@@ -1,17 +1,18 @@
 import React from 'react';
 import { useState } from 'react';
-import { useForm } from 'react';
+import { useForm } from 'react-hook-form';
 
 import Auth from '../utils/auth';
 
 const PreferencesForm = () => {
-    Auth.loggedIn();
+    // Auth.loggedIn();
 
     const { register, handleSubmit } = useForm();
     const [data, setData] = useState('');
 
     return (
         <div>
+            <h2>A FORM</h2>
             <form onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}>
                 <input {...register('age')} />
                 <input {...register('gender')} />
@@ -20,6 +21,7 @@ const PreferencesForm = () => {
                 <input {...register('politics')} />
                 <input {...register('smoking')} />
                 <input {...register('drinking')} />
+                <p>{data}</p>
                 <input type='submit' />
             </form>
 
