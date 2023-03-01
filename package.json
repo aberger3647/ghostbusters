@@ -2,9 +2,6 @@
   "name": "cache-me-outside",
   "version": "1.0.0",
   "description": "",
-  "engines": {
-    "node": "16.x"
-  },
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
@@ -19,6 +16,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  },
   "bugs": {
     "url": "https://github.com/aberger3647/cache-me-outside/issues"
   },

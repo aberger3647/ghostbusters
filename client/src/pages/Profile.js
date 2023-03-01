@@ -5,8 +5,9 @@ import useQuery from '@apollo/client';
 
 const Profile = () => {
 
-    const { loading, data } = useQuery(QUERY_ME);
-
+    // const { loading, data } = useQuery(QUERY_ME);
+    const data = "woo"
+    const loading = false
     const user = data?.user || {};
 
     if (!user?.userId) {
