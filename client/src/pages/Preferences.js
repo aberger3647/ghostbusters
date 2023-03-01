@@ -4,7 +4,7 @@ import { useForm } from 'react';
 
 import Auth from '../utils/auth';
 
-const ProfileForm = () => {
+const PreferencesForm = () => {
     Auth.loggedIn();
 
     const { register, handleSubmit } = useForm();
@@ -16,20 +16,16 @@ const ProfileForm = () => {
                 <input {...register('age')} />
                 <input {...register('gender')} />
                 <input {...register('height')} />
-                <input {...register('work')} />
                 <input {...register('religion')} />
                 <input {...register('politics')} />
-                <textarea {...register('bio')} />
                 <input {...register('smoking')} />
                 <input {...register('drinking')} />
                 <input type='submit' />
-                <p>{data}</p>
             </form>
 
             <button>Next</button>
         </div>
-
     )
 };
 
-export default ProfileForm;
+export default PreferencesForm;
