@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import './App.css';
+
 // import Profile from './pages/Profile'
+import Explore from './pages/Explore'
 import Preferences from './pages/Preferences'
 import Login from './components/LoginForm'
 import SignUp from './components/SignUpForm'
@@ -31,16 +33,44 @@ const client = new ApolloClient({
 });
 
 function App() {
+  // add hook to keep track of login/logout
+  const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('id_token'));
+  // handle login
+  const handleLogin = () => {
+    setLoggedIn(true);
+  };
+  // handle logout
+  const handleLogout = () => {
+    localStorage.removeItem('id_token');
+    setLoggedIn(false);
+  };
+
   return (
 <ApolloProvider client={client}>
       <Router>
         <>
           {/* Header? */}
           <Routes>
+
+            {/* if not logged in, direct to login */}
+            {!loggedIn && (
             <Route
               exact path='/'
-              element={<Preferences />}
+              element={<Login onLogin={handleLogin} />}
             />
+            )}
+
+            {/* if logged in, direct to explore pg */}
+            {loggedIn && (
+            <Route
+              exact path='/explore'
+              element={<Explore onLogout={handleLogout} />}
+            />
+            )}
+
+            <Route path='/preferences' element={<Preferences />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<SignUp />} />
             <Route
               path='*'
               element={<h1 className='display-2'>Wrong page!</h1>}

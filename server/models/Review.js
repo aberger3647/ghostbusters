@@ -9,7 +9,7 @@ const reviewSchema = new Schema(
             minlength: 1,
             maxlength: 500
         },
-        username: {
+        fullName: {
             type: String,
             required: true
         },
