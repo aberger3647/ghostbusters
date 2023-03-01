@@ -5,6 +5,8 @@ import { setContext } from '@apollo/client/link/context';
 import './App.css';
 // import Profile from './pages/Profile'
 import Preferences from './pages/Preferences'
+import Login from './components/LoginForm'
+import SignUp from './components/SignUpForm'
 
 // SETTING UP THE HTTP LINK
 const httpLink = createHttpLink({
