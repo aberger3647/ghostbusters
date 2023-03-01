@@ -1,4 +1,5 @@
 import React from 'react';
+import Info from '../components/info'
 
 import useQuery from '@apollo/client';
 
@@ -23,17 +24,7 @@ const Profile = () => {
 
     return (
         <div>
-            <h2>Name</h2>
-            <p>Image</p>
-            <span>Gender, Age, Height</span>
-
-            <p>Bio</p>
-            <p>Work:</p>
-            <p>Religion:</p>
-            <p>Politics:</p>
-
-            <p>Smoking</p>
-            <p>Drinking</p>
+            <Info />
 
             <hr></hr>
 
