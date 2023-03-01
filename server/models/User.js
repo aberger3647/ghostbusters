@@ -1,8 +1,9 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const reviewSchema = require('./Review');
 // DO WE EVEN NEED THIS?
-const matchSchema = require('./Match')
+const matchSchema = require('./Match');
 // PROBABLY NOT
 
 const userSchema = new Schema(
@@ -21,6 +22,7 @@ const userSchema = new Schema(
             type: String,
             required: true,
         },
+        reviews: [reviewSchema],
         matches: [
             {
                 type: Schema.Types.ObjectId,
