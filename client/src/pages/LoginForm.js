@@ -25,9 +25,6 @@ const LoginForm = () => {
     }
     
 const styles = {
-    body: {
-      fontFace: 'Zilla Slab'
-    },
     formContainer: {
       background: 'linear-gradient(to bottom, #613cff, #6788ff)',
       color: 'white',
@@ -122,7 +119,7 @@ const styles = {
                     Log In
                   </button>
                 </div>
-                <h4 style={styles.h4}>Login</h4>
+                <h4 style={styles.h4}>Log In</h4>
                 <input {...register("email", { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ })} style={styles.input} placeholder='Email Address'/>
                 <input type="password" {...register("password")} style={styles.input} placeholder='Password'/>
                 <button
