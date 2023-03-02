@@ -10,7 +10,7 @@ const matchSchema = new Schema({
         unique: true,
         match: [/.+@.+\..+/, 'Must be a valid email address'],
     },
-    fullName: {
+    firstName: {
         type: String,
         required: true,
     },

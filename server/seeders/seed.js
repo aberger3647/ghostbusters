@@ -11,9 +11,9 @@ db.once('open', async () => {
     await User.create(userSeeds);
 
     for (let i = 0; i < reviewSeeds.length; i++) {
-      const { _id, fullName } = await Review.create(reviewSeeds[i]);
+      const { _id, firstName } = await Review.create(reviewSeeds[i]);
       const user = await User.findOneAndUpdate(
-        { fullName: fullName },
+        { firstName: firstName },
         {
           $addToSet: {
             reviews: _id,

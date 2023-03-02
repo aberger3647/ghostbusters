@@ -6,7 +6,7 @@ const typeDefs = gql`
 
     type User {
         _id: ID!
-        fullName: String!
+        firstName: String!
         email: String!
         totalMatches: Int!
         reviews: [Review]!
@@ -15,24 +15,24 @@ const typeDefs = gql`
     type Review {
         _id: ID!
         reviewText: String!
-        username: String!
+        firstName: String!
         created_at: String!
     }
 
     input ReviewInput {
         reviewText: String!
-        username: String!
+        firstName: String!
     }
 
     type Match {
         _id: ID!
         email: String!
-        fullName: String!
+        firstName: String!
     }
 
     input MatchInput {
         email: String!
-        fullName: String!
+        firstName: String!
     }
     
     type Auth {
@@ -48,7 +48,7 @@ const typeDefs = gql`
 
     type Mutation {
         login(email: String!, password: String!): Auth
-        addUser(email: String!, password: String!, fullName: String!): Auth
+        addUser(email: String!, password: String!, firstName: String!): Auth
         addReview(userId: ID!, reviewData: ReviewInput!): Review!
         addMatch(userId: ID!, matchData: MatchInput!): Match!
     }
