@@ -25,6 +25,9 @@ const LoginForm = () => {
     }
     
 const styles = {
+    body: {
+      fontFace: 'Zilla Slab'
+    },
     formContainer: {
       background: 'linear-gradient(to bottom, #613cff, #6788ff)',
       color: 'white',
@@ -61,10 +64,10 @@ const styles = {
       backgroundColor: 'transparent',
       color: 'white',
       border: '1px solid white',
-      borderRadius: '10px',
+      borderRadius: '20px',
       padding: '10px',
       margin: '10px',
-      width: '40%',
+      width: '50%',
       cursor: 'pointer',
       transition: 'background-color 0.3s ease-in-out'
     },
@@ -114,7 +117,7 @@ const styles = {
                     Sign Up
                   </button>
                   <button
-                    style={{...styles.button, ...(activeTab === 'login' && styles.activeButton), borderTopLeftRadius: 0, borderTopRightRadius: 0}}
+                    style={{...styles.button, ...(activeTab === 'login' && styles.activeButton)}}
                     onClick={() => setActiveTab('login')}>
                     Log In
                   </button>
