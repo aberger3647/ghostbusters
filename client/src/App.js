@@ -53,12 +53,12 @@ function App() {
           <Routes>
 
             {/* if not logged in, direct to login */}
-            {!loggedIn && (
+            {/* {!loggedIn && ( */}
             <Route
               exact path='/'
               element={<Login onLogin={handleLogin} />}
             />
-            )}
+            {/* )} */}
 
             {/* if logged in, direct to explore pg */}
             {loggedIn && (

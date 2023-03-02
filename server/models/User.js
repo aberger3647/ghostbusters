@@ -23,6 +23,12 @@ const userSchema = new Schema(
             required: true,
         },
         reviews: [reviewSchema],
+        likes: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ],
         matches: [
             {
                 type: Schema.Types.ObjectId,
@@ -45,6 +51,10 @@ userSchema.pre('save', async function (next) {
 
     next();
 });
+
+userSchema.methods.isCorrectPassword = async function (password) {
+    return bcrypt.compare(password, this.password);
+}
 
 userSchema.virtual('totalMatches').get(function () {
     return this.matches.length;
