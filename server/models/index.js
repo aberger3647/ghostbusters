@@ -1,3 +1,3 @@
 const User = require('./User');
 
-module.exoprts = { User };
+module.exports = { User };

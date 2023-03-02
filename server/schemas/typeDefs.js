@@ -8,8 +8,8 @@ const typeDefs = gql`
         _id: ID!
         firstName: String!
         email: String!
-        totalMatches: Int!
-        reviews: [Review]!
+        totalMatches: Int
+        reviews: [Review]
     }
 
     type Review {
@@ -37,7 +37,7 @@ const typeDefs = gql`
     
     type Auth {
         token: ID!
-        user: User!
+        me: User
     }
   
     type Query {

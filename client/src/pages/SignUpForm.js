@@ -9,10 +9,12 @@ const SignUpForm = () => {
     const [signup, { error, data }] = useMutation(ADD_USER);
 
     const onSubmit = async (formData) => {
+        console.log(formData)
         try {
             const { data } = await signup({
-                variables: { ...formData },
+                variables: { email: formData.email, firstName: formData.firstName, password: formData.password },
             });
+            
             Auth.login(data.addUser.token);
             console.log('signed up')
         } catch (err) {
