@@ -3,13 +3,14 @@ import Auth from '../utils/auth'
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
+import { Navigate } from 'react-router-dom'
 
 
 const LoginForm = () => {
     const { register, handleSubmit } = useForm();
     const [login, { error, data }] = useMutation(LOGIN_USER);
 
-    const onSubmit = async (formData) => {
+    const onSubmit = async (formData, event) => {
         try {
           const { data } = await login({
             variables: { ...formData },
@@ -51,6 +52,9 @@ const LoginForm = () => {
     return (
         <div style={styles.formContainer}>
             <h4>Login Page</h4>
+            {Auth.loggedIn() && (
+              <Navigate to="/explore" />
+            )}
             <form onSubmit={handleSubmit(onSubmit)} style={styles.form}>
                 <label>Email:</label>
                 <input {...register("email", { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ })} style={styles.input}/>

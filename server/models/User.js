@@ -56,6 +56,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
 }
 
+// DO WE NEED?
 userSchema.virtual('totalMatches').get(function () {
     return this.matches.length;
 })
