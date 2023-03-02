@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Auth from '../utils/auth'
 import { useForm } from 'react-hook-form';
-
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../utils/mutations';
 
 
 const LoginForm = () => {
     const { register, handleSubmit } = useForm();
-    const [data, setData] = useState('');
+    const [login, { error, data }] = useMutation(LOGIN_USER);
 
     const onSubmit = async (formData) => {
         try {
-            const response = await Auth.login(formData.email, formData.password);
-            if (!response.ok) {
-              throw new Error('Cannot login.');
-            }
-            const { token, user } = response.data;
-            Auth.login(token);
-            setData('/explore');
+          const { data } = await login({
+            variables: { ...formData },
+          });
+            Auth.login(data.login.token);
+            console.log('logged in')
           } catch (err) {
             console.error(err);
           }
     }
+    
 
     const styles = {
         formContainer: {
