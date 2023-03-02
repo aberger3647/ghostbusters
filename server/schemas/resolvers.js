@@ -75,7 +75,7 @@ const resolvers = {
           throw new AuthenticationError('User not found by that Id.');
         }
 
-        const { email, fullName } = matchData;
+        const { email, firstName } = matchData;
 
         const user = await User.findOne({ _id: userId });
 

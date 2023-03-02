@@ -7,8 +7,8 @@ import './App.css';
 // import Profile from './pages/Profile'
 import Explore from './pages/Explore'
 import Preferences from './pages/Preferences'
-import Login from './components/LoginForm'
-import SignUp from './components/SignUpForm'
+import Login from './pages/LoginForm'
+import SignUp from './pages/SignUpForm'
 
 // SETTING UP THE HTTP LINK
 const httpLink = createHttpLink({
@@ -56,7 +56,7 @@ function App() {
             {/* {!loggedIn && ( */}
             <Route
               exact path='/'
-              element={<Login onLogin={handleLogin} />}
+              element={<SignUp />}
             />
             {/* )} */}
 
