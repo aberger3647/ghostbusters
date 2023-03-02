@@ -3,6 +3,7 @@ import Auth from '../utils/auth'
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
+import { Navigate } from 'react-router-dom'
 
 const SignUpForm = () => {
     const { register, handleSubmit } = useForm();
@@ -23,15 +24,19 @@ const SignUpForm = () => {
     }
 
     return (
-        <>
+        <div>
             <h4>Sign-Up Page</h4>
+            {/* change to preferences later */}
+            {Auth.loggedIn() && (
+                <Navigate to="/explore" />
+            )}
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input {...register('firstName')} placeholder="First Name" />
                 <input {...register("email", { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ })} placeholder="Email" />
                 <input type="password" {...register("password")} placeholder="Password" />
                 <input type="submit" />
             </form>
-        </>
+        </div>
     )
 }
 
