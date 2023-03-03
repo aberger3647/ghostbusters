@@ -8,7 +8,7 @@ const typeDefs = gql`
         _id: ID!
         firstName: String!
         email: String!
-        reviews: [Review]
+        reviews: [Review]!
         image: String
     }
 
@@ -39,6 +39,7 @@ const typeDefs = gql`
         _id: ID!
         text: String!
         firstName: String!
+        createdAt: String!
     }
 
     type Auth {
