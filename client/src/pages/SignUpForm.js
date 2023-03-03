@@ -26,16 +26,6 @@ const SignUpForm = () => {
     }
 
     const styles = {
-        formContainer: {
-          background: 'linear-gradient(to bottom, #613cff, #6788ff)',
-          color: 'white',
-          padding: '20px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100vh',
-          boxSizing: 'border-box'
-        },
         form: {
           display: 'flex',
           flexDirection: 'column',
@@ -102,25 +92,12 @@ const SignUpForm = () => {
         };
 
     return (
-        <div style={styles.formContainer}>
+        <div>
             {/* change to preferences later */}
             {Auth.loggedIn() && (
                 <Navigate to="/explore" />
             )}
             <form onSubmit={handleSubmit(onSubmit)} style={styles.form}>
-                <h1 style={styles.h1}>Ghostbusters</h1>
-                <div style={styles.buttonContainer}>
-                <button
-                    style={{...styles.button, ...(activeTab === 'signup' && styles.activeButton)}}
-                    onClick={() => setActiveTab('signup')}>
-                    Sign Up
-                  </button>
-                  <button
-                    style={{...styles.button, ...(activeTab === 'login' && styles.activeButton)}}
-                    onClick={() => setActiveTab('login')}>
-                    Log In
-                  </button>
-                </div>
                 <h4 style={styles.h4}>Sign Up</h4>
                 <input {...register('firstName')} style={styles.input} placeholder="First Name" />
                 <input {...register("email", { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ })} style={styles.input} placeholder="Email" />

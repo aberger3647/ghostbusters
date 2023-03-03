@@ -5,12 +5,23 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import { Navigate } from 'react-router-dom'
 
+import SignUpForm from './SignUpForm';
 
 const LoginForm = () => {
     const { register, handleSubmit } = useForm();
     const [login, { error, data }] = useMutation(LOGIN_USER);
     const [isHover, setIsHover] = useState(false);
     const [activeTab, setActiveTab] = useState('login');
+
+    const [showSignUp, setShowSignUp] = useState(false);
+
+    function handleSignUp() {
+      setShowSignUp(true);
+    }
+
+    function handleLogin() {
+      setShowSignUp(false);
+    }
 
     const onSubmit = async (formData, event) => {
         try {
@@ -110,15 +121,25 @@ const styles = {
                 <div style={styles.buttonContainer}>
                   <button
                     style={{...styles.button, ...(activeTab === 'signup' && styles.activeButton)}}
-                    onClick={() => setActiveTab('signup')}>
+                    onClick={() => {
+                      setActiveTab('signup');
+                      handleSignUp();
+                    }}>
                     Sign Up
                   </button>
                   <button
                     style={{...styles.button, ...(activeTab === 'login' && styles.activeButton)}}
-                    onClick={() => setActiveTab('login')}>
+                    onClick={() => {
+                      setActiveTab('login');
+                      handleLogin();
+                    }}>
                     Log In
                   </button>
                 </div>
+                {showSignUp ? (
+                  <SignUpForm />
+                ) : (
+                <>  
                 <h4 style={styles.h4}>Log In</h4>
                 <input {...register("email", { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ })} style={styles.input} placeholder='Email Address'/>
                 <input type="password" {...register("password")} style={styles.input} placeholder='Password'/>
@@ -129,6 +150,8 @@ const styles = {
                   onMouseLeave={() => setIsHover(false)}
                   >Log In</button>
                 <p style={styles.p}>{data}</p>
+                </>
+                )}    
             </form>
         </div>
     )
