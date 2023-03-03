@@ -15,6 +15,8 @@ import ProfileForm from './pages/CreateProfile'
 import Details from './pages/Details'
 import Profile from './pages/Profile'
 
+import Upload from './components/Upload'
+
 // SETTING UP THE HTTP LINK
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -79,6 +81,7 @@ function App() {
             <Route path='/createprofile' element={<ProfileForm />} />
             <Route path='/details' element={<Details />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/upload' element={<Upload />}/>
             <Route
               path='*'
               element={<h1 className='display-2'>Wrong page!</h1>}

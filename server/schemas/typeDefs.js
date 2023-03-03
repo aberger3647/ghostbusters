@@ -48,14 +48,16 @@ const typeDefs = gql`
     type Query {
         users: [User]!
         user(userId: ID!): User
+        me: User
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(email: String!, password: String!, firstName: String!): Auth
         addProfile(profile: ProfileInput!): Profile
-        addReview(userId: ID!, reviewData: ReviewInput!): Review!
-        addMatch(userId: ID!, matchData: MatchInput!): Match!
+        # addReview(userId: ID!, reviewData: ReviewInput!): Review!
+        # addMatch(userId: ID!, matchData: MatchInput!): Match!
+        uploadImage(image: String!): User
     }
 `;
 

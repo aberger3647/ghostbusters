@@ -11,6 +11,7 @@ const resolvers = {
         return User.findOne({ _id: context.user._id }).populate('savedReviews');
       }
       throw new AuthenticationError('You must be logged in.');
+    },
     users: async () => {
       return User.find();
 
@@ -18,12 +19,12 @@ const resolvers = {
     user: async (parent, { userId }, context) => {
       return User.findOne({ _id: userId });
     },
-    getReviewsByUserId: async (parent, { userId }, context) => {
-      if (context.user) {
-        return Review.find({ reviewedUser: userId }).populate('reviewer');
-      }
-      throw new AuthenticationError('You must be logged in.');
-    }
+    // getReviewsByUserId: async (parent, { userId }, context) => {
+    //   if (context.user) {
+    //     return Review.find({ reviewedUser: userId }).populate('reviewer');
+    //   }
+    //   throw new AuthenticationError('You must be logged in.');
+    // }
 
 
   },
@@ -61,46 +62,56 @@ const resolvers = {
         throw new AuthenticationError('You must be logged in.');
       }
     },
-    addReview: async (parent, { userId, reviewData }, context) => {
+    // addReview: async (parent, { userId, reviewData }, context) => {
+    //   if (!context.user) {
+    //     throw new AuthenticationError('You must be logged in.');
+    //   }
+
+    //   const { reviewText, username } = reviewData;
+
+    //   const review = await Review.create({
+    //     reviewer: context.user._id,
+    //     reviewedUser: userId,
+    //     reviewText,
+    //     username,
+    //   });
+
+    //   await User.findByIdAndUpdate(userId, { $push: { reviews: review._id } });
+
+    //   return review;
+    // },
+
+    // NOT SURE THIS WORKS
+    // addMatch: async (parent, { userId, matchData }, context) => {
+    //   if (context.user) {
+    //     throw new AuthenticationError('User not found by that Id.');
+    //   }
+
+    //   const { email, firstName } = matchData;
+
+    //   const user = await User.findOne({ _id: userId });
+
+    //   if (!user) {
+    //     throw new Error('Cannot find user with that Id');
+    //   }
+
+    //   const match = await Match.create({ user1: context.user._id, user2: user._id });
+
+    //   await User.findByIdAndUpdate(userId, { $inc: { totalMatches: 1 } });
+
+    //   return match;
+    // },
+    uploadImage: async (parent, args, context) => {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in.');
       }
-
-      const { reviewText, username } = reviewData;
-
-      const review = await Review.create({
-        reviewer: context.user._id,
-        reviewedUser: userId,
-        reviewText,
-        username,
-      });
-
-      await User.findByIdAndUpdate(userId, { $push: { reviews: review._id } });
-
-      return review;
-    },
-
-    // NOT SURE THIS WORKS
-    addMatch: async (parent, { userId, matchData }, context) => {
-      if (context.user) {
-        throw new AuthenticationError('User not found by that Id.');
-      }
-
-      const { email, firstName } = matchData;
-
-      const user = await User.findOne({ _id: userId });
-
-      if (!user) {
-        throw new Error('Cannot find user with that Id');
-      }
-
-      const match = await Match.create({ user1: context.user._id, user2: user._id });
-
-      await User.findByIdAndUpdate(userId, { $inc: { totalMatches: 1 } });
-
-      return match;
+      const newImage = args.image
+      return await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $set: { image: { newImage } } },
+        { new: true }
+      )
     }
-
   },
 };
 
