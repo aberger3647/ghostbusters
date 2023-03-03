@@ -58,6 +58,7 @@ const typeDefs = gql`
         addUser(email: String!, password: String!, firstName: String!): Auth
         addProfile(profile: ProfileInput!): Profile
         uploadImage(image: String): User
+        addReview(userId: ID!, reviewText: String!): User
     }
 `;
 
