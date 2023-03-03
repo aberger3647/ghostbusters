@@ -24,111 +24,52 @@ const LoginForm = () => {
           }
     }
     
-const styles = {
-    formContainer: {
-      background: 'linear-gradient(to bottom, #613cff, #6788ff)',
-      color: 'white',
-      padding: '20px',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      minHeight: '100vh',
-      boxSizing: 'border-box'
-    },
-    form: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      width: '100%',
-      maxWidth: '400px'
-    },
-    input: {
-      backgroundColor: 'transparent',
-      color: 'white',
-      border: '1px solid white',
-      padding: '10px',
-      marginBottom: '10px',
-      width: '100%',
-      borderRadius: '10px',
-      '::placeholder': { color: 'white' }
-    },
-    buttonContainer: {
-      display: 'flex',
-      width: '100%',
-      marginBottom: '10px'
-    },
-    button: {
-      backgroundColor: 'transparent',
-      color: 'white',
-      border: '1px solid white',
-      borderRadius: '20px',
-      padding: '10px',
-      margin: '10px',
-      width: '50%',
-      cursor: 'pointer',
-      transition: 'background-color 0.3s ease-in-out'
-    },
-    activeButton: {
-      backgroundColor: '#613cff',
-      color: '#fff'
-    },
-    submitButton: {
-      backgroundColor: 'transparent',
-      color: 'white',
-      border: '1px solid white',
-      borderRadius: '10px',
-      padding: '10px',
-      width: '100px',
-      cursor: 'pointer',
-      transition: 'opacity 0.3s ease-in-out'
-    },
-    submitButtonHover: {
-      backgroundColor: '#613cff',
-      opacity: '0.8',
-      color: 'white'
-    },
-    h1: {
-      color: 'white',
-      textAlign: 'center',
-    },
-    h4: {
-      color: 'white',
-      textAlign: 'center'
-    },
-    p: {
-      color: 'white'
-    },
-    };
-    
+    const handleActivePage = () => {
+      const links = document.getElementsByTagName('a');
+      const signupLink = links[0];
+      const loginLink = links[1];
+      if (window.location.pathname === '/') {
+        console.log('signup', signupLink)
+        signupLink.addClassName('active');
+        if (loginLink.classList.contains('active'))
+        loginLink.classList.remove('active');
+      }
+      if (window.location.pathname === '/login') {
+        loginLink.addClassName('active');
+        if(signupLink.classList.contains('active')) {
+          signupLink.classList.remove('active');
+        }
+      }
+  }
+
     return (
-        <div style={styles.formContainer}>
+        <div className='formContainer'>
             {Auth.loggedIn() && (
               <Navigate to="/explore" />
             )}
-            <form onSubmit={handleSubmit(onSubmit)} style={styles.form}>
-                <h1 style={styles.h1}>Ghostbusters</h1>
-                <div style={styles.buttonContainer}>
-                  <button
-                    style={{...styles.button, ...(activeTab === 'signup' && styles.activeButton)}}
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <h1>Ghostbusters</h1>
+
+                <div className='signupLogin'>
+                  <a href
                     onClick={() => setActiveTab('signup')}>
-                    Sign Up
-                  </button>
-                  <button
-                    style={{...styles.button, ...(activeTab === 'login' && styles.activeButton)}}
+                    <h2>Sign Up</h2>
+                  </a>
+                  <a href
                     onClick={() => setActiveTab('login')}>
-                    Log In
-                  </button>
+                    <h2>Log In</h2>
+                  </a>
                 </div>
-                <h4 style={styles.h4}>Log In</h4>
-                <input {...register("email", { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ })} style={styles.input} placeholder='Email Address'/>
-                <input type="password" {...register("password")} style={styles.input} placeholder='Password'/>
+
+                <input {...register("email", { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ })} placeholder='Email Address'/>
+                <input type="password" {...register("password")} placeholder='Password'/>
+                
                 <button
                   type="submit"
-                  style={{ ...styles.submitButton, ...(isHover && styles.submitButtonHover) }}
                   onMouseEnter={() => setIsHover(true)}
                   onMouseLeave={() => setIsHover(false)}
-                  >Log In</button>
-                <p style={styles.p}>{data}</p>
+                  ><h5>Log In</h5></button>
+                <p>{data}</p>
             </form>
         </div>
     )
