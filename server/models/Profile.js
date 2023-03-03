@@ -2,21 +2,17 @@ const { Schema, model } = require('mongoose');
 
 const profileSchema = new Schema(
     {
-        name: {
-            type: String,
-            required: true,
-        },
         age: {
             type: Number,
-            required: true,
+            // required: true,
         },
         gender: {
             type: String,
-            required: true
+            // required: true
         },
         height: {
             type: String,
-            required: true,
+            // required: true,
         },
         religion: {
             type: String,
@@ -25,14 +21,14 @@ const profileSchema = new Schema(
             type: String,
         },
         smoking: {
-            type: Boolean,
+            type: String,
         },
         drinking: {
-            type: Boolean,
+            type: String,
         },
         bio: {
             type: String,
-            required: true,
+            // required: true,
         },
     },
     {

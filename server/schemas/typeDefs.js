@@ -13,25 +13,25 @@ const typeDefs = gql`
     }
 
     type Profile {
-        _id: ID!
-        age: Int!
-        gender: String
-        height: String
-        religion: String
-        politics: String
-        smoking: Boolean
-        drinking: Boolean
-        bio: String
-    }
-
-    input ProfileInput {
+        _id: ID
         age: Int
         gender: String
         height: String
         religion: String
         politics: String
-        smoking: Boolean
-        drinking: Boolean
+        smoking: String
+        drinking: String
+        bio: String
+    }
+
+    input ProfileInput {
+        age: String
+        gender: String
+        height: String
+        religion: String
+        politics: String
+        smoking: String
+        drinking: String
         bio: String
     }
 
@@ -72,7 +72,7 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(email: String!, password: String!, firstName: String!): Auth
-        addProfile(profileData: ProfileInput!): Profile
+        addProfile(profile: ProfileInput!): Profile
         addReview(userId: ID!, reviewData: ReviewInput!): Review!
         addMatch(userId: ID!, matchData: MatchInput!): Match!
     }
