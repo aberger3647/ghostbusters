@@ -5,11 +5,16 @@ import Auth from '../utils/auth';
 const Explore = () => {
     Auth.loggedIn();
 
+    const handleLogout = () => {
+        Auth.logout();
+    };
+
     return (
         <>
             <nav>
                 <p>My Profile</p>
                 <p>Matches</p>
+                <button onClick={handleLogout}>Logout</button>
             </nav>
 
             <div>
