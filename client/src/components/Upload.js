@@ -3,13 +3,14 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
 import { UPLOAD_IMAGE } from '../utils/mutations';
+import { Image } from 'cloudinary-react';
 
 
 const UploadImage = () => {
 
     const { register, handleSubmit } = useForm();
     const [uploadImage, { error }] = useMutation(UPLOAD_IMAGE);
-
+    const [imageId, setimageId] = useState('')
     const submit = async (data, e) => {
         e.preventDefault();
         
@@ -33,6 +34,8 @@ const UploadImage = () => {
             await uploadImage({
                 variables: { image:image }
             })
+
+            setimageId(image)
         } catch (err) {
             console.error(err)
         }
@@ -46,7 +49,9 @@ const UploadImage = () => {
                 <input accept="image/*" type="file" {...register("image")} />
                 <input type="submit" />
             </form>
-        </>
+
+            <Image cloudName={process.env.REACT_APP_CLOUD_NAME} publicId={imageId} />
+            </>
     )
 }
 
