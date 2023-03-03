@@ -23,6 +23,10 @@ const userSchema = new Schema(
             required: true,
         },
         reviews: [reviewSchema],
+        image: {
+            type: String,
+            default: null,
+        },
         likes: [
             {
                 type: Schema.Types.ObjectId,
@@ -56,7 +60,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
 }
 
-// DO WE NEED?
+// DO WE NEED OR CARE?
 userSchema.virtual('totalMatches').get(function () {
     return this.matches.length;
 })

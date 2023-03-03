@@ -25,6 +25,9 @@
   },
   "homepage": "https://github.com/aberger3647/cache-me-outside#readme",
   "dependencies": {
+    "@cloudinary/react": "^1.11.0",
+    "@cloudinary/url-gen": "^1.9.1",
+    "axios": "^1.3.4",
     "bootstrap": "^5.2.3",
     "react-bootstrap": "^2.7.2",
     "react-hook-form": "^7.43.3"

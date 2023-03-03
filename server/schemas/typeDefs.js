@@ -51,6 +51,7 @@ const typeDefs = gql`
         addUser(email: String!, password: String!, firstName: String!): Auth
         addReview(userId: ID!, reviewData: ReviewInput!): Review!
         addMatch(userId: ID!, matchData: MatchInput!): Match!
+        uploadImage(image: String!): User
     }
 `;
 
