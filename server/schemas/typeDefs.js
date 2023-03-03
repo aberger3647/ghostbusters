@@ -12,6 +12,29 @@ const typeDefs = gql`
         reviews: [Review]
     }
 
+    type Profile {
+        _id: ID!
+        age: Int!
+        gender: String
+        height: String
+        religion: String
+        politics: String
+        smoking: Boolean
+        drinking: Boolean
+        bio: String
+    }
+
+    input ProfileInput {
+        age: Int
+        gender: String
+        height: String
+        religion: String
+        politics: String
+        smoking: Boolean
+        drinking: Boolean
+        bio: String
+    }
+
     type Review {
         _id: ID!
         reviewText: String!
@@ -49,6 +72,7 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(email: String!, password: String!, firstName: String!): Auth
+        addProfile(profileData: ProfileInput!): Profile
         addReview(userId: ID!, reviewData: ReviewInput!): Review!
         addMatch(userId: ID!, matchData: MatchInput!): Match!
     }
