@@ -69,7 +69,7 @@ function App() {
             {/* {loggedIn && ( */}
             <Route
               exact path='/explore'
-              element={<CreateProfile />}
+              element={<Explore />}
             />
             {/* )} */}
 
