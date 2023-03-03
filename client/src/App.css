@@ -1,40 +1,128 @@
-.App {
+:root {
+  --periwinkle: #6789FF;
+  --white: #ffffff;
+  --lightperi: #D8E0FF;
+  --purple: #623CFF;
+}
+
+/* 
+typography
+size and color
+50 semibold - logotype, it's a match H1
+40 bold - name on profile, name on its a match sign up/login H2
+30 medium - page header, explore, gender/age/height H3
+30 bold - reviews/preferences
+25 regular - p, button, form P
+20 medium - details, review name H4
+20 regular - signup/login, close its a match H5
+*/
+h1 {
+  font-size: 50px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0;
+}
+
+h3 {
+  font-size:  30px;
+  font-weight: 500;
+}
+
+p, button, input, textarea {
+  font-size: 25px;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+h5 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+h1, h2, h3, h5 {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+button {
+  border: 3px solid var(--periwinkle);
+  border-radius: 50px;
+  padding: 5px 25px 5px 25px;
+  margin: 10px;
+  background-color: var(--white);
+  transition: opacity 0.3s ease-in-out;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+button:hover, button:active {
+  background-color: var(--lightperi);
 }
 
-.App-header {
-  background-color: #282c34;
+/* login and signup */
+.formContainer {
+  background: linear-gradient(to bottom, var(--purple), var(--periwinkle));
+  color: white;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
   min-height: 100vh;
+}
+
+form {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.signupLogin {
+  display: flex;
+  justify-content: space-between;
+  margin: 80px 10px 60px 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.signupLogin > button {
+  padding: 15px 25px 15px 25px;
+}
+
+.active {
+  border: 2px solid var(--white);
+  border-radius: 50px;
+  background-color: var(--purple);
+}
+
+input {
+  background-color: transparent;
+  border: 1px solid var(--white);
+  border-radius: 20px;
+  padding: 15px;
+  margin: 7px 0px 7px;
+  text-indent: 10px;
+  width: 300px;
+  color: var(--white);
+  outline: none;
+}
+
+::placeholder {
+  color: var(--white);
+  opacity: 1;
+}
+
+form > button {
+  border: none;
+  background-color: transparent;
+  color: var(--white);
+}
+
+form > button:hover {
+  color: var(--lightperi);
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .footer {
