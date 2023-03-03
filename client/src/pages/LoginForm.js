@@ -5,12 +5,23 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import { Navigate } from 'react-router-dom'
 
+import SignUpForm from './SignUpForm';
 
 const LoginForm = () => {
     const { register, handleSubmit } = useForm();
     const [login, { error, data }] = useMutation(LOGIN_USER);
     const [isHover, setIsHover] = useState(false);
     const [activeTab, setActiveTab] = useState('login');
+
+    const [showSignUp, setShowSignUp] = useState(false);
+
+    function handleSignUp() {
+      setShowSignUp(true);
+    }
+
+    function handleLogin() {
+      setShowSignUp(false);
+    }
 
     const onSubmit = async (formData, event) => {
         try {
@@ -23,44 +34,73 @@ const LoginForm = () => {
             console.error(err);
           }
     }
-    
-    const handleActivePage = () => {
-      const links = document.getElementsByTagName('a');
-      const signupLink = links[0];
-      const loginLink = links[1];
-      if (window.location.pathname === '/') {
-        console.log('signup', signupLink)
-        signupLink.addClassName('active');
-        if (loginLink.classList.contains('active'))
-        loginLink.classList.remove('active');
+
+    const styles = {
+      button: {
+        backgroundColor: 'transparent',
+        color: 'white',
+        border: '1px solid white',
+        borderRadius: '20px',
+        padding: '10px',
+        margin: '10px',
+        width: '50%',
+        cursor: 'pointer',
+        transition: 'background-color 0.3s ease-in-out'
+      },
+      activeButton: {
+        backgroundColor: '#613cff',
+        color: '#fff'
+      },
+      submitButton: {
+        backgroundColor: 'transparent',
+        color: 'white',
+        border: '1px solid white',
+        borderRadius: '10px',
+        padding: '10px',
+        width: '100px',
+        cursor: 'pointer',
+        transition: 'opacity 0.3s ease-in-out'
+      },
+      submitButtonHover: {
+        backgroundColor: '#613cff',
+        opacity: '0.8',
+        color: 'white'
       }
-      if (window.location.pathname === '/login') {
-        loginLink.addClassName('active');
-        if(signupLink.classList.contains('active')) {
-          signupLink.classList.remove('active');
-        }
-      }
-  }
+    };
 
     return (
         <div className='formContainer'>
             {Auth.loggedIn() && (
               <Navigate to="/explore" />
             )}
+
             <form onSubmit={handleSubmit(onSubmit)}>
                 <h1>Ghostbusters</h1>
 
                 <div className='signupLogin'>
-                  <a href
-                    onClick={() => setActiveTab('signup')}>
-                    <h2>Sign Up</h2>
-                  </a>
-                  <a href
-                    onClick={() => setActiveTab('login')}>
-                    <h2>Log In</h2>
-                  </a>
+                  <button
+                      style={{...styles.button, ...(activeTab === 'signup' && styles.activeButton)}}
+                      onClick={() => {
+                        setActiveTab('signup');
+                        handleSignUp();
+                      }}>
+                      <h2>Sign Up</h2>
+                      </button>
+
+                    <button
+                      style={{...styles.button, ...(activeTab === 'login' && styles.activeButton)}}
+                      onClick={() => {
+                        setActiveTab('login');
+                        handleLogin();
+                      }}>
+                      <h2>Log In</h2>
+                    </button>
                 </div>
 
+                {showSignUp ? (
+                  <SignUpForm />
+                ) : (
+                <>  
                 <input {...register("email", { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ })} placeholder='Email Address'/>
                 <input type="password" {...register("password")} placeholder='Password'/>
                 
@@ -70,6 +110,8 @@ const LoginForm = () => {
                   onMouseLeave={() => setIsHover(false)}
                   ><h5>Log In</h5></button>
                 <p>{data}</p>
+                </>
+                )}
             </form>
         </div>
     )

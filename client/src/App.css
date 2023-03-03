@@ -86,7 +86,7 @@ form {
   margin: 80px 10px 60px 10px;
 }
 
-.signupLogin > a {
+.signupLogin > button {
   padding: 15px 25px 15px 25px;
 }
 
@@ -117,3 +117,16 @@ form > button {
   color: var(--white);
 }
 
+.footer {
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+}
+
+
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+}
