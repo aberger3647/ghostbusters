@@ -1,8 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const reviewSchema = require('./Review')
-
 const userSchema = new Schema(
     {
         email: {
@@ -23,22 +21,28 @@ const userSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Profile',
         },
-        // reviews: [reviewSchema],
+        reviews: [
+            {
+                reviewText: {
+                    type: String,
+                    required: true,
+                    minlength: 1,
+                    maxlength: 280,
+                },
+                firstName: {
+                    type: String,
+                    required: true
+                },
+                createdAt: {
+                    type: Date,
+                    default: Date.now,
+                    get: (timestamp) => dateFormat(timestamp),
+                },
+            },
+        ],
         image: {
             type: String,
         },
-        likes: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        ],
-        matches: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            },
-        ],
     },
     {
         toJSON: {

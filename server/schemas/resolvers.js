@@ -19,13 +19,6 @@ const resolvers = {
     user: async (parent, { userId }, context) => {
       return User.findOne({ _id: userId });
     },
-    // getReviewsByUserId: async (parent, { userId }, context) => {
-    //   if (context.user) {
-    //     return Review.find({ reviewedUser: userId }).populate('reviewer');
-    //   }
-    //   throw new AuthenticationError('You must be logged in.');
-    // }
-
 
   },
 
@@ -62,45 +55,22 @@ const resolvers = {
         throw new AuthenticationError('You must be logged in.');
       }
     },
-    // addReview: async (parent, { userId, reviewData }, context) => {
-    //   if (!context.user) {
-    //     throw new AuthenticationError('You must be logged in.');
-    //   }
 
-    //   const { reviewText, username } = reviewData;
+    addReview: async (parent, { userId, reviewText }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: userId },
+          {
+            $addToSet: {
+              reviews: { reviewText, firstName: context.user.firstName },
+            },
+          },
+          { new: true, runValidators: true }
+        );
+      }
+      throw new AuthenticationError('You must be logged in.');
+    },
 
-    //   const review = await Review.create({
-    //     reviewer: context.user._id,
-    //     reviewedUser: userId,
-    //     reviewText,
-    //     username,
-    //   });
-
-    //   await User.findByIdAndUpdate(userId, { $push: { reviews: review._id } });
-
-    //   return review;
-    // },
-
-    // NOT SURE THIS WORKS
-    // addMatch: async (parent, { userId, matchData }, context) => {
-    //   if (context.user) {
-    //     throw new AuthenticationError('User not found by that Id.');
-    //   }
-
-    //   const { email, firstName } = matchData;
-
-    //   const user = await User.findOne({ _id: userId });
-
-    //   if (!user) {
-    //     throw new Error('Cannot find user with that Id');
-    //   }
-
-    //   const match = await Match.create({ user1: context.user._id, user2: user._id });
-
-    //   await User.findByIdAndUpdate(userId, { $inc: { totalMatches: 1 } });
-
-    //   return match;
-    // },
     uploadImage: async (parent, args, context) => {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in.');
