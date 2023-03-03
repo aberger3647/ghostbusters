@@ -1,6 +1,8 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const reviewSchema = require('./Review')
+
 const userSchema = new Schema(
     {
         email: {
@@ -21,10 +23,9 @@ const userSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Profile',
         },
-        reviews: [reviewSchema],
+        // reviews: [reviewSchema],
         image: {
             type: String,
-            default: null,
         },
         likes: [
             {

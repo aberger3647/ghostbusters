@@ -39,8 +39,9 @@ export const UPLOAD_IMAGE = gql`
             likes
             matches
         }
-    }`
-    
+    }
+`
+
 export const ADD_PROFILE = gql`
     mutation addProfile($profile: ProfileInput!) {
         addProfile(profile: $profile) {
