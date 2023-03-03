@@ -6,27 +6,25 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
 
   Query: {
-
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('savedReviews');
       }
       throw new AuthenticationError('You must be logged in.');
-    },
+    users: async () => {
+      return User.find();
 
-    getUserById: async (parent, { userId }, context) => {
-      if (context.user) {
-        return User.findById(userId).populate('reviews');
-      }
-      throw new AuthenticationError('You must be logged in.');
     },
-
+    user: async (parent, { userId }, context) => {
+      return User.findOne({ _id: userId });
+    },
     getReviewsByUserId: async (parent, { userId }, context) => {
       if (context.user) {
         return Review.find({ reviewedUser: userId }).populate('reviewer');
       }
       throw new AuthenticationError('You must be logged in.');
     }
+
 
   },
 
@@ -63,7 +61,6 @@ const resolvers = {
         throw new AuthenticationError('You must be logged in.');
       }
     },
-
     addReview: async (parent, { userId, reviewData }, context) => {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in.');
@@ -103,8 +100,8 @@ const resolvers = {
 
       return match;
     }
+
   },
 };
-
 
 module.exports = resolvers;

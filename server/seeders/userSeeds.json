@@ -2,6 +2,16 @@
     {
       "email": "cacheme@mail.com",
       "password": "cacheme",
-      "firstName": "Cache Me"
+      "firstName": "Danielle",
+      "reviews": [
+        {
+          "text": "she kept wanting to fight me",
+          "firstName": "Justin"
+        },
+        {
+          "text": "super rude",
+          "firstName": "Phil"
+        }
+    ]
     }
 ]

@@ -8,8 +8,7 @@ const typeDefs = gql`
         _id: ID!
         firstName: String!
         email: String!
-        totalMatches: Int
-        reviews: [Review]
+        reviews: [Review]!
     }
 
     type Profile {
@@ -37,36 +36,18 @@ const typeDefs = gql`
 
     type Review {
         _id: ID!
-        reviewText: String!
-        firstName: String!
-        created_at: String!
-    }
-
-    input ReviewInput {
-        reviewText: String!
+        text: String!
         firstName: String!
     }
 
-    type Match {
-        _id: ID!
-        email: String!
-        firstName: String!
-    }
-
-    input MatchInput {
-        email: String!
-        firstName: String!
-    }
-    
     type Auth {
         token: ID!
-        me: User
+        user: User
     }
   
     type Query {
-        me: User
-        getUserById(userId: ID!): User
-        getReviewsByUserId(userId: ID!): [Review]!
+        users: [User]!
+        user(userId: ID!): User
     }
 
     type Mutation {
