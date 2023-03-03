@@ -39,5 +39,21 @@ export const UPLOAD_IMAGE = gql`
             likes
             matches
         }
+    }`
+    
+export const ADD_PROFILE = gql`
+    mutation addProfile($profile: ProfileInput!) {
+        addProfile(profile: $profile) {
+                _id
+                age
+                gender
+                height
+                religion
+                politics
+                smoking
+                drinking
+                bio
+            
+        }
     }
 `

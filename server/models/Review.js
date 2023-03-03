@@ -1,9 +1,9 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 // This is a subdocument schema, it won't become its own model but we'll use it as the schema for the User's `reviews` array in User.js
 const reviewSchema = new Schema(
     {
-        reviewText: {
+        text: {
             type: String,
             required: true,
             minlength: 1,
@@ -24,4 +24,6 @@ const reviewSchema = new Schema(
     }
 );
 
-module.exports = reviewSchema;
+const Review = model('Review', reviewSchema);
+
+module.exports = Review;

@@ -8,47 +8,52 @@ const typeDefs = gql`
         _id: ID!
         firstName: String!
         email: String!
-        totalMatches: Int
-        reviews: [Review]
+        reviews: [Review]!
+    }
+
+    type Profile {
+        _id: ID
+        age: Int
+        gender: String
+        height: String
+        religion: String
+        politics: String
+        smoking: String
+        drinking: String
+        bio: String
+    }
+
+    input ProfileInput {
+        age: String
+        gender: String
+        height: String
+        religion: String
+        politics: String
+        smoking: String
+        drinking: String
+        bio: String
     }
 
     type Review {
         _id: ID!
-        reviewText: String!
-        firstName: String!
-        created_at: String!
-    }
-
-    input ReviewInput {
-        reviewText: String!
+        text: String!
         firstName: String!
     }
 
-    type Match {
-        _id: ID!
-        email: String!
-        firstName: String!
-    }
-
-    input MatchInput {
-        email: String!
-        firstName: String!
-    }
-    
     type Auth {
         token: ID!
-        me: User
+        user: User
     }
   
     type Query {
-        me: User
-        getUserById(userId: ID!): User
-        getReviewsByUserId(userId: ID!): [Review]!
+        users: [User]!
+        user(userId: ID!): User
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(email: String!, password: String!, firstName: String!): Auth
+        addProfile(profile: ProfileInput!): Profile
         addReview(userId: ID!, reviewData: ReviewInput!): Review!
         addMatch(userId: ID!, matchData: MatchInput!): Match!
         uploadImage(image: String!): User

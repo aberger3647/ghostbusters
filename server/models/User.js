@@ -1,11 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const reviewSchema = require('./Review');
-// DO WE EVEN NEED THIS?
-const matchSchema = require('./Match');
-// PROBABLY NOT
-
 const userSchema = new Schema(
     {
         email: {
@@ -22,6 +17,10 @@ const userSchema = new Schema(
             type: String,
             required: true,
         },
+        profile: {
+            type: Schema.Types.ObjectId,
+            ref: 'Profile',
+        },
         reviews: [reviewSchema],
         image: {
             type: String,
@@ -34,10 +33,19 @@ const userSchema = new Schema(
             }
         ],
         matches: [
+
             {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            }
+                text: {
+                    type: String,
+                    required: true,
+                    minlength: 1,
+                    maxlength: 500
+                },
+                firstName: {
+                    type: String,
+                    required: true
+                },
+            },
         ],
     },
     {
@@ -59,11 +67,6 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
 }
-
-// DO WE NEED OR CARE?
-userSchema.virtual('totalMatches').get(function () {
-    return this.matches.length;
-})
 
 const User = model('User', userSchema);
 
