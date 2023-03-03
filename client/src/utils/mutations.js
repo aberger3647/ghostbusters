@@ -24,3 +24,28 @@ export const ADD_USER = gql`
         }
     }    
 `
+
+export const UPLOAD_IMAGE = gql`
+    mutation uploadImage($image: String!) {
+        uploadImage(image: $image) {
+            image
+        }
+    }
+`
+
+export const ADD_PROFILE = gql`
+    mutation addProfile($profile: ProfileInput!) {
+        addProfile(profile: $profile) {
+                _id
+                age
+                gender
+                height
+                religion
+                politics
+                smoking
+                drinking
+                bio
+            
+        }
+    }
+`

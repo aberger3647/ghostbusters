@@ -8,7 +8,31 @@ const typeDefs = gql`
         _id: ID!
         firstName: String!
         email: String!
-        reviews: [Review]!
+        reviews: [Review]
+        image: String
+    }
+
+    type Profile {
+        _id: ID
+        age: Int
+        gender: String
+        height: String
+        religion: String
+        politics: String
+        smoking: String
+        drinking: String
+        bio: String
+    }
+
+    input ProfileInput {
+        age: String
+        gender: String
+        height: String
+        religion: String
+        politics: String
+        smoking: String
+        drinking: String
+        bio: String
     }
 
     type Review {
@@ -19,17 +43,20 @@ const typeDefs = gql`
 
     type Auth {
         token: ID!
-        user: User
+        me: User
     }
   
     type Query {
         users: [User]!
         user(userId: ID!): User
+        me: User
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(email: String!, password: String!, firstName: String!): Auth
+        addProfile(profile: ProfileInput!): Profile
+        uploadImage(image: String): User
     }
 `;
 

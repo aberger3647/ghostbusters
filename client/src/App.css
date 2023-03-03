@@ -70,7 +70,7 @@ button:hover, button:active {
   color: white;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   min-height: 100vh;
 }
 
@@ -104,6 +104,8 @@ input {
   margin: 7px 0px 7px;
   text-indent: 10px;
   width: 300px;
+  color: var(--white);
+  outline: none;
 }
 
 ::placeholder {
@@ -117,13 +119,11 @@ form > button {
   color: var(--white);
 }
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  background-color: white;
+form > button:hover {
+  color: var(--lightperi);
+  background-color: transparent;
+  cursor: pointer;
 }
-
-
 
 .footer {
   position: fixed;

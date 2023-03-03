@@ -9,7 +9,8 @@ function Footer() {
         <a href="/explore">Explore</a> | 
         <a href="/createprofile">Profile Form</a> | 
         <a href="/details">Details</a> | 
-        <a href="/profile">Profile</a>
+        <a href="/profile">Profile</a> | 
+        <a href="/upload">Upload</a> | 
     </div>
   );
 }

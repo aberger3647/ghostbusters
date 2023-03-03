@@ -8,12 +8,14 @@ import { Navigate } from 'react-router-dom'
 import SignUpForm from './SignUpForm';
 
 const LoginForm = () => {
-    const { register, handleSubmit } = useForm();
-    const [login, { error, data }] = useMutation(LOGIN_USER);
-    const [isHover, setIsHover] = useState(false);
-    const [activeTab, setActiveTab] = useState('login');
+  const { register, handleSubmit } = useForm();
+  const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [isHover, setIsHover] = useState(false);
+  const [activeTab, setActiveTab] = useState('login');
 
-    const [showSignUp, setShowSignUp] = useState(false);
+  
+
+const [showSignUp, setShowSignUp] = useState(false);
 
     function handleSignUp() {
       setShowSignUp(true);
@@ -37,10 +39,9 @@ const LoginForm = () => {
 
     const styles = {
       button: {
+        border: 'none',
         backgroundColor: 'transparent',
         color: 'white',
-        border: '1px solid white',
-        borderRadius: '20px',
         padding: '10px',
         margin: '10px',
         width: '50%',
@@ -48,24 +49,11 @@ const LoginForm = () => {
         transition: 'background-color 0.3s ease-in-out'
       },
       activeButton: {
-        backgroundColor: '#613cff',
+        border: '2px solid white',
+        borderRadius: '50px',
+        backgroundColor: '#623cff',
         color: '#fff'
       },
-      submitButton: {
-        backgroundColor: 'transparent',
-        color: 'white',
-        border: '1px solid white',
-        borderRadius: '10px',
-        padding: '10px',
-        width: '100px',
-        cursor: 'pointer',
-        transition: 'opacity 0.3s ease-in-out'
-      },
-      submitButtonHover: {
-        backgroundColor: '#613cff',
-        opacity: '0.8',
-        color: 'white'
-      }
     };
 
     return (
@@ -115,7 +103,7 @@ const LoginForm = () => {
             </form>
         </div>
     )
+  }
 
-}
 
 export default LoginForm;
