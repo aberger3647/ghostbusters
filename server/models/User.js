@@ -17,7 +17,19 @@ const userSchema = new Schema(
             type: String,
             required: true,
         },
-        reviews: [
+        profile: {
+            type: Schema.Types.ObjectId,
+            ref: 'Profile',
+        },
+        reviews: [reviewSchema],
+        likes: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ],
+        matches: [
+
             {
                 text: {
                     type: String,

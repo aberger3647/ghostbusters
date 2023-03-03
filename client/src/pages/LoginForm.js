@@ -8,12 +8,14 @@ import { Navigate } from 'react-router-dom'
 import SignUpForm from './SignUpForm';
 
 const LoginForm = () => {
-    const { register, handleSubmit } = useForm();
-    const [login, { error, data }] = useMutation(LOGIN_USER);
-    const [isHover, setIsHover] = useState(false);
-    const [activeTab, setActiveTab] = useState('login');
+  const { register, handleSubmit } = useForm();
+  const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [isHover, setIsHover] = useState(false);
+  const [activeTab, setActiveTab] = useState('login');
 
-    const [showSignUp, setShowSignUp] = useState(false);
+  
+
+const [showSignUp, setShowSignUp] = useState(false);
 
     function handleSignUp() {
       setShowSignUp(true);
@@ -22,96 +24,95 @@ const LoginForm = () => {
     function handleLogin() {
       setShowSignUp(false);
     }
-
-    const onSubmit = async (formData, event) => {
-        try {
-          const { data } = await login({
-            variables: { ...formData },
-          });
-            Auth.login(data.login.token);
-            console.log('logged in')
-          } catch (err) {
-            console.error(err);
-          }
+  const onSubmit = async (formData, event) => {
+    try {
+      const { data } = await login({
+        variables: { ...formData },
+      });
+      Auth.login(data.login.token);
+      console.log('logged in')
+    } catch (err) {
+      console.error(err);
     }
-    
-const styles = {
-    formContainer: {
-      background: 'linear-gradient(to bottom, #613cff, #6788ff)',
-      color: 'white',
-      padding: '20px',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      minHeight: '100vh',
-      boxSizing: 'border-box'
-    },
-    form: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      width: '100%',
-      maxWidth: '400px'
-    },
-    input: {
-      backgroundColor: 'transparent',
-      color: 'white',
-      border: '1px solid white',
-      padding: '10px',
-      marginBottom: '10px',
-      width: '100%',
-      borderRadius: '10px',
-      '::placeholder': { color: 'white' }
-    },
-    buttonContainer: {
-      display: 'flex',
-      width: '100%',
-      marginBottom: '10px'
-    },
-    button: {
-      backgroundColor: 'transparent',
-      color: 'white',
-      border: '1px solid white',
-      borderRadius: '20px',
-      padding: '10px',
-      margin: '10px',
-      width: '50%',
-      cursor: 'pointer',
-      transition: 'background-color 0.3s ease-in-out'
-    },
-    activeButton: {
-      backgroundColor: '#613cff',
-      color: '#fff'
-    },
-    submitButton: {
-      backgroundColor: 'transparent',
-      color: 'white',
-      border: '1px solid white',
-      borderRadius: '10px',
-      padding: '10px',
-      width: '100px',
-      cursor: 'pointer',
-      transition: 'opacity 0.3s ease-in-out'
-    },
-    submitButtonHover: {
-      backgroundColor: '#613cff',
-      opacity: '0.8',
-      color: 'white'
-    },
-    h1: {
-      color: 'white',
-      textAlign: 'center',
-    },
-    h4: {
-      color: 'white',
-      textAlign: 'center'
-    },
-    p: {
-      color: 'white'
-    },
+
+    const styles = {
+      formContainer: {
+        background: 'linear-gradient(to bottom, #613cff, #6788ff)',
+        color: 'white',
+        padding: '20px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        boxSizing: 'border-box'
+      },
+      form: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '100%',
+        maxWidth: '400px'
+      },
+      input: {
+        backgroundColor: 'transparent',
+        color: 'white',
+        border: '1px solid white',
+        padding: '10px',
+        marginBottom: '10px',
+        width: '100%',
+        borderRadius: '10px',
+        '::placeholder': { color: 'white' }
+      },
+      buttonContainer: {
+        display: 'flex',
+        width: '100%',
+        marginBottom: '10px'
+      },
+      button: {
+        backgroundColor: 'transparent',
+        color: 'white',
+        border: '1px solid white',
+        borderRadius: '20px',
+        padding: '10px',
+        margin: '10px',
+        width: '50%',
+        cursor: 'pointer',
+        transition: 'background-color 0.3s ease-in-out'
+      },
+      activeButton: {
+        backgroundColor: '#613cff',
+        color: '#fff'
+      },
+      submitButton: {
+        backgroundColor: 'transparent',
+        color: 'white',
+        border: '1px solid white',
+        borderRadius: '10px',
+        padding: '10px',
+        width: '100px',
+        cursor: 'pointer',
+        transition: 'opacity 0.3s ease-in-out'
+      },
+      submitButtonHover: {
+        backgroundColor: '#613cff',
+        opacity: '0.8',
+        color: 'white'
+      },
+      h1: {
+        color: 'white',
+        textAlign: 'center',
+      },
+      h4: {
+        color: 'white',
+        textAlign: 'center'
+      },
+      p: {
+        color: 'white'
+      },
     };
-    
+
     return (
+
         <div style={styles.formContainer}>
             {Auth.loggedIn() && (
               <Navigate to="/explore" />
@@ -154,7 +155,9 @@ const styles = {
                 )}    
             </form>
         </div>
+
     )
+  }
 
 }
 

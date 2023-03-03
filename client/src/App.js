@@ -6,6 +6,7 @@ import './App.css';
 
 // import Profile from './pages/Profile'
 import Explore from './pages/Explore'
+import CreateProfile from './pages/CreateProfile'
 import Preferences from './pages/Preferences'
 import Login from './pages/LoginForm'
 import SignUp from './pages/SignUpForm'
