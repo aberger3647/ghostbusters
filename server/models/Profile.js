@@ -4,15 +4,15 @@ const profileSchema = new Schema(
     {
         age: {
             type: Number,
-            // required: true,
+            required: true,
         },
         gender: {
             type: String,
-            // required: true
+            required: true
         },
         height: {
             type: String,
-            // required: true,
+            required: true,
         },
         religion: {
             type: String,
@@ -28,7 +28,7 @@ const profileSchema = new Schema(
         },
         bio: {
             type: String,
-            // required: true,
+            required: true,
         },
     },
     {
