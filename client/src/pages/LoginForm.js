@@ -25,59 +25,23 @@ const [showSignUp, setShowSignUp] = useState(false);
       setShowSignUp(false);
     }
 
-  const onSubmit = async (formData, event) => {
-    try {
-      
-      const { data } = await login({
-        variables: { ...formData },
-      });
-
-      Auth.login(data.login.token);
-      console.log('logged in')
-    } catch (err) {
-      console.error(err);
+    const onSubmit = async (formData, event) => {
+        try {
+          const { data } = await login({
+            variables: { ...formData },
+          });
+            Auth.login(data.login.token);
+            console.log('logged in')
+          } catch (err) {
+            console.error(err);
+          }
     }
-  }
-    
 
     const styles = {
-      formContainer: {
-        background: 'linear-gradient(to bottom, #613cff, #6788ff)',
-        color: 'white',
-        padding: '20px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-        boxSizing: 'border-box'
-      },
-      form: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '100%',
-        maxWidth: '400px'
-      },
-      input: {
-        backgroundColor: 'transparent',
-        color: 'white',
-        border: '1px solid white',
-        padding: '10px',
-        marginBottom: '10px',
-        width: '100%',
-        borderRadius: '10px',
-        '::placeholder': { color: 'white' }
-      },
-      buttonContainer: {
-        display: 'flex',
-        width: '100%',
-        marginBottom: '10px'
-      },
       button: {
+        border: 'none',
         backgroundColor: 'transparent',
         color: 'white',
-        border: '1px solid white',
-        borderRadius: '20px',
         padding: '10px',
         margin: '10px',
         width: '50%',
@@ -85,82 +49,59 @@ const [showSignUp, setShowSignUp] = useState(false);
         transition: 'background-color 0.3s ease-in-out'
       },
       activeButton: {
-        backgroundColor: '#613cff',
+        border: '2px solid white',
+        borderRadius: '50px',
+        backgroundColor: '#623cff',
         color: '#fff'
-      },
-      submitButton: {
-        backgroundColor: 'transparent',
-        color: 'white',
-        border: '1px solid white',
-        borderRadius: '10px',
-        padding: '10px',
-        width: '100px',
-        cursor: 'pointer',
-        transition: 'opacity 0.3s ease-in-out'
-      },
-      submitButtonHover: {
-        backgroundColor: '#613cff',
-        opacity: '0.8',
-        color: 'white'
-      },
-      h1: {
-        color: 'white',
-        textAlign: 'center',
-      },
-      h4: {
-        color: 'white',
-        textAlign: 'center'
-      },
-      p: {
-        color: 'white'
       },
     };
 
     return (
+        <div className='formContainer'>
+            {Auth.loggedIn() && (
+              <Navigate to="/explore" />
+            )}
 
-      <div style={styles.formContainer}>
-      {Auth.loggedIn() && (
-        <Navigate to="/explore" />
-      )}
-      <form onSubmit={handleSubmit(onSubmit)} style={styles.form}>
-          <h1 style={styles.h1}>Ghostbusters</h1>
-          <div style={styles.buttonContainer}>
-            <button
-              style={{...styles.button, ...(activeTab === 'signup' && styles.activeButton)}}
-              onClick={() => {
-                setActiveTab('signup');
-                handleSignUp();
-              }}>
-              Sign Up
-            </button>
-            <button
-              style={{...styles.button, ...(activeTab === 'login' && styles.activeButton)}}
-              onClick={() => {
-                setActiveTab('login');
-                handleLogin();
-              }}>
-              Log In
-            </button>
-          </div>
-          {showSignUp ? (
-            <SignUpForm />
-          ) : (
-          <>  
-          <h4 style={styles.h4}>Log In</h4>
-          <input {...register("email", { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ })} style={styles.input} placeholder='Email Address'/>
-          <input type="password" {...register("password")} style={styles.input} placeholder='Password'/>
-          <button
-            type="submit"
-            style={{ ...styles.submitButton, ...(isHover && styles.submitButtonHover) }}
-            onMouseEnter={() => setIsHover(true)}
-            onMouseLeave={() => setIsHover(false)}
-            >Log In</button>
-          <p style={styles.p}>{data}</p>
-          </>
-          )}    
-      </form>
-  </div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <h1>Ghostbusters</h1>
 
+                <div className='signupLogin'>
+                  <button
+                      style={{...styles.button, ...(activeTab === 'signup' && styles.activeButton)}}
+                      onClick={() => {
+                        setActiveTab('signup');
+                        handleSignUp();
+                      }}>
+                      <h2>Sign Up</h2>
+                      </button>
+
+                    <button
+                      style={{...styles.button, ...(activeTab === 'login' && styles.activeButton)}}
+                      onClick={() => {
+                        setActiveTab('login');
+                        handleLogin();
+                      }}>
+                      <h2>Log In</h2>
+                    </button>
+                </div>
+
+                {showSignUp ? (
+                  <SignUpForm />
+                ) : (
+                <>  
+                <input {...register("email", { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ })} placeholder='Email Address'/>
+                <input type="password" {...register("password")} placeholder='Password'/>
+                
+                <button
+                  type="submit"
+                  onMouseEnter={() => setIsHover(true)}
+                  onMouseLeave={() => setIsHover(false)}
+                  ><h5>Log In</h5></button>
+                <p>{data}</p>
+                </>
+                )}
+            </form>
+        </div>
     )
   }
 

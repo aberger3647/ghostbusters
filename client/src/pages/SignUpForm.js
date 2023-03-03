@@ -25,91 +25,22 @@ const SignUpForm = () => {
         }
     }
 
-    const styles = {
-        form: {
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          width: '100%',
-          maxWidth: '400px'
-        },
-        input: {
-          backgroundColor: 'transparent',
-          color: 'white',
-          border: '1px solid white',
-          padding: '10px',
-          marginBottom: '10px',
-          width: '100%',
-          borderRadius: '10px',
-          '::placeholder': { color: 'white' }
-        },
-        buttonContainer: {
-          display: 'flex',
-          width: '100%',
-          marginBottom: '10px'
-        },
-        button: {
-          backgroundColor: 'transparent',
-          color: 'white',
-          border: '1px solid white',
-          borderRadius: '20px',
-          padding: '10px',
-          margin: '10px',
-          width: '50%',
-          cursor: 'pointer',
-          transition: 'background-color 0.3s ease-in-out'
-        },
-        activeButton: {
-          backgroundColor: '#613cff',
-          color: '#fff'
-        },
-        submitButton: {
-          backgroundColor: 'transparent',
-          color: 'white',
-          border: '1px solid white',
-          borderRadius: '10px',
-          padding: '10px',
-          width: '100px',
-          cursor: 'pointer',
-          transition: 'opacity 0.3s ease-in-out'
-        },
-        submitButtonHover: {
-          backgroundColor: '#613cff',
-          opacity: '0.8',
-          color: 'white'
-        },
-        h1: {
-          color: 'white',
-          textAlign: 'center',
-        },
-        h4: {
-          color: 'white',
-          textAlign: 'center'
-        },
-        p: {
-          color: 'white'
-        },
-        };
-
     return (
-        <div>
-            {/* change to preferences later */}
+        <>
             {Auth.loggedIn() && (
-                <Navigate to="/explore" />
+                <Navigate to="/preferences" />
             )}
-            <form onSubmit={handleSubmit(onSubmit)} style={styles.form}>
-                <h4 style={styles.h4}>Sign Up</h4>
-                <input {...register('firstName')} style={styles.input} placeholder="First Name" />
-                <input {...register("email", { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ })} style={styles.input} placeholder="Email" />
-                <input type="password" {...register("password")} style={styles.input} placeholder="Password" />
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <input {...register('firstName')} placeholder="First Name" />
+                <input {...register("email", { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ })} placeholder="Email" />
+                <input type="password" {...register("password")} placeholder="Password" />
                 <button
                   type="submit"
-                  style={{ ...styles.submitButton, ...(isHover && styles.submitButtonHover) }}
                   onMouseEnter={() => setIsHover(true)}
                   onMouseLeave={() => setIsHover(false)}
-                  >Sign Up</button>
+                  ><h5>Sign Up</h5></button>
             </form>
-        </div>
+        </>
     )
 }
 
