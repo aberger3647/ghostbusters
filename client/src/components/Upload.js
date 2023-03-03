@@ -8,7 +8,7 @@ import { UPLOAD_IMAGE } from '../utils/mutations';
 const UploadImage = () => {
 
     const { register, handleSubmit } = useForm();
-    const [upload, { error, data }] = useMutation(UPLOAD_IMAGE);
+    const [uploadImage, { error }] = useMutation(UPLOAD_IMAGE);
 
     const submit = async (data, e) => {
         e.preventDefault();
@@ -19,16 +19,24 @@ const UploadImage = () => {
         formData.append('file', file);
         formData.append('upload_preset', process.env.REACT_APP_UPLOAD_PRESET)
 
-
         const response = await axios.post(
             `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
             formData,
         )
-            const imageId = response.data.public_id
+            const image = response.data.public_id
 
-        await upload({
-            variables: { image: {imageId} }
-        })
+            if (!image) {
+                return false;
+            }
+
+        try {
+            await uploadImage({
+                variables: { image:image }
+            })
+        } catch (err) {
+            console.error(err)
+        }
+
     }
 
     return (

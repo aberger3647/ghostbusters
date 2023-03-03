@@ -106,9 +106,10 @@ const resolvers = {
         throw new AuthenticationError('You must be logged in.');
       }
       const newImage = args.image
+      console.log(newImage)
       return await User.findOneAndUpdate(
         { _id: context.user._id },
-        { $set: { image: { newImage } } },
+        { $set: { image: newImage } },
         { new: true }
       )
     }
