@@ -24,16 +24,21 @@ const [showSignUp, setShowSignUp] = useState(false);
     function handleLogin() {
       setShowSignUp(false);
     }
+
   const onSubmit = async (formData, event) => {
     try {
+      
       const { data } = await login({
         variables: { ...formData },
       });
+
       Auth.login(data.login.token);
       console.log('logged in')
     } catch (err) {
       console.error(err);
     }
+  }
+    
 
     const styles = {
       formContainer: {
@@ -113,52 +118,51 @@ const [showSignUp, setShowSignUp] = useState(false);
 
     return (
 
-        <div style={styles.formContainer}>
-            {Auth.loggedIn() && (
-              <Navigate to="/explore" />
-            )}
-            <form onSubmit={handleSubmit(onSubmit)} style={styles.form}>
-                <h1 style={styles.h1}>Ghostbusters</h1>
-                <div style={styles.buttonContainer}>
-                  <button
-                    style={{...styles.button, ...(activeTab === 'signup' && styles.activeButton)}}
-                    onClick={() => {
-                      setActiveTab('signup');
-                      handleSignUp();
-                    }}>
-                    Sign Up
-                  </button>
-                  <button
-                    style={{...styles.button, ...(activeTab === 'login' && styles.activeButton)}}
-                    onClick={() => {
-                      setActiveTab('login');
-                      handleLogin();
-                    }}>
-                    Log In
-                  </button>
-                </div>
-                {showSignUp ? (
-                  <SignUpForm />
-                ) : (
-                <>  
-                <h4 style={styles.h4}>Log In</h4>
-                <input {...register("email", { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ })} style={styles.input} placeholder='Email Address'/>
-                <input type="password" {...register("password")} style={styles.input} placeholder='Password'/>
-                <button
-                  type="submit"
-                  style={{ ...styles.submitButton, ...(isHover && styles.submitButtonHover) }}
-                  onMouseEnter={() => setIsHover(true)}
-                  onMouseLeave={() => setIsHover(false)}
-                  >Log In</button>
-                <p style={styles.p}>{data}</p>
-                </>
-                )}    
-            </form>
-        </div>
+      <div style={styles.formContainer}>
+      {Auth.loggedIn() && (
+        <Navigate to="/explore" />
+      )}
+      <form onSubmit={handleSubmit(onSubmit)} style={styles.form}>
+          <h1 style={styles.h1}>Ghostbusters</h1>
+          <div style={styles.buttonContainer}>
+            <button
+              style={{...styles.button, ...(activeTab === 'signup' && styles.activeButton)}}
+              onClick={() => {
+                setActiveTab('signup');
+                handleSignUp();
+              }}>
+              Sign Up
+            </button>
+            <button
+              style={{...styles.button, ...(activeTab === 'login' && styles.activeButton)}}
+              onClick={() => {
+                setActiveTab('login');
+                handleLogin();
+              }}>
+              Log In
+            </button>
+          </div>
+          {showSignUp ? (
+            <SignUpForm />
+          ) : (
+          <>  
+          <h4 style={styles.h4}>Log In</h4>
+          <input {...register("email", { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ })} style={styles.input} placeholder='Email Address'/>
+          <input type="password" {...register("password")} style={styles.input} placeholder='Password'/>
+          <button
+            type="submit"
+            style={{ ...styles.submitButton, ...(isHover && styles.submitButtonHover) }}
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
+            >Log In</button>
+          <p style={styles.p}>{data}</p>
+          </>
+          )}    
+      </form>
+  </div>
 
     )
   }
 
-}
 
 export default LoginForm;

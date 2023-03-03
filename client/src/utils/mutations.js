@@ -28,16 +28,7 @@ export const ADD_USER = gql`
 export const UPLOAD_IMAGE = gql`
     mutation uploadImage($image: String!) {
         uploadImage(image: $image) {
-            _id
-            email
-            firstName
             image
-            reviews {
-                reviewText
-                firstName
-            }
-            likes
-            matches
         }
     }
 `

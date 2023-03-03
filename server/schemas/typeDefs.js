@@ -8,7 +8,8 @@ const typeDefs = gql`
         _id: ID!
         firstName: String!
         email: String!
-        reviews: [Review]!
+        reviews: [Review]
+        image: String
     }
 
     type Profile {
@@ -42,7 +43,7 @@ const typeDefs = gql`
 
     type Auth {
         token: ID!
-        user: User
+        me: User
     }
   
     type Query {
@@ -55,9 +56,7 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(email: String!, password: String!, firstName: String!): Auth
         addProfile(profile: ProfileInput!): Profile
-        # addReview(userId: ID!, reviewData: ReviewInput!): Review!
-        # addMatch(userId: ID!, matchData: MatchInput!): Match!
-        uploadImage(image: String!): User
+        uploadImage(image: String): User
     }
 `;
 

@@ -34,18 +34,9 @@ const userSchema = new Schema(
             }
         ],
         matches: [
-
             {
-                text: {
-                    type: String,
-                    required: true,
-                    minlength: 1,
-                    maxlength: 500
-                },
-                firstName: {
-                    type: String,
-                    required: true
-                },
+                type: Schema.Types.ObjectId,
+                ref: 'User'
             },
         ],
     },
