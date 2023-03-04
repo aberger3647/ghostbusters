@@ -22,7 +22,7 @@ h1 {
 }
 
 h2 {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
   margin: 0;
 }
@@ -69,8 +69,9 @@ button:hover, button:active {
   background: linear-gradient(to bottom, var(--purple), var(--periwinkle));
   color: white;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
+  align-items: center;
   min-height: 100vh;
 }
 
@@ -125,8 +126,87 @@ form > button:hover {
   cursor: pointer;
 }
 
-.footer {
+@media screen and (max-width: 768px) {
+  footer {
+    bottom: 0
+  }
+
+  body {
+    margin-bottom: 110px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  footer {
+    top: 0
+  }
+
+  body {
+    margin-top: 110px;
+  }
+}
+
+footer {
   position: fixed;
-  bottom: 0;
-  background-color: white;
+  height: 77px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  color: var(--white);
+  background: linear-gradient(270deg, var(--purple), var(--periwinkle));
+}
+
+footer a {
+  text-decoration: none;
+  color: white;
+}
+
+footer img {
+  height: 50px;
+  margin: 5px;
+}
+
+.exploreContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding-top: 80px;
+}
+
+.matchBtns {
+  height: 128px;
+  width: 128px;
+}
+
+.matchBtnContainer {
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  max-width: 420px;
+  margin-top: 30px;
+}
+
+.explorePhoto {
+  height: 345px;
+  width: 345px;
+}
+
+.exploreStats {
+  color: var(--periwinkle);
+  margin-top: 20px;
+  width: 55px;
+}
+
+.exploreName {
+  margin-top: 30px;
+}
+
+.exploreStatContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 186px;
 }

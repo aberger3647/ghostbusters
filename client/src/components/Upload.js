@@ -13,7 +13,7 @@ const UploadImage = () => {
     const [imageId, setimageId] = useState('')
     const submit = async (data, e) => {
         e.preventDefault();
-        
+
         const file = data.image[0]
 
         const formData = new FormData();
@@ -24,15 +24,15 @@ const UploadImage = () => {
             `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
             formData,
         )
-            const image = response.data.public_id
+        const image = response.data.public_id
 
-            if (!image) {
-                return false;
-            }
+        if (!image) {
+            return false;
+        }
 
         try {
             await uploadImage({
-                variables: { image:image }
+                variables: { image: image }
             })
 
             setimageId(image)
@@ -47,11 +47,11 @@ const UploadImage = () => {
 
             <form onSubmit={handleSubmit(submit)}>
                 <input accept="image/*" type="file" {...register("image")} />
-                <input type="submit" />
+                <button type="submit" >Submit</button>
             </form>
 
-            <Image cloudName={process.env.REACT_APP_CLOUD_NAME} publicId={imageId} />
-            </>
+            {/* <Image cloudName={process.env.REACT_APP_CLOUD_NAME} publicId={imageId} /> */}
+        </>
     )
 }
 

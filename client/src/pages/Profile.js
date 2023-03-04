@@ -1,9 +1,12 @@
 import React from 'react';
 import Info from '../components/Info'
-
 import useQuery from '@apollo/client';
-
+import Auth from '../utils/auth';
 const Profile = () => {
+
+    const handleLogout = () => {
+        Auth.logout();
+    };
 
     // const { loading, data } = useQuery(QUERY_ME);
     const data = "woo"
@@ -39,7 +42,7 @@ const Profile = () => {
             <p>Drinking</p>
 
             <button>Edit</button>
-            <button>Logout</button>
+            <button onClick={handleLogout}>Logout</button>
         </div>
     )
 };

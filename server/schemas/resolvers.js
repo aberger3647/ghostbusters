@@ -82,6 +82,54 @@ const resolvers = {
         { $set: { image: newImage } },
         { new: true }
       )
+    },
+    addLike: async (parent, args, context) => {
+      // if (!context.user) {
+      //   throw new AuthenticationError('You must be logged in.')
+      // }
+      let match = false;
+      console.log(args)
+      const likedUser = await User.findOne({ _id: args.userId })
+      console.log(likedUser)
+      // IF LIKED USER ALREADY HAS YOU LIKED (ITS A MATCH)
+      if (likedUser.likes.includes("640196d888622758d0611d07")) {
+        console.log('they like you already')
+        
+        // UPDATE LIKED USER (REMOVE FROM LIKES)
+        await User.findOneAndUpdate(
+          { _id: likedUser._id },
+          { $pull: { likes: "640196d888622758d0611d07" } },
+          { new: true }
+        )
+        console.log('')
+
+          // UPDATE LIKED USER (ADD TO MATCHES)
+        await User.findOneAndUpdate(
+          { _id: likedUser._id },
+          { $addToSet: { matches: "640196d888622758d0611d07" } },
+          { new: true }
+        )
+        console.log('')
+
+        // UPDATE LOGGED IN USER TO ADD LIKED USER TO MATCHES
+        await User.findOneAndUpdate(
+          { _id: "640196d888622758d0611d07" },
+          { $addtoSet: { matches: args.userId } },
+          { new: true }
+        )
+        console.log('')
+        match = true;
+
+      } else {
+        // ADD LIKE TO USER'S LIKES
+        await User.findOneAndUpdate(
+          { _id: "640196d888622758d0611d07" },
+          { $addToSet: { likes: args.userId } },
+          { new: true }
+        )
+        console.log('ONLY ADD TO LIKES')
+      }
+
     }
   },
 };
