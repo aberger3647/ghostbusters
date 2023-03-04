@@ -8,6 +8,7 @@ import { ADD_PREFERENCE } from '../utils/mutations';
 
 const PreferencesForm = () => {
 
+
     { !Auth.loggedIn() && <Navigate to='/login' /> }
 
     const { register, handleSubmit } = useForm();
@@ -15,12 +16,13 @@ const PreferencesForm = () => {
     const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
 
     const onSubmit = async (preference, event) => {
+        event.preventDefault();
         try {
             const { data } = await addPreference({
                 variables: { preference },
             });
 
-            // Auth.login(data.addPreference.token);
+            Auth.login(data.addPreference.token);
         } catch (err) {
             console.error(err)
         }
@@ -32,7 +34,7 @@ const PreferencesForm = () => {
 
     return (
         <>
-            <Header />
+            <Header title="prefences" />
             <div className='formContainer'>
 
                 <form onSubmit={handleSubmit(onSubmit)}>

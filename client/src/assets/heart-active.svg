@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 27.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 129 128" style="enable-background:new 0 0 129 128;" xml:space="preserve">
+	 viewBox="0 0 134.7 134.7" style="enable-background:new 0 0 134.7 134.7;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#6789FF;}
-	.st1{fill:#D8E0FF;}
-	.st2{fill:none;stroke:#6789FF;stroke-width:5;}
-	.st3{clip-path:url(#SVGID_00000038375461034701676110000013657414131045774517_);}
-	.st4{fill:#623CFF;}
+	.st0{fill:#6789FF;stroke:#6789FF;stroke-width:7.3143;stroke-miterlimit:10;}
+	.st1{fill:#D8E0FF;stroke:#6789FF;stroke-width:6;stroke-miterlimit:10;}
+	.st2{clip-path:url(#SVGID_00000049927875823995383910000008324731060173218984_);}
+	.st3{fill:#623CFF;}
 </style>
-<g id="Group_18" transform="translate(-255 -755)">
-	<circle id="Ellipse_6_00000123405500939323532510000012295082496048964780_" class="st0" cx="322" cy="821" r="62"/>
-	<g id="Ellipse_5_00000032611073867163326180000010284462841082034585_" transform="translate(255 755)">
-		<circle class="st1" cx="67" cy="66" r="62"/>
-		<circle class="st2" cx="67" cy="66" r="59.5"/>
-	</g>
+<g id="Layer_2_copy">
+	<ellipse class="st0" cx="69.1" cy="68.6" rx="61.9" ry="62.4"/>
 </g>
-<g id="Group_20" transform="translate(30 38.133)">
-	<g>
-		<defs>
-			<rect id="SVGID_1_" x="6" y="3.3" width="63" height="55.7"/>
-		</defs>
-		<clipPath id="SVGID_00000000940582467820772350000005554212289297153204_">
-			<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
-		</clipPath>
-		
-			<g id="Group_19" transform="translate(0 0)" style="clip-path:url(#SVGID_00000000940582467820772350000005554212289297153204_);">
-			<path id="Path_18" class="st4" d="M6,23.4c0,17.4,24.2,31.9,30.2,35.2c0.8,0.5,1.8,0.5,2.6,0c6-3.3,30.2-17.8,30.2-35.2
-				C69,3.6,50.5-3.2,37.5,10.7C25.2-3.4,6,3.6,6,23.4"/>
+<g id="Layer_2_00000057832294654144727630000004110678626153720221_">
+	<ellipse class="st1" cx="68.9" cy="68.4" rx="61.9" ry="62.4"/>
+</g>
+<g id="Layer_1_00000084521060868966366070000013181904236946348929_">
+	<g id="Group_20" transform="translate(30 38.133)">
+		<g>
+			<g>
+				<g>
+					<defs>
+						<rect id="SVGID_1_" x="6" y="4" width="65" height="58"/>
+					</defs>
+					<clipPath id="SVGID_00000117679024405925448030000012637885714238536087_">
+						<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+					</clipPath>
+					
+						<g id="Group_19" transform="translate(0 0)" style="clip-path:url(#SVGID_00000117679024405925448030000012637885714238536087_);">
+						<path id="Path_18" class="st3" d="M6,24.9C6,43,31,58.1,37.2,61.6c0.8,0.5,1.9,0.5,2.7,0C46,58.1,71,43,71,24.9
+							C71,4.3,51.9-2.8,38.5,11.7C25.8-3,6,4.3,6,24.9"/>
+					</g>
+				</g>
+			</g>
 		</g>
 	</g>
 </g>
