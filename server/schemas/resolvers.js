@@ -1,5 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Review, Match } = require('../models');
+const Preference = require('../models/Preference');
 const Profile = require('../models/Profile');
 const { signToken } = require('../utils/auth');
 
@@ -51,6 +52,19 @@ const resolvers = {
           { profile: profile._id }
         );
         return profile;
+      } else {
+        throw new AuthenticationError('You must be logged in.');
+      }
+    },
+
+    addPreference: async (parent, args, context) => {
+      if (context.user) {
+        const preference = await Preference.create(args.preference);
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { preference: preference._id }
+        );
+        return preference;
       } else {
         throw new AuthenticationError('You must be logged in.');
       }

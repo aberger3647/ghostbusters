@@ -21,6 +21,10 @@ const userSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Profile',
         },
+        preferences: {
+            type: Schema.Types.ObjectId,
+            ref: 'Preference',
+        },
         reviews: [
             {
                 reviewText: {

@@ -36,6 +36,27 @@ const typeDefs = gql`
         bio: String
     }
 
+    type Preference {
+        _id: ID
+        age: Int
+        gender: String
+        height: String
+        religion: String
+        politics: String
+        smoking: String
+        drinking: String
+    }
+
+    input PreferenceInput {
+        age: String
+        gender: String
+        height: String
+        religion: String
+        politics: String
+        smoking: String
+        drinking: String
+    }
+
     type Review {
         _id: ID!
         text: String!
@@ -58,6 +79,7 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(email: String!, password: String!, firstName: String!): Auth
         addProfile(profile: ProfileInput!): Profile
+        addPreference(preference: PreferenceInput!): Preference
         addReview(userId: ID!, reviewText: String!): User
         uploadImage(image: String): User
         addLike(userId: ID!): User
