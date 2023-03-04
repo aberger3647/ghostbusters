@@ -21,7 +21,7 @@ const userSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Profile',
         },
-        preferences: {
+        preference: {
             type: Schema.Types.ObjectId,
             ref: 'Preference',
         },

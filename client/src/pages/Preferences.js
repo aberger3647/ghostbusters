@@ -1,32 +1,34 @@
 import React from 'react';
-import { useState } from 'react';
+import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Auth from '../utils/auth';
+import { ADD_PREFERENCE } from '../utils/mutations';
 
 const PreferencesForm = () => {
+
     { !Auth.loggedIn() && <Navigate to='/login' /> }
 
     const { register, handleSubmit } = useForm();
-    const [data, setData] = useState('');
+
+    const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
+
+    const onSubmit = async (preference, event) => {
+        try {
+            const { data } = await addPreference({
+                variables: { preference },
+            });
+
+            Auth.login(data.addPreference.token);
+        } catch (err) {
+            console.error(err)
+        }
+    }
 
     const handleLogout = () => {
         Auth.logout();
     };
-
-    const onSubmit = async (profile, event) => {
-        console.log(profile);
-        try {
-            // const { data } = await addProfile({
-            //     variables: { profile },
-            // });
-            // console.log(data);
-            // Auth.login(data.addProfile.token);
-        } catch (err) {
-            console.error(err);
-        }
-    }
 
     return (
         <>

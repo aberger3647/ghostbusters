@@ -11,6 +11,7 @@ const typeDefs = gql`
         reviews: [Review]!
         image: String
         profile: Profile
+        preference: Preference
     }
 
     type Profile {
@@ -80,7 +81,6 @@ const typeDefs = gql`
         addUser(email: String!, password: String!, firstName: String!): Auth
         addProfile(profile: ProfileInput!): Profile
         addPreference(preference: PreferenceInput!): Preference
-        addReview(userId: ID!, reviewText: String!): User
         uploadImage(image: String): User
         addLike(userId: ID!): User
     }
