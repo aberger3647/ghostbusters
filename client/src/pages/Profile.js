@@ -1,25 +1,20 @@
 import React from 'react';
-import Info from '../components/Info'
-import useQuery from '@apollo/client';
 import Auth from '../utils/auth';
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../utils/queries';
+
 const Profile = () => {
 
     const handleLogout = () => {
         Auth.logout();
     };
 
-    // const { loading, data } = useQuery(QUERY_ME);
-    const data = "woo"
-    const loading = false
-    const user = data?.user || {};
+    const { loading, data } = useQuery(GET_ME);
+    console.log("data", data);
+    const profile = data?.me.profile || {};
+    const preference = data?.me.preference || {};
 
-    if (!user?.userId) {
-        return (
-            <h4>
-                Sign up or login to view your profile!
-            </h4>
-        );
-    }
+    console.log("profile", profile);
 
     if (loading) {
         return <div>Potentially app logo</div>
@@ -27,19 +22,31 @@ const Profile = () => {
 
     return (
         <div>
-            <Info />
+            <h2>My Profile</h2>
+
+            <p>Image here</p>
+
+            <p>{profile.gender} {profile.age} {profile.height}</p>
+
+            <p>{profile.bio}</p>
+
+            <p>{profile.religion}</p>
+            <p>{profile.politics}</p>
+            <p>{profile.smoking}</p>
+            <p>{profile.drinking}</p>
+
 
             <hr></hr>
 
-            <h4>Preferences</h4>
+            <h2>My Preferences</h2>
 
-            <p>Age:</p>
-            <p>Height</p>
-            <p>Religion</p>
-            <p>Politics:</p>
+            <p>Age: {preference.age}</p>
+            <p>Height: {preference.height}</p>
+            <p>Religion: {preference.religion}</p>
+            <p>Politics: {preference.politics}</p>
 
-            <p>Smoking</p>
-            <p>Drinking</p>
+            <p>Smoking {preference.smoking}</p>
+            <p>Drinking {preference.drinking}</p>
 
             <button>Edit</button>
             <button onClick={handleLogout}>Logout</button>

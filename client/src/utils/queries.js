@@ -6,6 +6,27 @@ export const GET_ME = gql`
             _id
             firstName
             email
+            profile {
+                _id
+                age
+                gender
+                height
+                religion
+                politics
+                smoking
+                drinking
+                bio
+            }
+            preference {
+                _id
+                age
+                gender
+                height
+                religion
+                politics
+                smoking
+                drinking
+            }
         }
     }
 `

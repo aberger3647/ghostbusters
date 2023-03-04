@@ -6,12 +6,11 @@ import './App.css';
 
 // import Profile from './pages/Profile'
 import Explore from './pages/Explore'
-import CreateProfile from './pages/CreateProfile'
-import Preferences from './pages/Preferences'
 import Login from './pages/LoginForm'
 import SignUp from './pages/SignUpForm'
 import Footer from './components/Footer'
 import ProfileForm from './pages/CreateProfile'
+import PreferencesForm from './pages/Preferences';
 import Details from './pages/Details'
 import Profile from './pages/Profile'
 import Matches from './pages/Matches'
@@ -64,7 +63,7 @@ function App() {
             {/* {!loggedIn && ( */}
             <Route
               exact path='/'
-              element={<Login />}
+              element={<SignUp />}
             />
             {/* )} */}
 
@@ -76,10 +75,11 @@ function App() {
             />
             {/* )} */}
 
-            <Route path='/preferences' element={<Preferences />} />
+
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/createprofile' element={<ProfileForm />} />
+            <Route path='/preferences' element={<PreferencesForm />} />
             <Route path='/details' element={<Details />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/upload' element={<Upload />} />

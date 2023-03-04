@@ -49,3 +49,18 @@ export const ADD_PROFILE = gql`
         }
     }
 `
+
+export const ADD_PREFERENCE = gql`
+    mutation addPreference($preference: PreferenceInput!) {
+        addPreference(preference: $preference) {
+                 _id
+                age
+                gender
+                height
+                religion
+                politics
+                smoking
+                drinking
+        }
+    }
+`

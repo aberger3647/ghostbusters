@@ -1,32 +1,34 @@
 import React from 'react';
-import { useState } from 'react';
+import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Auth from '../utils/auth';
+import { ADD_PREFERENCE } from '../utils/mutations';
 
 const PreferencesForm = () => {
+
     { !Auth.loggedIn() && <Navigate to='/login' /> }
 
     const { register, handleSubmit } = useForm();
-    const [data, setData] = useState('');
+
+    const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
+
+    const onSubmit = async (preference, event) => {
+        try {
+            const { data } = await addPreference({
+                variables: { preference },
+            });
+
+            // Auth.login(data.addPreference.token);
+        } catch (err) {
+            console.error(err)
+        }
+    }
 
     const handleLogout = () => {
         Auth.logout();
     };
-
-    const onSubmit = async (profile, event) => {
-        console.log(profile);
-        try {
-            // const { data } = await addProfile({
-            //     variables: { profile },
-            // });
-            // console.log(data);
-            // Auth.login(data.addProfile.token);
-        } catch (err) {
-            console.error(err);
-        }
-    }
 
     return (
         <>
@@ -46,7 +48,7 @@ const PreferencesForm = () => {
                         <option value='Non-Binary'>Non-Binary</option>
                     </select>
                     <div className='heightPrefs'>
-                        <select className='minMaxHeight' {...register('minHeight', { required: true })}>
+                        <select className='minMaxHeight' {...register('height')}>
                             <option value=''>Min Height</option>
                             <option value='45'>4'5"</option>
                             <option value='46'>4'6"</option>
@@ -77,7 +79,7 @@ const PreferencesForm = () => {
                             <option value='67'>6'7"</option>
                         </select>
                         <p>to</p>
-                        <select className='minMaxHeight' {...register('maxHeight', { required: true })}>
+                        {/* <select className='minMaxHeight' {...register('maxHeight')}>
                             <option value=''>Max Height</option>
                             <option value='45'>4'5"</option>
                             <option value='46'>4'6"</option>
@@ -106,7 +108,7 @@ const PreferencesForm = () => {
                             <option value='65'>6'5"</option>
                             <option value='66'>6'6"</option>
                             <option value='67'>6'7"</option>
-                        </select>
+                        </select> */}
                     </div>
 
                     <select {...register('religion', { required: true })}>
