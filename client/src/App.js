@@ -56,24 +56,17 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <>
-          {/* Header? */}
           <Routes>
-
-            {/* if not logged in, direct to login */}
-            {/* {!loggedIn && ( */}
             <Route
               exact path='/'
-              element={<SignUp />}
+              element={<Login />}
             />
-            {/* )} */}
-
             {/* if logged in, direct to explore pg */}
-            {/* {loggedIn && ( */}
             <Route
               exact path='/explore'
               element={<Explore />}
             />
-            {/* )} */}
+
 
 
             <Route path='/login' element={<Login />} />

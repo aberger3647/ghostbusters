@@ -58,6 +58,7 @@ h5 {
 header {
   border-bottom: 1px solid var(--periwinkle);
   padding: 5px;
+  padding-bottom: 6px;
   margin-bottom: 25px;
 }
 
@@ -229,14 +230,7 @@ footer img {
   margin: 5px;
 }
 
-.exploreContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 70vh;
-  padding-top: 80px;
-}
+
 
 .matchBtnContainer {
   width: 75%;
@@ -253,7 +247,6 @@ footer img {
 
 .like, .dislike {
   padding: 0px;
-  border-radius: 100px;
   border: none;
   height: 128px;
   width: 128px;
@@ -264,7 +257,7 @@ footer img {
 }
 
 .like:hover {
-  background-image: url('./assets/heart-hover.svg')
+  background-color: transparent;
 }
 
 .like:active {
@@ -276,11 +269,20 @@ footer img {
 }
 
 .dislike:hover {
-  background-image: url('./assets/broken-heart-hover.svg')
+  background-color: transparent;
 }
 
 .dislike:active {
   background-image: url('./assets/broken-heart-active.svg')
+}
+
+.exploreContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding-top: 80px;
 }
 
 .explorePhoto {
@@ -333,6 +335,74 @@ footer img {
   color: black;
 }
 
+.mediumPhoto {
+  height: 268px;
+  width: 268px;
+}
+
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: fill;
+  width: 336px;
+}
+
+.profileContainer hr {
+  width: 335px;
+  border-top: 1px solid var(--periwinkle);
+}
+
+.profilebioText {
+  text-align: center;
+  width: fill;
+}
+
+.profileDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profileDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  width: fill;
+  margin-bottom: 15px;
+}
+
+.profileDetailsContainer h4 {
+  text-align: center;
+  margin: 5px;
+}
+
+.profilePreferences {
+  text-align: left;
+  width: fill;
+  margin-bottom: 15px;
+}
+
+.profilePreferences h4 {
+  margin: 0;
+  line-height: 30px;
+}
+
+.profilePreferencesTitle {
+  font-weight: bold;
+  margin: 10px;
+}
+
+.profileBtns {
+  display: flex;
+  width: fill;
+  justify-content: space-between;
+}
+
+.profileBtns button {
+  margin: 25px 0 25px 0;
+}
+
 @media screen and (max-width: 768px) {
   footer {
     bottom: 0
@@ -349,7 +419,7 @@ footer img {
   }
 
   body {
-    margin-top: 80px;
+    margin-top: 76px;
   }
 
   .matches {
