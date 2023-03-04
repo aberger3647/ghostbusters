@@ -81,7 +81,8 @@ function App() {
             <Route path='/createprofile' element={<ProfileForm />} />
             <Route path='/details' element={<Details />} />
             <Route path='/profile' element={<Profile />} />
-            <Route path='/upload' element={<Upload />}/>
+            <Route path='/upload' element={<Upload />} />
+            <Route path='/matches' element={<Matches />} />
             <Route
               path='*'
               element={<h1 className='display-2'>Wrong page!</h1>}
