@@ -8,10 +8,13 @@ const Profile = () => {
     const handleLogout = () => {
         Auth.logout();
     };
+
     const { loading, data } = useQuery(GET_ME);
+    console.log("data", data);
     const profile = data?.me.profile || {};
     const preference = data?.me.preference || {};
-    console.log(profile);
+
+    console.log("profile", profile);
 
     if (loading) {
         return <div>Potentially app logo</div>

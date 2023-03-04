@@ -48,7 +48,7 @@ const PreferencesForm = () => {
                         <option value='Non-Binary'>Non-Binary</option>
                     </select>
                     <div className='heightPrefs'>
-                        <select className='minMaxHeight' {...register('minHeight', { required: true })}>
+                        <select className='minMaxHeight' {...register('height')}>
                             <option value=''>Min Height</option>
                             <option value='45'>4'5"</option>
                             <option value='46'>4'6"</option>
@@ -79,7 +79,7 @@ const PreferencesForm = () => {
                             <option value='67'>6'7"</option>
                         </select>
                         <p>to</p>
-                        <select className='minMaxHeight' {...register('maxHeight', { required: true })}>
+                        {/* <select className='minMaxHeight' {...register('maxHeight')}>
                             <option value=''>Max Height</option>
                             <option value='45'>4'5"</option>
                             <option value='46'>4'6"</option>
@@ -108,7 +108,7 @@ const PreferencesForm = () => {
                             <option value='65'>6'5"</option>
                             <option value='66'>6'6"</option>
                             <option value='67'>6'7"</option>
-                        </select>
+                        </select> */}
                     </div>
 
                     <select {...register('religion', { required: true })}>
