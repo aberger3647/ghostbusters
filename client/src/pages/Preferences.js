@@ -18,6 +18,7 @@ const PreferencesForm = () => {
 
     const onSubmit = async (preference, event) => {
         event.preventDefault();
+        console.log(preference)
         try {
             const { data } = await addPreference({
                 variables: { preference },
@@ -40,16 +41,16 @@ const PreferencesForm = () => {
 
     return (
         <>
-            <Header title="prefences" />
+            <Header title="preferences" />
             <div className='formContainer'>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
 
-                {/* <div className='heightPrefs'>
-                        <input className='minMaxAge' {...register('minAge')} />
+                <div className='heightPrefs'>
+                        <input className='minMaxAge' {...register('age')} />
                         <p>to</p>
-                        <input className='minMaxAge' {...register('maxAge')} />
-                    </div> */}
+                        {/* <input className='minMaxAge' {...register('maxAge')} /> */}
+                    </div>
 
                     <select {...register('gender', { required: true })}>
                         <option value=''>Gender...</option>
