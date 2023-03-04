@@ -14,6 +14,7 @@ import Footer from './components/Footer'
 import ProfileForm from './pages/CreateProfile'
 import Details from './pages/Details'
 import Profile from './pages/Profile'
+import Matches from './pages/Matches'
 
 import Upload from './components/Upload'
 
@@ -81,7 +82,8 @@ function App() {
             <Route path='/createprofile' element={<ProfileForm />} />
             <Route path='/details' element={<Details />} />
             <Route path='/profile' element={<Profile />} />
-            <Route path='/upload' element={<Upload />}/>
+            <Route path='/upload' element={<Upload />} />
+            <Route path='/matches' element={<Matches />} />
             <Route
               path='*'
               element={<h1 className='display-2'>Wrong page!</h1>}

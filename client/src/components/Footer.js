@@ -7,6 +7,7 @@ function Footer() {
         <a href="/login">Login</a> | 
         <a href="/preferences">Preferences</a> | 
         <a href="/explore">Explore</a> | 
+        <a href="/matches">Matches</a> | 
         <a href="/createprofile">Profile Form</a> | 
         <a href="/details">Details</a> | 
         <a href="/profile">Profile</a> | 
