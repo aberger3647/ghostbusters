@@ -79,7 +79,7 @@ button:active {
 
 /* login and signup */
 .formContainer {
-  color: white;
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -90,6 +90,7 @@ button:active {
 .loginSignup {
   min-height: 100vh;
   background: linear-gradient(to bottom, var(--purple), var(--periwinkle));
+  color: white;
 }
 
 form {
@@ -119,7 +120,7 @@ form {
   border: 1px solid var(--white);
 }
 
-selec, .heightPrefs {
+.heightPrefs {
   max-width: 337px;
 }
 
@@ -194,7 +195,7 @@ textarea {
   width: 43%;
 }
 
-.footer {
+footer {
   position: fixed;
   height: 77px;
   width: 100%;
