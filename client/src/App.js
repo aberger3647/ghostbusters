@@ -14,6 +14,7 @@ import Footer from './components/Footer'
 import ProfileForm from './pages/CreateProfile'
 import Details from './pages/Details'
 import Profile from './pages/Profile'
+import Matches from './pages/Matches'
 
 import Upload from './components/Upload'
 
