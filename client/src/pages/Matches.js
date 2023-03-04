@@ -2,7 +2,7 @@ import React from 'react';
 // import { useQuery } from '@apollo/client';
 // import { GET_ME } from '../queries';
 
-import MatchCard from '../components/MatchCard';
+// import MatchCard from '../components/MatchCard';
 
 const Matches = () => {
     // const { data, loading, error } = useQuery(GET_ME);
