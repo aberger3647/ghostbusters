@@ -35,16 +35,12 @@ h3 {
   margin: 0;
 }
 
-p,
-button,
-input,
-textarea,
-select {
+p, button {
   font-size: 25px;
   font-weight: 400;
 }
 
-h4 {
+h4, select, input, textarea {
   font-size: 20px;
   font-weight: 500;
 }
@@ -123,6 +119,22 @@ form {
   border: 1px solid var(--white);
 }
 
+selec, .heightPrefs {
+  max-width: 337px;
+}
+
+input, textarea {
+  max-width: 304px;
+}
+
+select, .heightPrefs {
+  max-width: 337px;
+}
+
+input, textarea {
+  max-width: 304px;
+}
+
 input,
 textarea,
 select {
@@ -131,7 +143,6 @@ select {
   border-radius: 20px;
   padding: 15px;
   margin: 7px 0px 7px;
-  width: 300px;
   color: var(--periwinkle);
   outline: none;
 }
@@ -140,15 +151,7 @@ textarea {
   height: 200px;
 }
 
-input {
-  text-indent: 10px;
-}
-
-select {
-  text-indent: 5px;
-}
-
-.loginSignup ::placeholder {
+.loginSignup  ::placeholder {
   color: var(--white);
   opacity: 1;
 }
@@ -181,8 +184,17 @@ textarea {
   margin-top: 20px;
 }
 
+/* preferences */
+.heightPrefs {
+  display: flex;
+  justify-content: space-between;
+}
 
-footer {
+.minMaxHeight {
+  width: 43%;
+}
+
+.footer {
   position: fixed;
   height: 77px;
   width: 100%;
