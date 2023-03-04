@@ -4,6 +4,7 @@
   --lightperi: #D8E0FF;
   --purple: #623CFF;
 }
+
 /* 
 typography
 size and color
@@ -22,12 +23,13 @@ h1 {
 
 h2 {
   font-size: 40px;
+  font-size: 40px;
   font-weight: bold;
   margin: 0;
 }
 
 h3 {
-  font-size:  30px;
+  font-size: 30px;
   font-weight: 500;
   color: var(--periwinkle);
   margin: 0;
@@ -48,7 +50,10 @@ h5 {
   font-weight: 400;
 }
 
-h1, h2, h3, h5 {
+h1,
+h2,
+h3,
+h5 {
   text-align: center;
 }
 
@@ -67,14 +72,16 @@ button {
   transition: opacity 0.3s ease-in-out;
 }
 
-button:hover, button:active {
+button:hover,
+button:active {
   background-color: var(--lightperi);
 }
 
 /* login and signup */
 .formContainer {
-  color: black;
+  
   display: flex;
+  flex-direction: column;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -83,6 +90,7 @@ button:hover, button:active {
 .loginSignup {
   min-height: 100vh;
   background: linear-gradient(to bottom, var(--purple), var(--periwinkle));
+  color: white;
 }
 
 form {
@@ -97,7 +105,7 @@ form {
   margin: 80px 10px 60px 10px;
 }
 
-.signupLogin > button {
+.signupLogin>button {
   padding: 15px 25px 15px 25px;
 }
 
@@ -112,7 +120,7 @@ form {
   border: 1px solid var(--white);
 }
 
-selec, .heightPrefs {
+.heightPrefs {
   max-width: 337px;
 }
 
@@ -120,7 +128,17 @@ input, textarea {
   max-width: 304px;
 }
 
-input, textarea, select {
+select, .heightPrefs {
+  max-width: 337px;
+}
+
+input, textarea {
+  max-width: 304px;
+}
+
+input,
+textarea,
+select {
   background-color: var(--white);
   border: 1px solid var(--periwinkle);
   border-radius: 20px;
@@ -144,13 +162,13 @@ textarea {
   opacity: 1;
 }
 
-form > button {
+form>button {
   border: none;
   background-color: transparent;
   color: var(--white);
 }
 
-form > button:hover {
+form>button:hover {
   color: var(--lightperi);
   background-color: transparent;
   cursor: pointer;
@@ -177,8 +195,158 @@ textarea {
   width: 43%;
 }
 
-.footer {
+footer {
   position: fixed;
-  bottom: 0;
-  background-color: white;
+  height: 77px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  color: var(--white);
+  background: linear-gradient(270deg, var(--purple), var(--periwinkle));
+}
+
+footer a {
+  text-decoration: none;
+  color: white;
+}
+
+footer img {
+  height: 50px;
+  margin: 5px;
+}
+
+.exploreContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding-top: 80px;
+}
+
+.matchBtnContainer {
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  max-width: 420px;
+  margin-top: 30px;
+}
+
+.matchBtns {
+  height: 128px;
+  width: 128px;
+}
+
+.like, .dislike {
+  padding: 0px;
+  border-radius: 100px;
+  border: none;
+  height: 128px;
+  width: 128px;
+}
+
+.like {
+  background-image: url('./assets/heart.svg')
+}
+
+.like:hover {
+  background-image: url('./assets/heart-hover.svg')
+}
+
+.like:active {
+  background-image: url('./assets/heart-active.svg')
+}
+
+.dislike {
+  background-image: url('./assets/broken-heart.svg')
+}
+
+.dislike:hover {
+  background-image: url('./assets/broken-heart-hover.svg')
+}
+
+.dislike:active {
+  background-image: url('./assets/broken-heart-active.svg')
+}
+
+.explorePhoto {
+  height: 345px;
+  width: 345px;
+}
+
+.exploreStats {
+  color: var(--periwinkle);
+  margin-top: 20px;
+  width: 55px;
+}
+
+.exploreName {
+  margin-top: 30px;
+}
+
+.exploreStatContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 186px;
+}
+
+.matchCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 270px;
+  padding-top: 25px;
+}
+
+.matchCard a {
+  text-decoration: none;
+}
+
+.matchCard img {
+  height: 165px;
+  width: 165px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.matchCard hr {
+  width: 335px;
+  border-top: 1px solid var(--periwinkle);
+}
+
+.matchCard h3 {
+  color: black;
+}
+
+@media screen and (max-width: 768px) {
+  footer {
+    bottom: 0
+  }
+
+  body {
+    margin-bottom: 110px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  footer {
+    top: 0
+  }
+
+  body {
+    margin-top: 80px;
+  }
+
+  .matches {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .matchCard hr {
+    opacity: 0;
+  }
 }

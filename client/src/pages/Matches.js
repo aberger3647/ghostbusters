@@ -2,8 +2,8 @@ import React from 'react';
 // import { useQuery } from '@apollo/client';
 // import { GET_ME } from '../queries';
 
-// import MatchCard from '../components/MatchCard';
-
+import MatchCard from '../components/MatchCard';
+import Header from '../components/Header'
 const Matches = () => {
     // const { data, loading, error } = useQuery(GET_ME);
 
@@ -11,11 +11,17 @@ const Matches = () => {
 
     return (
         <div>
-        <h1>My Matches</h1>
+            <Header />
         <div className="matches">
             {/* {matches.map((user) => (
             <MatchCard key={user._id} user={user} />
             ))} */}
+            <MatchCard />
+            <MatchCard />
+            <MatchCard />
+            <MatchCard />
+            <MatchCard />
+            <MatchCard />
         </div>
         </div>
     );

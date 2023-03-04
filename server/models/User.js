@@ -43,6 +43,14 @@ const userSchema = new Schema(
         image: {
             type: String,
         },
+        likes: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }],
+        matches: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }],
     },
     {
         toJSON: {

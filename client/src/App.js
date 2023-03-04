@@ -64,7 +64,7 @@ function App() {
             {/* {!loggedIn && ( */}
             <Route
               exact path='/'
-              element={<SignUp />}
+              element={<Login />}
             />
             {/* )} */}
 

@@ -73,7 +73,7 @@ const LoginForm = () => {
             handleSignUp();
           }}
         >
-          <h2>Sign Up</h2>
+          <h3>Sign Up</h3>
         </button>
 
         <button
@@ -86,7 +86,7 @@ const LoginForm = () => {
             handleLogin();
           }}
         >
-          <h2>Log In</h2>
+          <h3>Log In</h3>
         </button>
       </div>
 
