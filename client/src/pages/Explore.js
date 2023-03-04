@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Auth from '../utils/auth';
 import likeIcon from '../assets/heart.svg'
-import hateIcon from '../assets/broken-heart.svg'
+import dislikeIcon from '../assets/broken-heart.svg'
 import profilePhoto from '../assets/profile-icon.svg'
 
 const Explore = () => {
@@ -23,8 +23,8 @@ const Explore = () => {
                     <h3 className="exploreStats">{gender} </h3><h3 className="exploreStats">{age}</h3> <h3 className="exploreStats">{height}</h3>
                 </div>
                 <div className="matchBtnContainer">
-                    <img className='matchBtns' src={hateIcon} alt='Dislike Button' />
-                    <img className='matchBtns' src={likeIcon} alt='Like Button' />
+                    <button className="dislike"></button>
+                    <button className="like"></button>
                 </div>
             </div>
         </>

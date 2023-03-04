@@ -23,16 +23,23 @@ h1 {
 
 h2 {
   font-size: 40px;
+  font-size: 40px;
   font-weight: bold;
   margin: 0;
 }
 
 h3 {
-  font-size:  30px;
+  font-size: 30px;
   font-weight: 500;
+  color: var(--periwinkle);
+  margin: 0;
 }
 
-p, button, input, textarea {
+p,
+button,
+input,
+textarea,
+select {
   font-size: 25px;
   font-weight: 400;
 }
@@ -47,32 +54,46 @@ h5 {
   font-weight: 400;
 }
 
-h1, h2, h3, h5 {
+h1,
+h2,
+h3,
+h5 {
   text-align: center;
+}
+
+header {
+  border-bottom: 1px solid var(--periwinkle);
+  padding: 5px;
+  margin-bottom: 25px;
 }
 
 button {
   border: 3px solid var(--periwinkle);
   border-radius: 50px;
   padding: 5px 25px 5px 25px;
-  margin: 10px;
+  margin: 25px;
   background-color: var(--white);
   transition: opacity 0.3s ease-in-out;
 }
 
-button:hover, button:active {
+button:hover,
+button:active {
   background-color: var(--lightperi);
 }
 
 /* login and signup */
 .formContainer {
-  background: linear-gradient(to bottom, var(--purple), var(--periwinkle));
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
+}
+
+.loginSignup {
   min-height: 100vh;
+  background: linear-gradient(to bottom, var(--purple), var(--periwinkle));
 }
 
 form {
@@ -87,7 +108,7 @@ form {
   margin: 80px 10px 60px 10px;
 }
 
-.signupLogin > button {
+.signupLogin>button {
   padding: 15px 25px 15px 25px;
 }
 
@@ -97,54 +118,69 @@ form {
   background-color: var(--purple);
 }
 
-input {
+.loginInput {
   background-color: transparent;
   border: 1px solid var(--white);
+}
+
+input,
+textarea,
+select {
+  background-color: var(--white);
+  border: 1px solid var(--periwinkle);
   border-radius: 20px;
   padding: 15px;
   margin: 7px 0px 7px;
-  text-indent: 10px;
   width: 300px;
-  color: var(--white);
+  color: var(--periwinkle);
   outline: none;
 }
 
-::placeholder {
+textarea {
+  height: 200px;
+}
+
+input {
+  text-indent: 10px;
+}
+
+select {
+  text-indent: 5px;
+}
+
+.loginSignup ::placeholder {
   color: var(--white);
   opacity: 1;
 }
 
-form > button {
+::placeholder {
+  color: var(--periwinkle);
+  opacity: 1;
+}
+
+form>button {
   border: none;
   background-color: transparent;
   color: var(--white);
 }
 
-form > button:hover {
+form>button:hover {
   color: var(--lightperi);
   background-color: transparent;
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-  footer {
-    bottom: 0
-  }
-
-  body {
-    margin-bottom: 110px;
-  }
+textarea {
+  resize: none;
 }
 
-@media screen and (min-width: 768px) {
-  footer {
-    top: 0
-  }
-
-  body {
-    margin-top: 110px;
-  }
+/* create profile */
+.profileIcon {
+  height: 150px;
+  width: auto;
+  margin-top: 20px;
 }
+
 
 footer {
   position: fixed;
@@ -177,17 +213,49 @@ footer img {
   padding-top: 80px;
 }
 
-.matchBtns {
-  height: 128px;
-  width: 128px;
-}
-
 .matchBtnContainer {
   width: 75%;
   display: flex;
   justify-content: space-between;
   max-width: 420px;
   margin-top: 30px;
+}
+
+.matchBtns {
+  height: 128px;
+  width: 128px;
+}
+
+.like, .dislike {
+  padding: 0px;
+  border-radius: 100px;
+  border: none;
+  height: 128px;
+  width: 128px;
+}
+
+.like {
+  background-image: url('./assets/heart.svg')
+}
+
+.like:hover {
+  background-image: url('./assets/heart-hover.svg')
+}
+
+.like:active {
+  background-image: url('./assets/heart-active.svg')
+}
+
+.dislike {
+  background-image: url('./assets/broken-heart.svg')
+}
+
+.dislike:hover {
+  background-image: url('./assets/broken-heart-hover.svg')
+}
+
+.dislike:active {
+  background-image: url('./assets/broken-heart-active.svg')
 }
 
 .explorePhoto {
@@ -209,4 +277,63 @@ footer img {
   display: flex;
   justify-content: space-between;
   width: 186px;
+}
+
+.matchCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 270px;
+  padding-top: 25px;
+}
+
+.matchCard a {
+  text-decoration: none;
+}
+
+.matchCard img {
+  height: 165px;
+  width: 165px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.matchCard hr {
+  width: 335px;
+  border-top: 1px solid var(--periwinkle);
+}
+
+.matchCard h3 {
+  color: black;
+}
+
+@media screen and (max-width: 768px) {
+  footer {
+    bottom: 0
+  }
+
+  body {
+    margin-bottom: 110px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  footer {
+    top: 0
+  }
+
+  body {
+    margin-top: 80px;
+  }
+
+  .matches {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .matchCard hr {
+    opacity: 0;
+  }
 }

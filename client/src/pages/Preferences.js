@@ -1,17 +1,20 @@
 import React from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { Navigate } from 'react-router-dom'
 import Auth from '../utils/auth';
 
 const PreferencesForm = () => {
-    // Auth.loggedIn();
+    const handleLogout = () => {
+        Auth.logout();
+    };
 
     const { register, handleSubmit } = useForm();
     const [data, setData] = useState('');
 
     return (
         <div>
+            {!Auth.loggedIn() && <Navigate to='/login'/>}
             <h2>A FORM</h2>
             <form onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}>
                 <input {...register('age')} />
@@ -26,6 +29,7 @@ const PreferencesForm = () => {
             </form>
 
             <button>Next</button>
+            <button onClick={handleLogout}>Logout</button>
         </div>
     )
 };
