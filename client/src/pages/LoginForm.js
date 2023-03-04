@@ -30,7 +30,7 @@ const LoginForm = () => {
         variables: { ...formData },
       });
       Auth.login(data.login.token);
-      console.log("logged in");
+
     } catch (err) {
       console.error(err);
     }
@@ -99,14 +99,14 @@ const LoginForm = () => {
         <>
           <form onSubmit={handleSubmit(loginSubmit)}>
             <input
-            className='loginInput'
+              className='loginInput'
               {...register("email", {
                 pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
               })}
               placeholder="Email Address"
             />
             <input
-            className='loginInput'
+              className='loginInput'
               type="password"
               {...register("password")}
               placeholder="Password"

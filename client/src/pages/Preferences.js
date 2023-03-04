@@ -2,6 +2,7 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Auth from '../utils/auth';
 import { ADD_PREFERENCE } from '../utils/mutations';
@@ -20,7 +21,6 @@ const PreferencesForm = () => {
                 variables: { preference },
             });
 
-            // Auth.login(data.addPreference.token);
         } catch (err) {
             console.error(err)
         }
@@ -30,9 +30,16 @@ const PreferencesForm = () => {
         Auth.logout();
     };
 
+    const navigate = useNavigate();
+
+    const handleNextPage = () => {
+        navigate('/explore');
+    }
+
     return (
         <>
             <Header />
+            <h2>Preferences</h2>
             <div className='formContainer'>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -144,7 +151,7 @@ const PreferencesForm = () => {
 
                     <input type='submit' />
                 </form>
-                <button>Next</button>
+                <button onClick={handleNextPage}>Next</button>
                 <button onClick={handleLogout}>Logout</button>
             </div>
         </>
