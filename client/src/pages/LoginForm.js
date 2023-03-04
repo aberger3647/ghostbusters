@@ -36,6 +36,9 @@ const LoginForm = () => {
     }
   };
 
+  const body = document.querySelector('body');
+  body.style.margin = 0;
+
   const styles = {
     button: {
       border: "none",

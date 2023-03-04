@@ -88,6 +88,8 @@ button:active {
   min-height: 100vh;
   background: linear-gradient(to bottom, var(--purple), var(--periwinkle));
   color: white;
+  position: relative;
+  z-index: 6;
 }
 
 
@@ -214,6 +216,7 @@ footer {
   align-items: center;
   color: var(--white);
   background: linear-gradient(270deg, var(--purple), var(--periwinkle));
+  z-index: -1;
 }
 
 footer a {
