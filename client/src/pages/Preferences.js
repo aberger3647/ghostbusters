@@ -2,6 +2,7 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Auth from '../utils/auth';
 import { ADD_PREFERENCE } from '../utils/mutations';
@@ -22,7 +23,6 @@ const PreferencesForm = () => {
                 variables: { preference },
             });
 
-            Auth.login(data.addPreference.token);
         } catch (err) {
             console.error(err)
         }
@@ -32,6 +32,12 @@ const PreferencesForm = () => {
         Auth.logout();
     };
 
+    const navigate = useNavigate();
+
+    const handleNextPage = () => {
+        navigate('/explore');
+    }
+
     return (
         <>
             <Header title="prefences" />
@@ -39,9 +45,11 @@ const PreferencesForm = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
 
-                    <input {...register('age')}
-                        placeholder='Age'
-                    />
+                {/* <div className='heightPrefs'>
+                        <input className='minMaxAge' {...register('minAge')} />
+                        <p>to</p>
+                        <input className='minMaxAge' {...register('maxAge')} />
+                    </div> */}
 
                     <select {...register('gender', { required: true })}>
                         <option value=''>Gender...</option>
@@ -80,7 +88,7 @@ const PreferencesForm = () => {
                             <option value='66'>6'6"</option>
                             <option value='67'>6'7"</option>
                         </select>
-                        <p>to</p>
+                        <h4>to</h4>
                         {/* <select className='minMaxHeight' {...register('maxHeight')}>
                             <option value=''>Max Height</option>
                             <option value='45'>4'5"</option>
@@ -144,7 +152,7 @@ const PreferencesForm = () => {
 
                     <input type='submit' />
                 </form>
-                <button>Next</button>
+                <button onClick={handleNextPage}>Next</button>
                 <button onClick={handleLogout}>Logout</button>
             </div>
         </>

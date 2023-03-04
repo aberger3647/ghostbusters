@@ -31,18 +31,18 @@ const SignUpForm = () => {
 
   return (
     <>
-      {Auth.loggedIn() && <Navigate to="/preferences" />}
+      {Auth.loggedIn() && <Navigate to="/createprofile" />}
       <form onSubmit={handleSubmit(onSubmit)}>
         <input className='loginInput' {...register("firstName")} placeholder="First Name" />
         <input
-        className='loginInput'
+          className='loginInput'
           {...register("email", {
             pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
           })}
           placeholder="Email"
         />
         <input
-        className='loginInput'
+          className='loginInput'
           type="password"
           {...register("password")}
           placeholder="Password"
