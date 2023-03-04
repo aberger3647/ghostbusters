@@ -59,7 +59,6 @@ const typeDefs = gql`
         addProfile(profile: ProfileInput!): Profile
         addReview(userId: ID!, reviewText: String!): User
         uploadImage(image: String): User
-        addReview(userId: ID!, reviewText: String!): User
     }
 `;
 
