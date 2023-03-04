@@ -4,7 +4,6 @@
   --lightperi: #D8E0FF;
   --purple: #623CFF;
 }
-
 /* 
 typography
 size and color
@@ -12,8 +11,8 @@ size and color
 40 bold - name on profile, name on its a match sign up/login H2
 30 medium - page header, explore, gender/age/height H3
 30 bold - reviews/preferences
-25 regular - p, button, form P
-20 medium - details, review name H4
+25 regular - p, button P
+20 medium - details, review name, input/textarea/select H4
 20 regular - signup/login, close its a match H5
 */
 h1 {
@@ -22,7 +21,6 @@ h1 {
 }
 
 h2 {
-  font-size: 40px;
   font-size: 40px;
   font-weight: bold;
   margin: 0;
@@ -79,7 +77,6 @@ button:active {
 
 /* login and signup */
 .formContainer {
-  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -92,6 +89,8 @@ button:active {
   background: linear-gradient(to bottom, var(--purple), var(--periwinkle));
   color: white;
 }
+
+
 
 form {
   display: flex;
@@ -109,6 +108,10 @@ form {
   padding: 15px 25px 15px 25px;
 }
 
+.signupLogin h3 {
+  color: white;
+}
+
 .active {
   border: 2px solid var(--white);
   border-radius: 50px;
@@ -117,6 +120,7 @@ form {
 
 .loginInput {
   background-color: transparent;
+  color: var(--white);
   border: 1px solid var(--white);
 }
 
@@ -147,6 +151,7 @@ select {
   color: var(--periwinkle);
   outline: none;
 }
+
 
 textarea {
   height: 200px;
@@ -186,13 +191,17 @@ textarea {
 }
 
 /* preferences */
-.heightPrefs {
+.heightPrefs, .agePrefs {
   display: flex;
   justify-content: space-between;
 }
 
 .minMaxHeight {
   width: 43%;
+}
+
+.minMaxAge { 
+  width: 43%
 }
 
 footer {
