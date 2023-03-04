@@ -10,6 +10,7 @@ const typeDefs = gql`
         email: String!
         reviews: [Review]!
         image: String
+        profile: Profile
     }
 
     type Profile {
