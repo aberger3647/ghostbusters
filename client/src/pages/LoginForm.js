@@ -57,7 +57,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="formContainer">
+    <div className="formContainer loginSignup">
       {Auth.loggedIn() && <Navigate to="/explore" />}
 
       <h1>Ghostbusters</h1>
@@ -96,12 +96,14 @@ const LoginForm = () => {
         <>
           <form loginSubmit={handleSubmit(loginSubmit)}>
             <input
+            className='loginInput'
               {...register("email", {
                 pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
               })}
               placeholder="Email Address"
             />
             <input
+            className='loginInput'
               type="password"
               {...register("password")}
               placeholder="Password"
@@ -114,7 +116,6 @@ const LoginForm = () => {
             >
               <h5>Log In</h5>
             </button>
-            <p>{data}</p>
           </form>
         </>
       )}
