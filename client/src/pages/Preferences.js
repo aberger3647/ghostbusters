@@ -20,7 +20,7 @@ const PreferencesForm = () => {
                 variables: { preference },
             });
 
-            Auth.login(data.addPreference.token);
+            // Auth.login(data.addPreference.token);
         } catch (err) {
             console.error(err)
         }

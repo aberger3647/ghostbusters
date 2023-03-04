@@ -1,8 +1,7 @@
 import React from 'react';
-import Info from '../components/Info'
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
-import { GET_ME, GET_PROFILE } from '../utils/queries';
+import { GET_ME } from '../utils/queries';
 
 const Profile = () => {
 
@@ -11,6 +10,8 @@ const Profile = () => {
     };
     const { loading, data } = useQuery(GET_ME);
     const profile = data?.me.profile || {};
+    const preference = data?.me.preference || {};
+    console.log(profile);
 
     if (loading) {
         return <div>Potentially app logo</div>
@@ -34,15 +35,15 @@ const Profile = () => {
 
             <hr></hr>
 
-            <h4>Preferences</h4>
+            <h2>My Preferences</h2>
 
-            <p>Age: </p>
-            <p>Height:</p>
-            <p>Religion</p>
-            <p>Politics:</p>
+            <p>Age: {preference.age}</p>
+            <p>Height: {preference.height}</p>
+            <p>Religion: {preference.religion}</p>
+            <p>Politics: {preference.politics}</p>
 
-            <p>Smoking</p>
-            <p>Drinking</p>
+            <p>Smoking {preference.smoking}</p>
+            <p>Drinking {preference.drinking}</p>
 
             <button>Edit</button>
             <button onClick={handleLogout}>Logout</button>
