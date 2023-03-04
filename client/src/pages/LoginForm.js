@@ -94,7 +94,7 @@ const LoginForm = () => {
         <SignUpForm />
       ) : (
         <>
-          <form loginSubmit={handleSubmit(loginSubmit)}>
+          <form onSubmit={handleSubmit(loginSubmit)}>
             <input
             className='loginInput'
               {...register("email", {

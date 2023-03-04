@@ -4,10 +4,11 @@ import { useForm } from 'react-hook-form';
 import Header from  '../components/Header';
 import profileIcon from '../assets/profile-icon.svg'
 import Auth from '../utils/auth';
+import {Navigate} from 'react-router-dom';
 import { ADD_PROFILE } from '../utils/mutations';
 
 const ProfileForm = () => {
-    Auth.loggedIn();
+    {!Auth.loggedIn() && <Navigate to='/login' />}
 
     const { register, handleSubmit } = useForm();
 
@@ -48,7 +49,7 @@ const ProfileForm = () => {
                     <option value='Non-Binary'>Non-Binary</option>
                 </select>
 
-                <select {...register('gender', { required: true })}>
+                <select {...register('height', { required: true })}>
                     <option value=''>Height...</option>
                     <option value='45'>4'5"</option>
                     <option value='46'>4'6"</option>
