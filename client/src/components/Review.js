@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import profilePhoto from '../assets/profile-icon.svg'
 
-const Review = ({ img, name, review }) => {
+const Review = (props) => {
+
+    const [containerDirection, setContainerDirection] = useState({})
+
+    useEffect(() => {
+        if (props.direction === 'right' ) {
+            setContainerDirection(styles.divRight)
+        }
+    }, [])
+
+    const styles = {
+        divRight: {
+            flexDirection: "row-reverse",
+        },    
+    }
 
     return (
-        <div>
-            <img src={img} alt='Reviewer thumbnail' />
-            <h4>{name}</h4>
-            <h4>{review}</h4>
+        <>
+        <div className="reviewContainer" style={containerDirection}>
+            <img className="smallPhoto" src={profilePhoto} />
+            <div className="reviewText" >
+            <h4>Dan</h4>
+            <h5>I had a great time with Jessica! She is sweet, fun, and loves to laugh.</h5>
+            </div>
         </div>
+        <hr/>
+        </>
     )
 };
 

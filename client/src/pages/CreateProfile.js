@@ -16,11 +16,11 @@ const ProfileForm = () => {
     
 
     const { register, handleSubmit } = useForm();
-
+    
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
-
+    
     const navigate = useNavigate();
-
+    
     const onSubmit = async (profile, event) => {
         try {
             const { data } = await addProfile({
@@ -33,8 +33,9 @@ const ProfileForm = () => {
             console.error(err);
         }
     }
-
+    
     return (
+        
         <div className='contentContainer'>
             { !Auth.loggedIn() && <Navigate to='/login' /> }
             <Header title="edit profile" />
