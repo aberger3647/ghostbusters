@@ -1,0 +1,17 @@
+[
+    {
+      "email": "cacheme@mail.com",
+      "password": "cacheme",
+      "firstName": "Danielle",
+      "reviews": [
+        {
+          "reviewText": "she kept wanting to fight me",
+          "firstName": "Justin"
+        },
+        {
+          "reviewText": "super rude",
+          "firstName": "Phil"
+        }
+    ]
+    }
+]

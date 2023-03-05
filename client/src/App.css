@@ -1,38 +1,553 @@
-.App {
+:root {
+  --periwinkle: #6789FF;
+  --white: #ffffff;
+  --lightperi: #D8E0FF;
+  --purple: #623CFF;
+}
+
+/* 
+typography
+size and color
+50 semibold - logotype, it's a match H1
+40 bold - name on profile, name on its a match sign up/login H2
+30 medium - page header, explore, gender/age/height H3
+30 bold - reviews/preferences
+25 regular - p, button P
+20 medium - details, review name, input/textarea/select H4
+20 regular - signup/login, close its a match H5
+*/
+h1 {
+  font-size: 50px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0;
+}
+
+h3 {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--periwinkle);
+  margin: 0;
+}
+
+p,
+button {
+  font-size: 25px;
+  font-weight: 400;
+}
+
+h4,
+select,
+input,
+textarea {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+h5 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h5 {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header {
+  border-bottom: 1px solid var(--periwinkle);
+  padding: 5px;
+  padding-bottom: 6px;
+  margin-bottom: 25px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+button, .uploadPhotoForm>button {
+  border: 3px solid var(--periwinkle);
+  border-radius: 50px;
+  padding: 5px 25px 5px 25px;
+  margin: 25px;
+  background-color: var(--white);
+  transition: opacity 0.3s ease-in-out;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.uploadPhotoForm>button {
+  color: black;
+}
+
+.uploadPhotoForm>button:hover {
+  background-color: var(--lightperi);
+  color: black;
+}
+
+button:hover,
+button:active {
+  background-color: var(--lightperi);
+}
+
+/* login and signup */
+.formContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginSignup,
+.itsAMatch {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, var(--purple), var(--periwinkle));
+  color: white;
+  z-index: 3;
+}
+
+.itsAMatch {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: none;
+}
+
+.loginSignup {
+  position: relative;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signupLogin {
+  display: flex;
+  justify-content: space-between;
+  margin: 80px 10px 60px 10px;
+}
+
+.signupLogin>button {
+  padding: 15px 25px 15px 25px;
+}
+
+.signupLogin h3 {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.active {
+  border: 2px solid var(--white);
+  border-radius: 50px;
+  background-color: var(--purple);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.loginInput {
+  background-color: transparent;
+  color: var(--white);
+  border: 1px solid var(--white);
+}
+
+.heightPrefs {
+  max-width: 337px;
+}
+
+input,
+textarea {
+  max-width: 304px;
+}
+
+select,
+.heightPrefs {
+  max-width: 337px;
+}
+
+input,
+textarea {
+  max-width: 304px;
+}
+
+input,
+textarea,
+select {
+  background-color: var(--white);
+  border: 1px solid var(--periwinkle);
+  border-radius: 20px;
+  padding: 15px;
+  margin: 7px 0px 7px;
+  color: var(--periwinkle);
+  outline: none;
+}
+
+
+textarea {
+  height: 200px;
+}
+
+.loginSignup ::placeholder {
+  color: var(--white);
+  opacity: 1;
+}
+
+::placeholder {
+  color: var(--periwinkle);
+  opacity: 1;
+}
+
+form>button, .itsAMatch>button {
+  border: none;
+  background-color: transparent;
+  color: var(--white);
+}
+
+form>button:hover, .itsAMatch>button:hover {
+  color: var(--lightperi);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+textarea {
+  resize: none;
+}
+
+/* create profile */
+.contentContainer {
+  position: relative;
+  z-index: 1;
+}
+
+.profileIcon {
+  height: 150px;
+  width: auto;
+  margin-top: 20px;
+}
+
+.uploadPhotoForm input {
+  border: none;
+}
+
+label {
+  display: flex;
+  justify-content: center;
+}
+
+/* preferences */
+.heightPrefs,
+.agePrefs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.minMaxHeight {
+  width: 43%;
+}
+
+.minMaxAge {
+  width: 43%
+}
+
+footer {
+  position: fixed;
+  height: 77px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  color: var(--white);
+  background: linear-gradient(270deg, var(--purple), var(--periwinkle));
+  z-index: 2;
+}
+
+footer a {
+  text-decoration: none;
+  color: white;
+}
+
+footer img {
+  height: 50px;
+  margin: 5px;
+}
+
+
+
+.matchBtnContainer {
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  max-width: 420px;
+  margin-top: 30px;
+}
+
+.matchBtns {
+  height: 128px;
+  width: 128px;
+}
+
+.like,
+.dislike {
+  padding: 0px;
+  border: none;
+  height: 128px;
+  width: 128px;
+}
+
+.like {
+  background-image: url('./assets/heart.svg');
+  background-repeat: no-repeat;
+}
+
+.like:hover {
+  background-color: transparent;
+  background-color: transparent;
+}
+
+.like:active {
+  background-image: url('./assets/heart-active.svg');
+  background-repeat: no-repeat;
+}
+
+.dislike {
+  background-image: url('./assets/broken-heart.svg');
+  background-repeat: no-repeat;
+}
+
+.dislike:hover {
+  background-color: transparent;
+  background-color: transparent;
+}
+
+.dislike:active {
+  background-image: url('./assets/broken-heart-active.svg');
+  background-repeat: no-repeat;
+}
+
+
+
+.exploreContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding-top: 80px;
+}
+
+.explorePhoto {
+  height: 345px;
+  width: 345px;
+}
+
+.exploreStats {
+  color: var(--periwinkle);
+  margin-top: 20px;
+  width: 55px;
+}
+
+.exploreName {
+  margin-top: 30px;
+}
+
+.exploreStatContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 186px;
+}
+
+.matchCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 270px;
+  padding-top: 25px;
+}
+
+.matchCard a {
+  text-decoration: none;
+}
+
+.matchCard img {
+  height: 165px;
+  width: 165px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.matchCard hr {
+  width: 335px;
+  border-top: 1px solid var(--periwinkle);
+}
+
+.matchCard h3 {
+  color: black;
+}
+
+.mediumPhoto {
+  height: 268px;
+  width: 268px;
+}
+
+.itsAMatch .mediumPhoto {
+  margin: 5px;
+}
+
+
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: fill;
+  width: 336px;
+}
+
+.profileContainer hr {
+  width: 335px;
+  border-top: 1px solid var(--periwinkle);
+}
+
+.profilebioText {
+  text-align: center;
+  width: fill;
+}
+
+.profileDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profileDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  width: fill;
+  margin-bottom: 15px;
+}
+
+.profileDetailsContainer h4 {
+  text-align: center;
+  margin: 5px;
+}
+
+.profilePreferences {
+  text-align: left;
+  width: fill;
+  margin-bottom: 15px;
+}
+
+.profilePreferences h4 {
+  margin: 0;
+  line-height: 30px;
+}
+
+.profilePreferencesTitle {
+  font-weight: bold;
+  margin: 10px;
+}
+
+.profileBtns {
+  display: flex;
+  width: fill;
+  justify-content: space-between;
+}
+
+.profileBtns button {
+  margin: 25px 0 25px 0;
+}
+
+@media screen and (max-width: 768px) {
+  footer {
+    bottom: 0
   }
-  to {
-    transform: rotate(360deg);
+
+  body {
+    margin-bottom: 76px;
   }
 }
+
+@media screen and (min-width: 768px) {
+  footer {
+    top: 0
+  }
+
+  body {
+    margin-top: 76px;
+    margin-top: 76px;
+  }
+
+  .matches {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    width: fill;
+  }
+
+  .matchCard hr {
+    opacity: 0;
+  }
+}
+
+/* its a match */
+.itsAMatchIcon {
+  position: absolute;
+  top: 355px;
+  width: 124px;
+}
+
+.itsAMatch h1 {
+  margin: 15px;
+}
+
+.itsAMatchImages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.smallPhoto {
+  height: 136px;
+  width: 136px;
+}
+
+.reviewContainer {
+  display: flex;
+  margin: 25px 0 25px 0;
+}
+
+.reviewText {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewText h5,
+h4 {
+  margin: 0 15px 0 15px;
+  text-align: left;
+}
+
+.reviewText h4 {
+  height: 35%;
+}
+
+.reviewsTitle {
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.reviewTextArea {
+  height: 190px;
+  width: 343px;
+}
+
+.matchBtnDetailContainer {
+  display: flex;
+  justify-content: space-between;
+  max-width: 420px;
+  margin-top: 30px;
+}
+

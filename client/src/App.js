@@ -1,24 +1,91 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import './App.css';
 
+// import Profile from './pages/Profile'
+import Explore from './pages/Explore'
+import Login from './pages/LoginForm'
+import SignUp from './pages/SignUpForm'
+import Footer from './components/Footer'
+import ProfileForm from './pages/CreateProfile'
+import PreferencesForm from './pages/Preferences';
+import Details from './pages/Details'
+import Profile from './pages/Profile'
+import Matches from './pages/Matches'
+
+import Upload from './components/Upload'
+
+// SETTING UP THE HTTP LINK
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+// SETTING UP THE CONTEXT
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+// CREATING THE APOLLO CLIENT WITH THE HTTPLINK AND CONTEXT
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
 function App() {
+  // add hook to keep track of login/logout
+  // const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('id_token'));
+  // handle login
+  // const handleLogin = () => {
+  //   setLoggedIn(true);
+  // };
+  // handle logout
+  // const handleLogout = () => {
+  //   localStorage.removeItem('id_token');
+  //   setLoggedIn(false);
+  // };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <Router>
+        <>
+          <Routes>
+            <Route
+              exact path='/'
+              element={<Login />}
+            />
+            {/* if logged in, direct to explore pg */}
+            <Route
+              exact path='/explore'
+              element={<Explore />}
+            />
+
+
+
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='/createprofile' element={<ProfileForm />} />
+            <Route path='/preferences' element={<PreferencesForm />} />
+            <Route path='/details/:userId' element={<Details />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/upload' element={<Upload />} />
+            <Route path='/matches' element={<Matches />} />
+            <Route
+              path='*'
+              element={<h1 className='display-2'>Wrong page!</h1>}
+            />
+          </Routes>
+        </>
+      </Router>
+      <Footer />
+    </ApolloProvider>
   );
 }
 
