@@ -11,6 +11,8 @@ const UploadImage = () => {
     const { register, handleSubmit } = useForm();
     const [uploadImage, { error }] = useMutation(UPLOAD_IMAGE);
     const [imageId, setimageId] = useState('')
+
+    
     const submit = async (data, e) => {
         e.preventDefault();
 
@@ -50,7 +52,7 @@ const UploadImage = () => {
                 <button type="submit" >Submit</button>
             </form>
 
-            {/* <Image cloudName={process.env.REACT_APP_CLOUD_NAME} publicId={imageId} /> */}
+        {/* <Image cloudName={process.env.REACT_APP_CLOUD_NAME} publicId={imageId} /> */}
         </>
     )
 }

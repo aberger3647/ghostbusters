@@ -6,6 +6,7 @@ import { GET_ME } from '../utils/queries';
 import Header from '../components/Header'
 import ProfileCard from '../components/ProfileCard'
 import Review from '../components/Review'
+import ItsAMatch from '../components/ItsAMatch'
 
 const Details = () => {
 
@@ -18,8 +19,14 @@ const Details = () => {
 
     // const reviews = []; 
 
+    const openModal = () => {
+        const modal = document.querySelector('.itsAMatch');
+        modal.style.display = 'flex';
+      };
+
     return (
         <>
+                <ItsAMatch />
             <Header title="details" />
             <div className="exploreContainer formContainer">
                 <div className="profileContainer">
@@ -30,8 +37,12 @@ const Details = () => {
                     <Review direction="left"/>
                     <Review direction="right"/>
                     <Review direction="left"/>
-                    <textarea className="reviewTextArea" placeholder="write a review.." />
-                    <button>Submit</button>
+                    {/* <textarea className="reviewTextArea" placeholder="write a review.." />
+                    <button>Submit</button> */}
+                    <div className="matchBtnDetailContainer">
+                    <button className="dislike" />
+                    <button onClick={openModal} className="like" />
+                    </div>
                 </div>
             </div>
         </>

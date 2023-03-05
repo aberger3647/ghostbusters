@@ -9,14 +9,13 @@ import { Navigate } from 'react-router-dom';
 import { ADD_PROFILE } from '../utils/mutations';
 
 const ProfileForm = () => {
-    { !Auth.loggedIn() && <Navigate to='/login' /> }
-
+    
     const { register, handleSubmit } = useForm();
-
+    
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
-
+    
     const navigate = useNavigate();
-
+    
     const onSubmit = async (profile, event) => {
         try {
             const { data } = await addProfile({
@@ -27,9 +26,11 @@ const ProfileForm = () => {
             console.error(err);
         }
     }
-
+    
     return (
+        
         <div className='contentContainer'>
+            {!Auth.loggedIn() &&  <Navigate to='/login' /> }
             <Header title="edit profile" />
             
             <h2>Name</h2>
@@ -91,7 +92,7 @@ const ProfileForm = () => {
                         <option value='Spiritual'>Spiritual</option>
                     </select>
 
-                    <select {...register('religion', { required: true })}>
+                    <select {...register('politics', { required: true })}>
                         <option value=''>Politics...</option>
                         <option value='Conservative'>Conservative</option>
                         <option value='Moderate'>Moderate</option>

@@ -99,9 +99,10 @@ button:active {
 }
 
 .itsAMatch {
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
+  display: none;
 }
 
 .loginSignup {
@@ -186,13 +187,13 @@ textarea {
   opacity: 1;
 }
 
-form>button {
+form>button, .itsAMatch>button {
   border: none;
   background-color: transparent;
   color: var(--white);
 }
 
-form>button:hover {
+form>button:hover, .itsAMatch>button:hover {
   color: var(--lightperi);
   background-color: transparent;
   cursor: pointer;
@@ -528,3 +529,10 @@ h4 {
 /* .reviewTextArea::placeholder {
   color: #919191;
 } */
+
+.matchBtnDetailContainer {
+  display: flex;
+  justify-content: space-between;
+  max-width: 420px;
+  margin-top: 30px;
+}
