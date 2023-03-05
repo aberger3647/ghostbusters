@@ -2,15 +2,23 @@ const { Schema, model } = require('mongoose');
 
 const preferenceSchema = new Schema(
     {
-        age: {
-            type: Number,
+        minAge: {
+            type: String,
+            required: true,
+        },
+        maxAge: {
+            type: String,
             required: true,
         },
         gender: {
             type: String,
             required: true
         },
-        height: {
+        minHeight: {
+            type: String,
+            required: true,
+        },
+        maxHeight: {
             type: String,
             required: true,
         },
