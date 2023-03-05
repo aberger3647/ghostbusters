@@ -45,9 +45,9 @@ const ProfileForm = () => {
 
                     <select {...register('gender', { required: true })}>
                         <option value=''>Gender...</option>
-                        <option value='Female'>Female</option>
-                        <option value='Male'>Male</option>
-                        <option value='Non-Binary'>Non-Binary</option>
+                        <option value='Female'>F</option>
+                        <option value='Male'>M</option>
+                        <option value='Non-Binary'>NB</option>
                     </select>
 
                     <select {...register('height', { required: true })}>
