@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-import Header from '../components/Header'
-import ProfileCard from '../components/ProfileCard'
+import Header from '../components/Header';
+import ProfileCard from '../components/ProfileCard';
+import { Link } from 'react-router-dom';
 
 
 const Profile = () => {
@@ -47,7 +48,9 @@ const Profile = () => {
                         <h4>Drinking: {preference.drinking}</h4>
                     </div>
                     <div className="profileBtns">
+                        <Link to='/createprofile'>
                         <button>Edit</button>
+                        </Link>
                         <button onClick={handleLogout}>Logout</button>
                     </div>
                 </div>

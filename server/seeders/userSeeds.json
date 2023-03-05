@@ -5,11 +5,11 @@
       "firstName": "Danielle",
       "reviews": [
         {
-          "text": "she kept wanting to fight me",
+          "reviewText": "she kept wanting to fight me",
           "firstName": "Justin"
         },
         {
-          "text": "super rude",
+          "reviewText": "super rude",
           "firstName": "Phil"
         }
     ]

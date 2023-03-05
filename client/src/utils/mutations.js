@@ -54,9 +54,11 @@ export const ADD_PREFERENCE = gql`
     mutation addPreference($preference: PreferenceInput!) {
         addPreference(preference: $preference) {
                  _id
-                age
+                minAge
+                maxAge
                 gender
-                height
+                minHeight
+                maxHeight
                 religion
                 politics
                 smoking
