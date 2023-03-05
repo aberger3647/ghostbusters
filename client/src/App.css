@@ -544,13 +544,10 @@ h4 {
   width: 343px;
 }
 
-/* .reviewTextArea::placeholder {
-  color: #919191;
-} */
-
 .matchBtnDetailContainer {
   display: flex;
   justify-content: space-between;
   max-width: 420px;
   margin-top: 30px;
 }
+

@@ -7,11 +7,13 @@ import { GET_SINGLE_USER } from '../utils/queries'
 
 
 import Auth from '../utils/auth';
+
 import { GET_ME } from '../utils/queries';
 import Header from '../components/Header'
 import ProfileCard from '../components/ProfileCard'
 import Review from '../components/Review'
 import ItsAMatch from '../components/ItsAMatch'
+
 
 const Details = () => {
 
@@ -23,9 +25,11 @@ const Details = () => {
     });
 
     const user = data?.user || {};
+
     const profile = data?.user.profile || {};
 
     console.log(user)
+
 
     const { register, handleSubmit } = useForm();
 
@@ -43,6 +47,7 @@ const Details = () => {
         }
     };
 
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -52,8 +57,13 @@ const Details = () => {
         modal.style.display = 'flex';
     };
 
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
     return (
         <>
+
             <ItsAMatch />
             <Header title="details" />
             <div className="exploreContainer formContainer">
