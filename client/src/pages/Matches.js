@@ -10,7 +10,7 @@ const Matches = () => {
     // const matches = data.me.matches;
 
     return (
-        <div>
+        <div className='contentContainer'>
             <Header title="my matches" />
         <div className="matches">
             {/* {matches.map((user) => (

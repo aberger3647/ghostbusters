@@ -29,7 +29,7 @@ const Profile = () => {
     return (
         <>
             <Header title="my profile" />
-            <div className="exploreContainer">
+            <div className="exploreContainer formContainer">
                 <div className="profileContainer">
 
                     <ProfileCard name={me.firstName} age={profile.age} gender={profile.gender} height={profile.height} bio={profile.bio} religion={profile.religion} politics={profile.politics} smoking={profile.smoking} drinking={profile.drinking} />
