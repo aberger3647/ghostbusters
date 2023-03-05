@@ -64,3 +64,17 @@ export const ADD_PREFERENCE = gql`
         }
     }
 `
+
+export const ADD_REVIEW = gql`
+    mutation addReview($userId: ID!, $reviewText: String!) {
+        addReview(userId: $userId, reviewText: $reviewText) {
+            _id
+            firstName
+            email
+            reviews {
+                _id
+                reviewText
+            }
+        }
+    }
+`

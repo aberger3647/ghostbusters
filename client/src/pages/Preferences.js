@@ -46,7 +46,7 @@ const PreferencesForm = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
 
-                <div className='heightPrefs'>
+                    <div className='heightPrefs'>
                         <input className='minMaxAge' {...register('age')} />
                         <p>to</p>
                         {/* <input className='minMaxAge' {...register('maxAge')} /> */}
@@ -132,7 +132,7 @@ const PreferencesForm = () => {
                         <option value='Spiritual'>Spiritual</option>
                     </select>
 
-                    <select {...register('religion', { required: true })}>
+                    <select {...register('politics', { required: true })}>
                         <option value=''>Politics...</option>
                         <option value='Conservative'>Conservative</option>
                         <option value='Moderate'>Moderate</option>
