@@ -14,6 +14,12 @@ const Explore = () => {
     const [height, setHeight] = useState(`5'6"`)
     const [name, setName] = useState('Jessica')
 
+    const openModal = () => {
+        const modal = document.querySelector('.itsAMatch');
+        modal.style.display = 'flex';
+      };
+    
+
     return (
         <>
         <ItsAMatch />
@@ -28,7 +34,7 @@ const Explore = () => {
                 </div>
                 <div className="matchBtnContainer">
                     <button className="dislike" />
-                    <button className="like" />
+                    <button onClick={openModal} className="like" />
                 </div>
             </div>
             </div>
