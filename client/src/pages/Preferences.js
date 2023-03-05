@@ -44,17 +44,10 @@ const PreferencesForm = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
 
-<<<<<<< HEAD
                 <div className='heightPrefs'>
                     <input className='minMaxAge' {...register('minAge')} placeholder='Min Age' />
                     <p>to</p>
                     <input className='minMaxAge' {...register('maxAge')} placeholder='Max Age' />
-=======
-                    <div className='heightPrefs'>
-                        <input className='minMaxAge' {...register('age')} />
-                        <p>to</p>
-                        {/* <input className='minMaxAge' {...register('maxAge')} /> */}
->>>>>>> dev
                     </div>
 
                     <select {...register('gender', { required: true })}>
