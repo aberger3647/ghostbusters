@@ -3,6 +3,7 @@ import Auth from '../utils/auth';
 import likeIcon from '../assets/heart.svg'
 import dislikeIcon from '../assets/broken-heart.svg'
 import profilePhoto from '../assets/profile-icon.svg'
+import ItsAMatch from '../components/ItsAMatch';
 
 const Explore = () => {
     Auth.loggedIn();
@@ -14,6 +15,8 @@ const Explore = () => {
 
     return (
         <>
+        <ItsAMatch />
+        <div className='contentContainer'>
 
             <div className='exploreContainer'>
                 <img className='explorePhoto' src={profilePhoto} alt='Profile Pic' />
@@ -27,6 +30,7 @@ const Explore = () => {
                     <button className="like"></button>
                 </div>
             </div>
+        </div>
         </>
     )
 };

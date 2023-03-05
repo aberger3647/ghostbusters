@@ -28,7 +28,7 @@ const ProfileForm = () => {
     }
 
     return (
-        <>
+        <div className='contentContainer'>
             <Header />
 
             <h2>Name</h2>
@@ -117,7 +117,7 @@ const ProfileForm = () => {
                 </form>
                 <button>Next</button>
             </div>
-        </>
+        </div>
     )
 };
 

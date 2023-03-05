@@ -21,7 +21,7 @@ const Profile = () => {
     }
 
     return (
-        <div>
+        <div className='formContainer'>
             <h2>My Profile</h2>
 
             <p>Image here</p>
