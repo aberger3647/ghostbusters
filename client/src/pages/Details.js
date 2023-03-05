@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_REVIEW } from '../utils/mutations';
@@ -22,6 +21,7 @@ const Details = () => {
     const user = data?.user || {};
 
     const { register, handleSubmit } = useForm();
+
     const [addReview, { error, data: reviewData }] = useMutation(ADD_REVIEW);
     const onSubmit = async (review, event) => {
         try {
@@ -34,11 +34,17 @@ const Details = () => {
         catch (err) {
             console.error(err);
         }
-    }
+    };
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
     return (
         <>
-            <ProfileCard name={user.firstName} age={user.profile.age} gender={user.profile.gender} height={user.profile.height} bio={user.profile.bio} religion={user.profile.religion} politics={user.profile.politics} smoking={user.profile.smoking} drinking={user.profile.drinking} />
+            {
+                user &&
+                <ProfileCard name={user.firstName} age={user.profile.age} gender={user.profile.gender} height={user.profile.height} bio={user.profile.bio} religion={user.profile.religion} politics={user.profile.politics} smoking={user.profile.smoking} drinking={user.profile.drinking} />
+            }
 
             <h2>Reviews</h2>
 
@@ -58,6 +64,7 @@ const Details = () => {
             </form>
         </>
     );
+
 };
 
 export default Details;
