@@ -1,58 +1,90 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useForm } from 'react-hook-form';
-import { useMutation } from '@apollo/client';
-import { UPLOAD_IMAGE } from '../utils/mutations';
-import { Image } from 'cloudinary-react';
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_ME } from '../utils/queries';
+import { UPLOAD_IMAGE } from "../utils/mutations";
+import { Image } from "cloudinary-react";
+import profileIcon from "../assets/profile-icon.svg";
 
 const UploadImage = () => {
+  const { register, handleSubmit } = useForm();
+  const [uploadImage, { error }] = useMutation(UPLOAD_IMAGE);
+  const [imageId, setImageId] = useState("");
 
-    const { register, handleSubmit } = useForm();
-    const [uploadImage, { error }] = useMutation(UPLOAD_IMAGE);
-    const [imageId, setimageId] = useState('')
-    const submit = async (data, e) => {
-        e.preventDefault();
+  const { loading, data } = useQuery(GET_ME);
+  console.log("data", data);
+  const me = data?.me || {};
+  const profile = data?.me.profile || {};
 
-        const file = data.image[0]
+useEffect(() => {
+    if (me) {
+        setImageId(me.image)
+    }
+}, [me])
 
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', process.env.REACT_APP_UPLOAD_PRESET)
+  const submit = async (data, e) => {
+    e.preventDefault();
 
-        const response = await axios.post(
-            `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
-            formData,
-        )
-        const image = response.data.public_id
+    const file = data.image[0];
 
-        if (!image) {
-            return false;
-        }
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
 
-        try {
-            await uploadImage({
-                variables: { image: image }
-            })
+    const response = await axios.post(
+      `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
+      formData
+    );
+    const image = response.data.public_id;
 
-            setimageId(image)
-        } catch (err) {
-            console.error(err)
-        }
-
+    if (!image) {
+      return false;
     }
 
-    return (
-        <>
+    try {
+      await uploadImage({
+        variables: { image: image },
+      });
 
-            <form onSubmit={handleSubmit(submit)}>
-                <input accept="image/*" type="file" {...register("image")} />
-                <button type="submit" >Submit</button>
-            </form>
+      setImageId(image);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-            {/* <Image cloudName={process.env.REACT_APP_CLOUD_NAME} publicId={imageId} /> */}
-        </>
-    )
-}
+  return (
+    <>
+      <form className="uploadPhotoForm" onSubmit={handleSubmit(submit)}>
+        <label for="file-input">
+          <span id="profPic"></span>
+          {!imageId ? (
+            <img
+              src={profileIcon}
+              alt="Upload profile icon"
+              className="profileIcon"
+            />
+          ) : (
+            <Image
+              className="mediumPhoto"
+              cloudName={process.env.REACT_APP_CLOUD_NAME}
+              publicId={imageId}
+            />
+          )}
+        </label>
+        <input
+          id="file-input"
+          hidden
+          className="uploadPhoto"
+          accept="image/*"
+          type="file"
+          {...register("image")}
+        />
+
+        <button type="submit">Save Photo</button>
+      </form>
+    </>
+  );
+};
 
 export default UploadImage;

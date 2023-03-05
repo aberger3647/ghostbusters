@@ -6,6 +6,7 @@ export const GET_ME = gql`
             _id
             firstName
             email
+            image
             profile {
                 _id
                 age
