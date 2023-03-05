@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
+import Header from '../components/Header'
+import ProfileCard from '../components/ProfileCard'
+
 
 const Profile = () => {
+
+
 
     const handleLogout = () => {
         Auth.logout();
@@ -11,6 +16,7 @@ const Profile = () => {
 
     const { loading, data } = useQuery(GET_ME);
     console.log("data", data);
+    const me = data?.me || {};
     const profile = data?.me.profile || {};
     const preference = data?.me.preference || {};
 
@@ -21,36 +27,32 @@ const Profile = () => {
     }
 
     return (
-        <div className='formContainer'>
-            <h2>My Profile</h2>
+        <>
+            <Header title="my profile" />
+            <div className="exploreContainer formContainer">
+                <div className="profileContainer">
 
-            <p>Image here</p>
+                    <ProfileCard name={me.firstName} age={profile.age} gender={profile.gender} height={profile.height} bio={profile.bio} religion={profile.religion} politics={profile.politics} smoking={profile.smoking} drinking={profile.drinking} />
+                    <hr />
 
-            <p>{profile.gender} {profile.age} {profile.height}</p>
-
-            <p>{profile.bio}</p>
-
-            <p>{profile.religion}</p>
-            <p>{profile.politics}</p>
-            <p>{profile.smoking}</p>
-            <p>{profile.drinking}</p>
+                    <h3 className="profilePreferencesTitle">Preferences</h3>
 
 
-            <hr></hr>
-
-            <h2>My Preferences</h2>
-
-            <p>Age: {preference.age}</p>
-            <p>Height: {preference.height}</p>
-            <p>Religion: {preference.religion}</p>
-            <p>Politics: {preference.politics}</p>
-
-            <p>Smoking {preference.smoking}</p>
-            <p>Drinking {preference.drinking}</p>
-
-            <button>Edit</button>
-            <button onClick={handleLogout}>Logout</button>
-        </div>
+                    <div className="profilePreferences">
+                        <h4>Age: {preference.age}</h4>
+                        <h4>Height: {preference.height}</h4>
+                        <h4>Religion: {preference.religion}</h4>
+                        <h4>Politics: {preference.politics}</h4>
+                        <h4>Smoking: {preference.smoking}</h4>
+                        <h4>Drinking: {preference.drinking}</h4>
+                    </div>
+                    <div className="profileBtns">
+                        <button>Edit</button>
+                        <button onClick={handleLogout}>Logout</button>
+                    </div>
+                </div>
+            </div>
+        </>
     )
 };
 

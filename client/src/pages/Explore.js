@@ -3,6 +3,7 @@ import Auth from '../utils/auth';
 import likeIcon from '../assets/heart.svg'
 import dislikeIcon from '../assets/broken-heart.svg'
 import profilePhoto from '../assets/profile-icon.svg'
+import Header from '../components/Header'
 import ItsAMatch from '../components/ItsAMatch';
 
 const Explore = () => {
@@ -17,7 +18,7 @@ const Explore = () => {
         <>
         <ItsAMatch />
         <div className='contentContainer'>
-
+            <Header title="explore" />
             <div className='exploreContainer'>
                 <img className='explorePhoto' src={profilePhoto} alt='Profile Pic' />
 
@@ -26,11 +27,11 @@ const Explore = () => {
                     <h3 className="exploreStats">{gender} </h3><h3 className="exploreStats">{age}</h3> <h3 className="exploreStats">{height}</h3>
                 </div>
                 <div className="matchBtnContainer">
-                    <button className="dislike"></button>
-                    <button className="like"></button>
+                    <button className="dislike" />
+                    <button className="like" />
                 </div>
             </div>
-        </div>
+            </div>
         </>
     )
 };

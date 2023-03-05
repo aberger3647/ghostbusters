@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import Header from '../components/Header';
 import profileIcon from '../assets/profile-icon.svg'
 import Auth from '../utils/auth';
+import { useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { ADD_PROFILE } from '../utils/mutations';
 
@@ -14,14 +15,14 @@ const ProfileForm = () => {
 
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
 
+    const navigate = useNavigate();
+
     const onSubmit = async (profile, event) => {
-        console.log(profile);
         try {
             const { data } = await addProfile({
                 variables: { profile },
             });
-            console.log('addProfile', data);
-            Auth.login(data.addProfile.token);
+            navigate('/preferences');
         } catch (err) {
             console.error(err);
         }
@@ -113,9 +114,8 @@ const ProfileForm = () => {
                         placeholder='Bio'
                     />
 
-                    <input type='submit' />
+                    <input type='submit' value='Next' />
                 </form>
-                <button>Next</button>
             </div>
         </div>
     )

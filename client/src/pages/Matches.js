@@ -11,7 +11,7 @@ const Matches = () => {
 
     return (
         <div className='contentContainer'>
-            <Header />
+            <Header title="my matches" />
         <div className="matches">
             {/* {matches.map((user) => (
             <MatchCard key={user._id} user={user} />
