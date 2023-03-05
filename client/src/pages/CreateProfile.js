@@ -22,7 +22,9 @@ const ProfileForm = () => {
             const { data } = await addProfile({
                 variables: { profile },
             });
-            navigate('/preferences');
+            if (data) {
+                navigate('/preferences');
+            }
         } catch (err) {
             console.error(err);
         }
@@ -45,9 +47,9 @@ const ProfileForm = () => {
 
                     <select {...register('gender', { required: true })}>
                         <option value=''>Gender...</option>
-                        <option value='Female'>Female</option>
-                        <option value='Male'>Male</option>
-                        <option value='Non-Binary'>Non-Binary</option>
+                        <option value='F'>Female</option>
+                        <option value='M'>Male</option>
+                        <option value='NB'>Non-Binary</option>
                     </select>
 
                     <select {...register('height', { required: true })}>
@@ -91,7 +93,7 @@ const ProfileForm = () => {
                         <option value='Spiritual'>Spiritual</option>
                     </select>
 
-                    <select {...register('religion', { required: true })}>
+                    <select {...register('politics', { required: true })}>
                         <option value=''>Politics...</option>
                         <option value='Conservative'>Conservative</option>
                         <option value='Moderate'>Moderate</option>

@@ -29,13 +29,13 @@ const userSchema = new Schema(
             {
                 reviewText: {
                     type: String,
-                    required: true,
+                    // required: true,
                     minlength: 1,
                     maxlength: 280,
                 },
-                firstName: {
+                reviewer: {
                     type: String,
-                    required: true
+                    // required: true
                 },
                 createdAt: {
                     type: Date,
