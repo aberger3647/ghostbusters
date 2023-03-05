@@ -30,8 +30,8 @@ const ProfileForm = () => {
 
     return (
         <div className='contentContainer'>
-            <Header />
-
+            <Header title="edit profile" />
+            
             <h2>Name</h2>
             <div className='formContainer'>
 

@@ -15,7 +15,7 @@ const ItsAMatch = (props) => {
         src={profilePhoto}
         alt="match pic"
       />
-
+      
       <img className="itsAMatchIcon" src={matchIcon} alt="heart icon" />
 
       <img
