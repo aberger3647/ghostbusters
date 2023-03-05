@@ -22,7 +22,9 @@ const ProfileForm = () => {
             const { data } = await addProfile({
                 variables: { profile },
             });
-            navigate('/preferences');
+            if (data) {
+                navigate('/preferences');
+            }
         } catch (err) {
             console.error(err);
         }
@@ -91,7 +93,7 @@ const ProfileForm = () => {
                         <option value='Spiritual'>Spiritual</option>
                     </select>
 
-                    <select {...register('religion', { required: true })}>
+                    <select {...register('politics', { required: true })}>
                         <option value=''>Politics...</option>
                         <option value='Conservative'>Conservative</option>
                         <option value='Moderate'>Moderate</option>
