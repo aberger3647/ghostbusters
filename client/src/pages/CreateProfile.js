@@ -1,42 +1,50 @@
-import { useMutation } from '@apollo/client';
 import React from 'react';
+
+import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
-import Header from '../components/Header';
-import profileIcon from '../assets/profile-icon.svg'
-import Auth from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
+
+import Auth from '../utils/auth';
+
+import Header from '../components/Header';
+import Upload from '../components/Upload';
+
 import { ADD_PROFILE } from '../utils/mutations';
 
 const ProfileForm = () => {
-    { !Auth.loggedIn() && <Navigate to='/login' /> }
+    
 
     const { register, handleSubmit } = useForm();
-
+    
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
-
+    
     const navigate = useNavigate();
-
+    
     const onSubmit = async (profile, event) => {
         try {
             const { data } = await addProfile({
                 variables: { profile },
             });
-            navigate('/preferences');
+            if (data) {
+                navigate('/preferences');
+            }
         } catch (err) {
             console.error(err);
         }
     }
-
+    
     return (
+        
         <div className='contentContainer'>
-            <Header />
+            { !Auth.loggedIn() && <Navigate to='/login' /> }
+            <Header title="edit profile" />
 
             <h2>Name</h2>
             <div className='formContainer'>
 
-                <img src={profileIcon} alt='Upload profile icon' className='profileIcon' />
-                <button>Upload Photo</button>
+                <Upload />
+
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <input {...register('age')}
@@ -45,9 +53,9 @@ const ProfileForm = () => {
 
                     <select {...register('gender', { required: true })}>
                         <option value=''>Gender...</option>
-                        <option value='Female'>Female</option>
-                        <option value='Male'>Male</option>
-                        <option value='Non-Binary'>Non-Binary</option>
+                        <option value='F'>Female</option>
+                        <option value='M'>Male</option>
+                        <option value='NB'>Non-Binary</option>
                     </select>
 
                     <select {...register('height', { required: true })}>

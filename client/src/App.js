@@ -73,7 +73,7 @@ function App() {
             <Route path='/signup' element={<SignUp />} />
             <Route path='/createprofile' element={<ProfileForm />} />
             <Route path='/preferences' element={<PreferencesForm />} />
-            <Route path='/details' element={<Details />} />
+            <Route path='/details/:userId' element={<Details />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/upload' element={<Upload />} />
             <Route path='/matches' element={<Matches />} />

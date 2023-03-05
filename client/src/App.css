@@ -4,6 +4,7 @@
   --lightperi: #D8E0FF;
   --purple: #623CFF;
 }
+
 /* 
 typography
 size and color
@@ -33,12 +34,16 @@ h3 {
   margin: 0;
 }
 
-p, button {
+p,
+button {
   font-size: 25px;
   font-weight: 400;
 }
 
-h4, select, input, textarea {
+h4,
+select,
+input,
+textarea {
   font-size: 20px;
   font-weight: 500;
 }
@@ -62,13 +67,22 @@ header {
   margin-bottom: 25px;
 }
 
-button {
+button, .uploadPhotoForm>button {
   border: 3px solid var(--periwinkle);
   border-radius: 50px;
   padding: 5px 25px 5px 25px;
   margin: 25px;
   background-color: var(--white);
   transition: opacity 0.3s ease-in-out;
+}
+
+.uploadPhotoForm>button {
+  color: black;
+}
+
+.uploadPhotoForm>button:hover {
+  background-color: var(--lightperi);
+  color: black;
 }
 
 button:hover,
@@ -85,7 +99,8 @@ button:active {
   align-items: center;
 }
 
-.loginSignup, .itsAMatch {
+.loginSignup,
+.itsAMatch {
   min-height: 100vh;
   background: linear-gradient(to bottom, var(--purple), var(--periwinkle));
   color: white;
@@ -93,7 +108,7 @@ button:active {
 }
 
 .itsAMatch {
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
   display: none;
@@ -139,15 +154,18 @@ form {
   max-width: 337px;
 }
 
-input, textarea {
+input,
+textarea {
   max-width: 304px;
 }
 
-select, .heightPrefs {
+select,
+.heightPrefs {
   max-width: 337px;
 }
 
-input, textarea {
+input,
+textarea {
   max-width: 304px;
 }
 
@@ -168,7 +186,7 @@ textarea {
   height: 200px;
 }
 
-.loginSignup  ::placeholder {
+.loginSignup ::placeholder {
   color: var(--white);
   opacity: 1;
 }
@@ -206,8 +224,18 @@ textarea {
   margin-top: 20px;
 }
 
+.uploadPhotoForm input {
+  border: none;
+}
+
+label {
+  display: flex;
+  justify-content: center;
+}
+
 /* preferences */
-.heightPrefs, .agePrefs {
+.heightPrefs,
+.agePrefs {
   display: flex;
   justify-content: space-between;
 }
@@ -216,7 +244,7 @@ textarea {
   width: 43%;
 }
 
-.minMaxAge { 
+.minMaxAge {
   width: 43%
 }
 
@@ -258,7 +286,8 @@ footer img {
   width: 128px;
 }
 
-.like, .dislike {
+.like,
+.dislike {
   padding: 0px;
   border: none;
   height: 128px;
@@ -453,6 +482,9 @@ footer img {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+
+    justify-content: center;
+    width: fill;
   }
 
   .matchCard hr {
@@ -470,3 +502,52 @@ footer img {
 .itsAMatch h1 {
   margin: 15px;
 }
+
+.itsAMatchImages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.smallPhoto {
+  height: 136px;
+  width: 136px;
+}
+
+.reviewContainer {
+  display: flex;
+  margin: 25px 0 25px 0;
+}
+
+.reviewText {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewText h5,
+h4 {
+  margin: 0 15px 0 15px;
+  text-align: left;
+}
+
+.reviewText h4 {
+  height: 35%;
+}
+
+.reviewsTitle {
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.reviewTextArea {
+  height: 190px;
+  width: 343px;
+}
+
+.matchBtnDetailContainer {
+  display: flex;
+  justify-content: space-between;
+  max-width: 420px;
+  margin-top: 30px;
+}
+

@@ -15,7 +15,9 @@ const ProfileCard = (props) => {
 
             <h2 className='exploreName'>{props.name}</h2>
             <div className='exploreStatContainer'>
-                <h3 className="exploreStats">{props.gender} </h3><h3 className="exploreStats">{props.age}</h3> <h3 className="exploreStats">{props.height}</h3>
+                <h3 className="exploreStats">{props.gender} </h3>
+                <h3 className="exploreStats">{props.age}</h3> 
+                <h3 className="exploreStats">{props.height}</h3>
             </div>
 
             <p className="profilebioText">{props.bio}</p>

@@ -18,7 +18,7 @@ const resolvers = {
 
     },
     user: async (parent, { userId }, context) => {
-      return User.findOne({ _id: userId });
+      return User.findOne({ _id: userId }).populate('profile');
     },
   },
 
@@ -75,7 +75,7 @@ const resolvers = {
           { _id: userId },
           {
             $addToSet: {
-              reviews: { reviewText, firstName: context.user.firstName },
+              reviews: { reviewText, reviewer: context.user.firstName },
             },
           },
           { new: true, runValidators: true }
@@ -107,7 +107,7 @@ const resolvers = {
       // IF LIKED USER ALREADY HAS YOU LIKED (ITS A MATCH)
       if (likedUser.likes.includes("640196d888622758d0611d07")) {
         console.log('they like you already')
-        
+
         // UPDATE LIKED USER (REMOVE FROM LIKES)
         await User.findOneAndUpdate(
           { _id: likedUser._id },
@@ -116,7 +116,7 @@ const resolvers = {
         )
         console.log('')
 
-          // UPDATE LIKED USER (ADD TO MATCHES)
+        // UPDATE LIKED USER (ADD TO MATCHES)
         await User.findOneAndUpdate(
           { _id: likedUser._id },
           { $addToSet: { matches: "640196d888622758d0611d07" } },
