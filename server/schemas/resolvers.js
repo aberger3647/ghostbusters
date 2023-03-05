@@ -7,6 +7,14 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
 
   Query: {
+    getImage: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne(
+          { _id: context.user._id },
+          { image }
+        )
+      }
+    },
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('profile').populate('preference').populate('savedReviews');

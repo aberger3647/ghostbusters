@@ -58,4 +58,12 @@ export const GET_SINGLE_USER = gql`
     }
 `
 
+export const GET_IMAGE = gql`
+    query getImage {
+        me {
+            image
+        }
+    }
+`
+
 // needs updated query for matches page to pull data from user's matches

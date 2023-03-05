@@ -14,6 +14,8 @@ import { ADD_PROFILE } from '../utils/mutations';
 
 const ProfileForm = () => {
     
+const footer = document.getElementsByTagName('footer')[0].style = 'display: none'
+    console.log("########## footer", footer )
 
     const { register, handleSubmit } = useForm();
     

@@ -73,6 +73,7 @@ const typeDefs = gql`
         users: [User]!
         user(userId: ID!): User
         me: User
+        getImage: User
     }
 
     type Mutation {
