@@ -80,3 +80,19 @@ export const ADD_REVIEW = gql`
         }
     }
 `
+
+export const ADD_LIKE = gql`
+    mutation addLike($userId: ID!) {
+        addLike(userId: $userId) {
+            _id
+        }
+    }
+`
+
+export const DISLIKE = gql`
+    mutation dislike($userId: ID!) {
+        dislike(userId: $userId) {
+            _id
+        }
+    }
+`
