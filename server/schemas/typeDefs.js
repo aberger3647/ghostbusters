@@ -39,9 +39,11 @@ const typeDefs = gql`
 
     type Preference {
         _id: ID
-        age: Int
+        minAge: String
+        maxAge: String
         gender: String
-        height: String
+        minHeight: String
+        maxHeight: String
         religion: String
         politics: String
         smoking: String
@@ -49,9 +51,11 @@ const typeDefs = gql`
     }
 
     input PreferenceInput {
-        age: String
+        minAge: String
+        maxAge: String
         gender: String
-        height: String
+        minHeight: String
+        maxHeight: String
         religion: String
         politics: String
         smoking: String

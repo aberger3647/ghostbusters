@@ -28,7 +28,6 @@ const resolvers = {
     user: async (parent, { userId }, context) => {
       return User.findOne({ _id: userId }).populate('profile');
     },
-
   },
 
   Mutation: {

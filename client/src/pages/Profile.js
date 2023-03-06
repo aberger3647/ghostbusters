@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-import Header from '../components/Header'
-import ProfileCard from '../components/ProfileCard'
+import Header from '../components/Header';
+import ProfileCard from '../components/ProfileCard';
+import { Link } from 'react-router-dom';
 
 
 const Profile = () => {
@@ -39,15 +40,17 @@ const Profile = () => {
 
 
                     <div className="profilePreferences">
-                        <h4>Age: {preference.age}</h4>
-                        <h4>Height: {preference.height}</h4>
+                        <h4>Age: {preference.minAge} to {preference.maxAge}</h4>
+                        <h4>Height: {preference.minHeight} to {preference.maxHeight}</h4>
                         <h4>Religion: {preference.religion}</h4>
                         <h4>Politics: {preference.politics}</h4>
                         <h4>Smoking: {preference.smoking}</h4>
                         <h4>Drinking: {preference.drinking}</h4>
                     </div>
                     <div className="profileBtns">
+                        <Link to='/createprofile'>
                         <button>Edit</button>
+                        </Link>
                         <button onClick={handleLogout}>Logout</button>
                     </div>
                 </div>

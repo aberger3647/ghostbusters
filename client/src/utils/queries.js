@@ -20,9 +20,11 @@ export const GET_ME = gql`
             }
             preference {
                 _id
-                age
+                minAge
+                maxAge
                 gender
-                height
+                minHeight
+                maxHeight
                 religion
                 politics
                 smoking
