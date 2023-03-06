@@ -14,16 +14,9 @@ import { ADD_PROFILE } from '../utils/mutations';
 
 const ProfileForm = () => {
 
-    // document.getElementById('footer').style.opacity = 0;
-
-console.log("#######", document.getElementById('footer'))
-
-
     const { register, handleSubmit } = useForm();
     
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
-    
-    const navigate = useNavigate();
     
     const onSubmit = async (profile, event) => {
         try {
@@ -36,6 +29,16 @@ console.log("#######", document.getElementById('footer'))
         } catch (err) {
             console.error(err);
         }
+    }
+
+        const navigate = useNavigate();
+
+        const handleNextPage = () => {
+        navigate('/preferences');
+    }
+
+        const h = {
+        f: `4'5"`
     }
     
     return (
@@ -64,7 +67,7 @@ console.log("#######", document.getElementById('footer'))
 
                     <select {...register('height', { required: true })}>
                         <option value=''>Height...</option>
-                        <option value='45'>4'5"</option>
+                        <option value='9'>4'5"</option>
                         <option value='46'>4'6"</option>
                         <option value='47'>4'7"</option>
                         <option value='48'>4'8"</option>
@@ -126,7 +129,7 @@ console.log("#######", document.getElementById('footer'))
                         placeholder='Bio'
                     />
 
-                    <input type='submit' value='Next' />
+                    <input type='submit' value='Next' onClick={handleNextPage} className="createProfNext" />
                 </form>
             </div>
         </div>

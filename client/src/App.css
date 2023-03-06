@@ -35,9 +35,24 @@ h3 {
 }
 
 p,
-button {
+button,
+input[type="submit"],
+input[value="Previous"] {
   font-size: 25px;
   font-weight: 400;
+}
+
+input[type="submit"],
+input[value="Previous"],
+.detailsSubmit {
+  color: black;
+  width: 40%;
+}
+
+input[type='submit']
+
+.detailsSubmit:hover {
+  color: black;
 }
 
 h4,
@@ -67,13 +82,17 @@ header {
   margin-bottom: 25px;
 }
 
-button, .uploadPhotoForm>button {
+button, .uploadPhotoForm>button, input[type="submit"], input[value="Previous"], .detailsSubmit {
   border: 3px solid var(--periwinkle);
   border-radius: 50px;
   padding: 5px 25px 5px 25px;
   margin: 25px;
   background-color: var(--white);
   transition: opacity 0.3s ease-in-out;
+}
+
+input[value="Previous"],input[type="submit"] {
+  margin: 25px 0px 25px 0px;
 }
 
 .uploadPhotoForm>button {
@@ -86,7 +105,10 @@ button, .uploadPhotoForm>button {
 }
 
 button:hover,
-button:active {
+button:active,
+input[type="submit"]:hover,
+input[value="Previous"]:hover,
+.detailsSubmit:hover {
   background-color: var(--lightperi);
 }
 
@@ -246,17 +268,26 @@ label {
 }
 
 .minMaxAge {
-  width: 43%
+  width: 34%
 }
 
+.prevNext {
+  display: flex;
+  justify-content: space-between;
+  max-width: 337px;
+}
+
+.createProfNext {
+  align-self: center;
+}
+
+/* footer */
 footer {
   position: fixed;
   height: 77px;
   width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: center;
   color: var(--white);
   background: linear-gradient(270deg, var(--purple), var(--periwinkle));
   z-index: 2;
@@ -264,15 +295,22 @@ footer {
 
 footer a {
   text-decoration: none;
+  height: 50px;
   color: white;
 }
 
 footer img {
   height: 50px;
-  margin: 5px;
+  width: 50px;
 }
 
-
+.footerLinks {
+  width: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
 
 .matchBtnContainer {
   width: 75%;
@@ -324,8 +362,6 @@ footer img {
   background-image: url('./assets/broken-heart-active.svg');
   background-repeat: no-repeat;
 }
-
-
 
 .exploreContainer {
   display: flex;
@@ -528,8 +564,7 @@ footer img {
   flex-direction: column;
 }
 
-.reviewText h5,
-h4 {
+.reviewText h5, .reviewText h4 {
   margin: 0 15px 0 15px;
   text-align: left;
 }
