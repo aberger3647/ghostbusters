@@ -40,6 +40,7 @@ export const GET_SINGLE_USER = gql`
             _id
             firstName
             email
+            image
             profile {
                 _id
                 age
@@ -55,6 +56,7 @@ export const GET_SINGLE_USER = gql`
                 _id
                 reviewText
                 reviewer
+                image
             }
         }
     }
