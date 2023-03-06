@@ -16,7 +16,8 @@ function Footer() {
 
 useEffect(() => {
   if (image) {
-    setImageId(image)
+    let newImage = `${image}.png`
+    setImageId(newImage)
   }
 }, [image])
 
