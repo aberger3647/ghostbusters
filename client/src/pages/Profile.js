@@ -9,8 +9,6 @@ import { Link } from 'react-router-dom';
 
 const Profile = () => {
 
-
-
     const handleLogout = () => {
         Auth.logout();
     };
@@ -37,7 +35,6 @@ const Profile = () => {
                     <hr />
 
                     <h3 className="profilePreferencesTitle">Preferences</h3>
-
 
                     <div className="profilePreferences">
                         <h4>Age: {preference.minAge} to {preference.maxAge}</h4>

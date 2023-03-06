@@ -13,7 +13,11 @@ import Upload from '../components/Upload';
 import { ADD_PROFILE } from '../utils/mutations';
 
 const ProfileForm = () => {
-    
+
+    // document.getElementById('footer').style.opacity = 0;
+
+console.log("#######", document.getElementById('footer'))
+
 
     const { register, handleSubmit } = useForm();
     
@@ -36,7 +40,7 @@ const ProfileForm = () => {
     
     return (
         
-        <div className='contentContainer'>
+        <div className='contentContainer createProfile'>
             { !Auth.loggedIn() && <Navigate to='/login' /> }
             <Header title="edit profile" />
 

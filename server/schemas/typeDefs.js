@@ -77,6 +77,7 @@ const typeDefs = gql`
         users: [User]!
         user(userId: ID!): User
         me: User
+        getImage: User
     }
 
     type Mutation {
@@ -87,6 +88,7 @@ const typeDefs = gql`
         addPreference(preference: PreferenceInput!): Preference
         uploadImage(image: String): User
         addLike(userId: ID!): User
+        dislike(userId: ID!): User
     }
 `;
 

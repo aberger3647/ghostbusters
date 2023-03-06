@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import './App.css';
@@ -40,6 +40,7 @@ const client = new ApolloClient({
 });
 
 function App() {
+
   // add hook to keep track of login/logout
   // const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('id_token'));
   // handle login
@@ -83,8 +84,8 @@ function App() {
             />
           </Routes>
         </>
-      </Router>
       <Footer />
+      </Router>
     </ApolloProvider>
   );
 }

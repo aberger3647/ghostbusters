@@ -38,7 +38,9 @@ const Details = () => {
         try {
             const result = await addReview({
                 variables: {
-                    userId: user._id, reviewText: review.reviewText
+                    userId: user._id,
+                    reviewText: review.reviewText,
+                    // reviewer: Auth.getProfile().data.firstName,
                 },
             });
         }
@@ -46,7 +48,6 @@ const Details = () => {
             console.error(err);
         }
     };
-
 
     if (loading) {
         return <div>Loading...</div>;
@@ -72,12 +73,22 @@ const Details = () => {
                     <ProfileCard name={user.firstName} age={profile.age} gender={profile.gender} height={profile.height} bio={profile.bio} religion={profile.religion} politics={profile.politics} smoking={profile.smoking} drinking={profile.drinking} />
                     <hr />
                     <h3 className="reviewsTitle">reviews</h3>
+
+                    <div>
+                        {user?.reviews?.map((review) => (
+                            <div key={review._id}>
+                                {/* <h4>{review.reviewText}</h4> */}
+                                <Review direction="left" reviewText={review.reviewText} name={review.reviewer} />
+                            </div>
+                        ))}
+                    </div>
+
                     <Review direction="left" />
                     <Review direction="right" />
                     <Review direction="left" />
                     {/* <textarea className="reviewTextArea" placeholder="write a review.." />
                     <button>Submit</button> */}
-                    <form  onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <textarea className="reviewTextArea" {...register('reviewText')}
                             placeholder='Add a review'
                         />
