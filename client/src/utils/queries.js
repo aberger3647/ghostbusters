@@ -68,4 +68,21 @@ export const GET_IMAGE = gql`
     }
 `
 
+export const GET_USER = gql`
+    query getUsers {
+        users {
+            _id
+            firstName
+            email
+            image
+            profile {
+                _id
+                age
+                gender
+                height
+            }
+        }
+    }
+`
+
 // needs updated query for matches page to pull data from user's matches

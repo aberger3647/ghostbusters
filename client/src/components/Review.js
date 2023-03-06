@@ -6,7 +6,7 @@ const Review = (props) => {
     const [containerDirection, setContainerDirection] = useState({})
 
     useEffect(() => {
-        if (props.direction === 'right' ) {
+        if (props.direction === 'right') {
             setContainerDirection(styles.divRight)
         }
     }, [])
@@ -14,19 +14,19 @@ const Review = (props) => {
     const styles = {
         divRight: {
             flexDirection: "row-reverse",
-        },    
+        },
     }
 
     return (
         <>
-        <div className="reviewContainer" style={containerDirection}>
-            <img className="smallPhoto" src={profilePhoto} />
-            <div className="reviewText" >
-            <h4>Dan</h4>
-            <h5>I had a great time with Jessica! She is sweet, fun, and loves to laugh.</h5>
+            <div className="reviewContainer" style={containerDirection}>
+                <img className="smallPhoto" src={profilePhoto} />
+                <div className="reviewText" >
+                    <h4>{props.name}</h4>
+                    <h5>{props.reviewText}</h5>
+                </div>
             </div>
-        </div>
-        <hr/>
+            <hr />
         </>
     )
 };

@@ -22,7 +22,7 @@ const resolvers = {
       throw new AuthenticationError('You must be logged in.');
     },
     users: async () => {
-      return User.find();
+      return User.find().populate('profile');
 
     },
     user: async (parent, { userId }, context) => {
