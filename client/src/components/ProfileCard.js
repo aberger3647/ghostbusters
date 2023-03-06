@@ -10,7 +10,6 @@ const ProfileCard = (props) => {
     const [imageId, setImageId] = useState("");
 
   const { loading, data } = useQuery(GET_ME);
-  console.log("data", data);
   const me = data?.me || {};
   const profile = data?.me.profile || {};
 
@@ -26,7 +25,7 @@ useEffect(() => {
                   <Image
         className="mediumPhoto topPhoto"
         cloudName={process.env.REACT_APP_CLOUD_NAME}
-        publicId={imageId}
+        publicId={props.image}
         alt="Prof Pic"
       >
         <Transformation

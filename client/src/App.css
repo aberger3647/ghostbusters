@@ -272,10 +272,7 @@ footer img {
   margin: 5px;
 }
 
-
-
 .matchBtnContainer {
-  width: 75%;
   display: flex;
   justify-content: space-between;
   max-width: 420px;
@@ -293,6 +290,7 @@ footer img {
   border: none;
   height: 128px;
   width: 128px;
+  margin: 0;
 }
 
 .like {
@@ -479,7 +477,6 @@ footer img {
 
   body {
     margin-top: 76px;
-    margin-top: 76px;
   }
 
   .matches {
@@ -526,6 +523,9 @@ footer img {
 .reviewText {
   display: flex;
   flex-direction: column;
+  width: fill;
+  max-width: 336px;
+  overflow-wrap: break-word;
 }
 
 .reviewText h5,

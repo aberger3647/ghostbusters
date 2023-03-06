@@ -16,9 +16,6 @@ const ProfileForm = () => {
 
     // document.getElementById('footer').style.opacity = 0;
 
-console.log("#######", document.getElementById('footer'))
-
-
     const { register, handleSubmit } = useForm();
     
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
