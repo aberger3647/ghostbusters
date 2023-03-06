@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import matchIcon from '../assets/matches-icon.svg';
 import { useQuery } from '@apollo/client';
 import { GET_IMAGE } from '../utils/queries';
-import { Image } from "cloudinary-react";
+import { Image, Transformation } from "cloudinary-react";
 import profileIcon from "../assets/profile-icon.svg";
 
 function Footer() {
@@ -47,7 +47,11 @@ useEffect(() => {
               <Image
                 cloudName={process.env.REACT_APP_CLOUD_NAME}
                 publicId={imageId}
-              />
+                alt='Prof Pic'
+              >
+                    <Transformation width="150" height="150" gravity="face" radius="max" crop="fill" />
+
+              </Image>
             )}
         </a>
         <h3><a href="/explore">explore</a></h3>

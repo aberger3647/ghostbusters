@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ME } from '../utils/queries';
 import { UPLOAD_IMAGE } from "../utils/mutations";
-import { Image } from "cloudinary-react";
+import { Image, Transformation } from "cloudinary-react";
 import profileIcon from "../assets/profile-icon.svg";
 
 const UploadImage = () => {
@@ -13,15 +13,14 @@ const UploadImage = () => {
   const [imageId, setImageId] = useState("");
 
   const { loading, data } = useQuery(GET_ME);
-  console.log("data", data);
   const me = data?.me || {};
-  const profile = data?.me.profile || {};
 
-useEffect(() => {
+  useEffect(() => {
     if (me) {
-        setImageId(me.image)
+      setImageId(me.image)
     }
-}, [me])
+
+  }, [me])
 
   const submit = async (data, e) => {
     e.preventDefault();
@@ -47,7 +46,9 @@ useEffect(() => {
         variables: { image: image },
       });
 
-      setImageId(image);
+      let newImage = `${image}.png`
+      setImageId(newImage)
+
     } catch (err) {
       console.error(err);
     }
@@ -66,10 +67,19 @@ useEffect(() => {
             />
           ) : (
             <Image
-              className="mediumPhoto"
-              cloudName={process.env.REACT_APP_CLOUD_NAME}
-              publicId={imageId}
+            className="mediumPhoto"
+            cloudName={process.env.REACT_APP_CLOUD_NAME}
+            publicId={imageId}
+            alt="Prof pic"
+          >
+            <Transformation
+              width="345"
+              height="345"
+              gravity="face"
+              radius="max"
+              crop="fill"
             />
+          </Image>
           )}
         </label>
         <input
