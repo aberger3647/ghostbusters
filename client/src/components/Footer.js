@@ -7,38 +7,38 @@ import { Image, Transformation } from "cloudinary-react";
 import profileIcon from "../assets/profile-icon.svg";
 
 function Footer() {
-  const { loading, data } = useQuery(GET_IMAGE);
-  console.log(data)
-  const image = data?.me.image || "";
 
+  const { loading, data } = useQuery(GET_IMAGE);
+
+  const image = data?.me.image || "";
   const [imageId, setImageId] = useState("");
   const [path, setPath] = useState();
 
-useEffect(() => {
-  if (image) {
-    let newImage = `${image}.png`
-    setImageId(newImage)
-  }
-}, [image])
+  useEffect(() => {
+    if (image) {
+      let newImage = `${image}.png`
+      setImageId(newImage)
+    }
+  }, [image])
 
-const location = useLocation();
-console.log(location.pathname)
-useEffect(() => {
+  const location = useLocation();
 
-  if (location.pathname === '/createprofile' || location.pathname === '/preferences') {
-    setPath(location.pathname);
-    document.body.style.margin = 0;
-  } else {
-    setPath('')
-  }
-})
+  useEffect(() => {
+
+    if (location.pathname === '/createprofile' || location.pathname === '/preferences') {
+      setPath(location.pathname);
+      document.body.style.margin = 0;
+    } else {
+      setPath('')
+    }
+  })
 
   return (
     <>
-    {!path ? (
-      <footer id='footer'>
-        <a href="/profile">
-        {!imageId ? (
+      {!path ? (
+        <footer id='footer'>
+          <a href="/profile">
+            {!imageId ? (
               <img
                 src={profileIcon}
                 alt="Profile icon"
@@ -49,18 +49,18 @@ useEffect(() => {
                 publicId={imageId}
                 alt='Prof Pic'
               >
-                    <Transformation width="150" height="150" gravity="face" radius="max" crop="fill" />
+                <Transformation width="150" height="150" gravity="face" radius="max" crop="fill" />
 
               </Image>
             )}
-        </a>
-        <h3><a href="/explore">explore</a></h3>
-        <a href="/matches"><img src={matchIcon} alt="Matches Icon" /></a>
-      </footer>
+          </a>
+          <h3><a href="/explore">explore</a></h3>
+          <a href="/matches"><img src={matchIcon} alt="Matches Icon" /></a>
+        </footer>
 
-    ) : (
-      <></>
-    )}
+      ) : (
+        <></>
+      )}
     </>
   );
 }

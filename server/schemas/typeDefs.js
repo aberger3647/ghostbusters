@@ -66,6 +66,7 @@ const typeDefs = gql`
         _id: ID
         reviewText: String
         reviewer: String
+        image: String
     }
 
     type Auth {

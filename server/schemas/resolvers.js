@@ -79,11 +79,12 @@ const resolvers = {
 
     addReview: async (parent, { userId, reviewText }, context) => {
       if (context.user) {
+
         return User.findOneAndUpdate(
           { _id: userId },
           {
             $addToSet: {
-              reviews: { reviewText, reviewer: context.user.firstName },
+              reviews: { reviewText, reviewer: context.user.firstName, image: context.user.image },
             },
           },
           { new: true, runValidators: true }
@@ -97,7 +98,7 @@ const resolvers = {
         throw new AuthenticationError('You must be logged in.');
       }
       const newImage = args.image
-      console.log(newImage)
+
       return await User.findOneAndUpdate(
         { _id: context.user._id },
         { $set: { image: newImage } },
