@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
@@ -7,27 +7,43 @@ import Header from '../components/Header';
 import Auth from '../utils/auth';
 import { ADD_PREFERENCE } from '../utils/mutations';
 
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../utils/queries';
+
 const PreferencesForm = () => {
     { !Auth.loggedIn() && <Navigate to='/login' /> }
 
-    const { register, handleSubmit } = useForm();
+    const { loading, data: userData } = useQuery(GET_ME);
+    console.log('I am looking at', userData);
+    const preference = userData?.me.preference || {};
+    const [formState, setFormState] = useState(preference);
 
+    const { register, handleSubmit } = useForm({
+        defaultValues: preference,
+    });
+
+    // i deleted data from { error, data } for something, incase something breaks.
     const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
 
     const onSubmit = async (preference, event) => {
-        event.preventDefault();
+        // event.preventDefault();
         console.log(preference)
         try {
             const { data } = await addPreference({
                 variables: { preference },
             });
-
+            setFormState(preference);
         } catch (err) {
             console.error(err)
         }
     }
 
     const navigate = useNavigate();
+
+    // const { loading, data: userData } = useQuery(GET_ME);
+    // console.log("I am looking at", userData);
+    // // const profile = userData?.me.profile || {};
+    // const preference = userData?.me.preference || {};
 
     const handleLogout = () => {
         Auth.logout();
@@ -45,19 +61,19 @@ const PreferencesForm = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                 <div className='heightPrefs'>
-                    <input className='minMaxAge' {...register('minAge')} placeholder='Min Age' />
+                    <input className='minMaxAge' {...register('minAge')} placeholder='Min Age' value={formState.minAge || ''} onChange={(event) => setFormState({ ...formState, minAge: event.target.value})}/>
                     <p>to</p>
-                    <input className='minMaxAge' {...register('maxAge')} placeholder='Max Age' />
+                    <input className='minMaxAge' {...register('maxAge')} placeholder='Max Age' defaultValue={preference.maxAge}/>
                     </div>
 
-                    <select {...register('gender', { required: true })}>
+                    <select {...register('gender', { required: true })} defaultValue={preference.gender}>
                         <option value=''>Gender...</option>
                         <option value='Female'>Female</option>
                         <option value='Male'>Male</option>
                         <option value='Non-Binary'>Non-Binary</option>
                     </select>
                     <div className='heightPrefs'>
-                        <select className='minMaxHeight' {...register('minHeight')}>
+                        <select className='minMaxHeight' {...register('minHeight')} defaultValue={preference.minHeight}>
                             <option value=''>Min Height</option>
                             <option value="I don't care">I don't care</option>
                             <option value="4'5&quot;">4'5"</option>
@@ -89,7 +105,7 @@ const PreferencesForm = () => {
                             <option value="6'7&quot;">6'7"</option>
                         </select>
                         <h4>to</h4>
-                        <select className='minMaxHeight' {...register('maxHeight')}>
+                        <select className='minMaxHeight' {...register('maxHeight')} defaultValue={preference.maxHeight}>
                             <option value=''>Max Height</option>
                             <option value="I don't care">I don't care</option>
                             <option value="4'5&quot;">4'5"</option>
@@ -122,7 +138,7 @@ const PreferencesForm = () => {
                         </select>
                     </div>
 
-                    <select {...register('religion', { required: true })}>
+                    <select {...register('religion', { required: true })} defaultValue={preference.religion}>
                         <option value=''>Religion...</option>
                         <option value='Agnostic/Atheist'>Agnostic/Atheist</option>
                         <option value='Buddhist'>Buddhist</option>
@@ -132,20 +148,20 @@ const PreferencesForm = () => {
                         <option value='Spiritual'>Spiritual</option>
                     </select>
 
-                    <select {...register('politics', { required: true })}>
+                    <select {...register('politics', { required: true })} defaultValue={preference.politics}>
                         <option value=''>Politics...</option>
                         <option value='Conservative'>Conservative</option>
                         <option value='Moderate'>Moderate</option>
                         <option value='Liberal'>Liberal</option>
                     </select>
 
-                    <select {...register('smoking', { required: true })}>
+                    <select {...register('smoking', { required: true })} defaultValue={preference.smoking}>
                         <option value=''>Smoking...</option>
                         <option value='Smokes'>Smokes</option>
                         <option value='Doesnt Smoke'>Doesn't smoke</option>
                     </select>
 
-                    <select {...register('drinking', { required: true })}>
+                    <select {...register('drinking', { required: true })} defaultValue={preference.drinking}>
                         <option value=''>Drinking...</option>
                         <option value='Drinks'>Drinks</option>
                         <option value='Doesnt Drink'>Doesn't drink</option>
