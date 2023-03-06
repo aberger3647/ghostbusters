@@ -35,11 +35,7 @@ const ProfileForm = () => {
 
         const handleNextPage = () => {
         navigate('/preferences');
-    }
 
-        const h = {
-        f: `4'5"`
-    }
     
     return (
         
@@ -67,7 +63,7 @@ const ProfileForm = () => {
 
                     <select {...register('height', { required: true })}>
                         <option value=''>Height...</option>
-                        <option value='9'>4'5"</option>
+                        <option value='45'>4'5"</option>
                         <option value='46'>4'6"</option>
                         <option value='47'>4'7"</option>
                         <option value='48'>4'8"</option>
