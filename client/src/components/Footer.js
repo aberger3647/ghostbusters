@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import matchIcon from '../assets/matches-icon.svg';
 import { useQuery } from '@apollo/client';
 import { GET_IMAGE } from '../utils/queries';
@@ -11,6 +12,7 @@ function Footer() {
   const image = data?.me.image || "";
 
   const [imageId, setImageId] = useState("");
+  const [path, setPath] = useState();
 
 useEffect(() => {
   if (image) {
@@ -18,24 +20,41 @@ useEffect(() => {
   }
 }, [image])
 
+const location = useLocation();
+
+useEffect(() => {
+
+  if (location.pathname === '/createprofile' || location.pathname === '/preferences') {
+    setPath(location.pathname);
+    document.body.style.margin = 0;
+  }
+}, [])
+
   return (
-    <footer>
-      <a href="/profile">
-      {!imageId ? (
-            <img
-              src={profileIcon}
-              alt="Profile icon"
-            />
-          ) : (
-            <Image
-              cloudName={process.env.REACT_APP_CLOUD_NAME}
-              publicId={imageId}
-            />
-          )}
-      </a>
-      <h3><a href="/explore">explore</a></h3>
-      <a href="/matches"><img src={matchIcon} alt="Matches Icon" /></a>
-    </footer>
+    <>
+    {!path ? (
+      <footer id='footer'>
+        <a href="/profile">
+        {!imageId ? (
+              <img
+                src={profileIcon}
+                alt="Profile icon"
+              />
+            ) : (
+              <Image
+                cloudName={process.env.REACT_APP_CLOUD_NAME}
+                publicId={imageId}
+              />
+            )}
+        </a>
+        <h3><a href="/explore">explore</a></h3>
+        <a href="/matches"><img src={matchIcon} alt="Matches Icon" /></a>
+      </footer>
+
+    ) : (
+      <></>
+    )}
+    </>
   );
 }
 

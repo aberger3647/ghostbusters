@@ -13,9 +13,11 @@ import Upload from '../components/Upload';
 import { ADD_PROFILE } from '../utils/mutations';
 
 const ProfileForm = () => {
-    
-const footer = document.getElementsByTagName('footer')[0].style = 'display: none'
-    console.log("########## footer", footer )
+
+    // document.getElementById('footer').style.opacity = 0;
+
+console.log("#######", document.getElementById('footer'))
+
 
     const { register, handleSubmit } = useForm();
     
@@ -38,7 +40,7 @@ const footer = document.getElementsByTagName('footer')[0].style = 'display: none
     
     return (
         
-        <div className='contentContainer'>
+        <div className='contentContainer createProfile'>
             { !Auth.loggedIn() && <Navigate to='/login' /> }
             <Header title="edit profile" />
 
