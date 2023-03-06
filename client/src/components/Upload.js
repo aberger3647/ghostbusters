@@ -56,8 +56,8 @@ useEffect(() => {
   return (
     <>
       <form className="uploadPhotoForm" onSubmit={handleSubmit(submit)}>
-        <label for="file-input">
-          <span id="profPic"></span>
+        <label htmlFor="file-input">
+
           {!imageId ? (
             <img
               src={profileIcon}
