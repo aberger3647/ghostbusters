@@ -21,14 +21,16 @@ useEffect(() => {
 }, [image])
 
 const location = useLocation();
-
+console.log(location.pathname)
 useEffect(() => {
 
   if (location.pathname === '/createprofile' || location.pathname === '/preferences') {
     setPath(location.pathname);
     document.body.style.margin = 0;
+  } else {
+    setPath('')
   }
-}, [])
+})
 
   return (
     <>
