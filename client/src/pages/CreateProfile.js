@@ -17,13 +17,14 @@ const ProfileForm = () => {
     const { register, handleSubmit } = useForm();
     
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
-    
+    const navigate = useNavigate();
     const onSubmit = async (profile, event) => {
         try {
             const { data } = await addProfile({
                 variables: { profile },
             });
             if (data) {
+                
                 navigate('/preferences');
             }
         } catch (err) {
@@ -56,6 +57,8 @@ const ProfileForm = () => {
       };
 
 useScrollToTop();
+
+
 
     return (
         
