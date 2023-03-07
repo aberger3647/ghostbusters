@@ -33,10 +33,6 @@ const ProfileForm = () => {
 
         const navigate = useNavigate();
 
-        const handleNextPage = () => {
-        navigate('/preferences');
-
-    
     return (
         
         <div className='contentContainer createProfile'>
@@ -125,7 +121,7 @@ const ProfileForm = () => {
                         placeholder='Bio'
                     />
 
-                    <input type='submit' value='Next' onClick={handleNextPage} className="createProfNext" />
+                    <input type='submit' value='Next' className="createProfNext" />
                 </form>
             </div>
         </div>

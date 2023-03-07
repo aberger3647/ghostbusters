@@ -271,13 +271,7 @@ label {
   width: 34%
 }
 
-.prevNext {
-  display: flex;
-  justify-content: space-between;
-  max-width: 337px;
-}
-
-.createProfNext {
+.createProfNext, .createPrefsNext {
   align-self: center;
 }
 

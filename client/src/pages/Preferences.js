@@ -17,26 +17,21 @@ const PreferencesForm = () => {
   const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
 
   const onSubmit = async (preference, event) => {
-    event.preventDefault();
+
     console.log(preference);
     try {
       const { data } = await addPreference({
         variables: { preference },
       });
+      if (data) {
+        navigate('/profile');
+    }
     } catch (err) {
       console.error(err);
     }
   };
 
   const navigate = useNavigate();
-  
-  const handleNextPage = () => {
-    navigate("/explore");
-  };
-
-  const handlePrevPage = () => {
-    navigate("/createprofile");
-  };
 
   return (
     <>
@@ -156,10 +151,7 @@ const PreferencesForm = () => {
             <option value="Doesnt Drink">Doesn't drink</option>
           </select>
 
-          <div className="prevNext">
-            <button onClick={handlePrevPage}>Previous</button>
-            <input type="submit" value="Next" onClick={handleNextPage} />
-          </div>
+            <input type="submit" value="Next" className="createPrefsNext" />
         </form>
       </div>
     </>
