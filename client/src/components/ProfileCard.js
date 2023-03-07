@@ -22,20 +22,21 @@ const ProfileCard = (props) => {
 
     return (
         <>
-            <Image
-                className="mediumPhoto topPhoto"
-                cloudName={process.env.REACT_APP_CLOUD_NAME}
-                publicId={props.image}
-                alt="Prof Pic"
-            >
-                <Transformation
-                    width="345"
-                    height="345"
-                    gravity="face"
-                    radius="max"
-                    crop="fill"
-                />
-            </Image>
+                  <Image
+        className="mediumPhoto topPhoto"
+        cloudName={process.env.REACT_APP_CLOUD_NAME}
+        publicId={props.image}
+        alt="Prof Pic"
+      >
+        <Transformation
+          width="345"
+          height="345"
+          gravity="face"
+          radius="max"
+          crop="fill"
+          border="10px_solid_rgb:6789FF"
+        />
+      </Image>
 
             <h2 className='exploreName'>{props.name}</h2>
             <div className='exploreStatContainer'>

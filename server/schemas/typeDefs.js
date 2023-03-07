@@ -92,7 +92,7 @@ const typeDefs = gql`
         addPreference(preference: PreferenceInput!): Preference
         uploadImage(image: String): User
         addLike(userId: ID!): User
-        dislike(userId: ID!): User
+        addDislike(userId: ID!): User
     }
 `;
 
