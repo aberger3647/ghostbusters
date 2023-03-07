@@ -46,19 +46,6 @@ const PreferencesForm = () => {
       <Header title="preferences" />
       <div className="formContainer">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="heightPrefs">
-            <input
-              className="minMaxAge"
-              {...register("minAge")}
-              placeholder="Min Age"
-            />
-            <h4>to</h4>
-            <input
-              className="minMaxAge"
-              {...register("maxAge")}
-              placeholder="Max Age"
-            />
-          </div>
 
                 <div className='heightPrefs'>
                     <input className='minMaxAge' {...register('minAge')} placeholder='Min Age' value={formState.minAge || ''} onChange={(event) => setFormState({ ...formState, minAge: event.target.value})}/>
@@ -169,8 +156,6 @@ const PreferencesForm = () => {
 
                     <input type="submit" value="Next" className="createPrefsNext" />
                 </form>
-                <button onClick={handleNextPage}>Next</button>
-                <button onClick={handleLogout}>Logout</button>
             </div>
         </>
     )
