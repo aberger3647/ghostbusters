@@ -14,6 +14,8 @@ import PreferencesForm from './pages/Preferences';
 import Details from './pages/Details'
 import Profile from './pages/Profile'
 import Matches from './pages/Matches'
+import EditProfile from './pages/EditProfile';
+import EditPreferences from './pages/EditPreferences';
 
 import Upload from './components/Upload'
 
@@ -62,6 +64,8 @@ function App() {
             <Route path='/profile' element={<Profile />} />
             <Route path='/upload' element={<Upload />} />
             <Route path='/matches' element={<Matches />} />
+            <Route path='/editprofile' element={<EditProfile />} />
+            <Route path='/editpreferences' element={<EditPreferences />} />
             <Route
               path='*'
               element={<h1 className='display-2'>Wrong page!</h1>}

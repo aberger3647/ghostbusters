@@ -42,6 +42,18 @@ const typeDefs = gql`
         bio: String
     }
 
+    input EditProfileInput {
+        _id: ID
+        age: String
+        gender: String
+        height: String
+        religion: String
+        politics: String
+        smoking: String
+        drinking: String
+        bio: String
+    }
+
     type Preference {
         _id: ID
         minAge: String
@@ -56,6 +68,19 @@ const typeDefs = gql`
     }
 
     input PreferenceInput {
+        minAge: String
+        maxAge: String
+        gender: String
+        minHeight: String
+        maxHeight: String
+        religion: String
+        politics: String
+        smoking: String
+        drinking: String
+    }
+
+    input EditPreferenceInput {
+        _id: ID
         minAge: String
         maxAge: String
         gender: String
@@ -90,8 +115,10 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(email: String!, password: String!, firstName: String!): Auth
         addProfile(profile: ProfileInput!): Profile
+        editProfile(profile: EditProfileInput!): Profile
         addReview(userId: ID!, reviewText: String!): User
         addPreference(preference: PreferenceInput!): Preference
+        editPreference(preference: EditPreferenceInput!): Preference
         uploadImage(image: String): User
         addLike(userId: ID!): User
         addDislike(userId: ID!): User
