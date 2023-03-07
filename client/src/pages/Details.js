@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_REVIEW } from '../utils/mutations';
 import { Navigate, useParams } from 'react-router-dom';
 import { GET_SINGLE_USER } from '../utils/queries'
-
 
 import Auth from '../utils/auth';
 
@@ -17,8 +16,7 @@ import ItsAMatch from '../components/ItsAMatch'
 
 const Details = () => {
 
-
-
+    const [match, setMatches] = useState()
     const { userId: userParam } = useParams();
     const { loading, data } = useQuery(GET_SINGLE_USER, {
         variables: { userId: userParam },
@@ -26,6 +24,18 @@ const Details = () => {
 
     const user = data?.user || {};
     const profile = data?.user.profile || {};
+
+    const { loading: meLoading, data: meData } = useQuery(GET_ME);
+
+    const me = meData?.me || {};
+    console.log('me', me)
+
+    useEffect(() => {
+        if (me) {
+            
+        }
+
+    }, [me])
 
     const { register, handleSubmit } = useForm();
 
