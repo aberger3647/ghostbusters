@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate, NavigationType, useNavigationType } from 'react-router-dom';
+
 
 import Auth from '../utils/auth';
 
@@ -13,8 +13,6 @@ import Upload from '../components/Upload';
 import { ADD_PROFILE } from '../utils/mutations';
 
 const ProfileForm = () => {
-
-    // document.getElementById('footer').style.opacity = 0;
 
     const { register, handleSubmit } = useForm();
     
@@ -34,7 +32,33 @@ const ProfileForm = () => {
             console.error(err);
         }
     }
-    
+
+    const useBackButton = () => {
+        const navType = useNavigationType();
+        return navType === NavigationType.Pop;
+      };
+      
+    const useScrollToTop = () => {
+        const { pathname } = useLocation();
+      
+        const isPop = useBackButton();
+      
+        const scrollToTop = () => window.scrollTo(0, 0);
+      
+        useEffect(() => {
+          scrollToTop();
+        }, [pathname, isPop]);
+      
+        useEffect(() => {
+          window.addEventListener("beforeunload", scrollToTop);
+          return () => {
+            window.removeEventListener("beforeunload", scrollToTop);
+          };
+        }, []);
+      };
+
+useScrollToTop();
+
     return (
         
         <div className='contentContainer createProfile'>
