@@ -7,6 +7,8 @@ export const LOGIN_USER = gql`
             me {
                 _id
                 email
+                firstName
+                image
             }
         }
     }
@@ -20,6 +22,7 @@ export const ADD_USER = gql`
                 _id
                 firstName
                 email
+                image
             }
         }
     }    
@@ -76,7 +79,8 @@ export const ADD_REVIEW = gql`
             reviews {
                 _id
                 reviewText
-               
+                reviewer
+                image
             }
         }
     }

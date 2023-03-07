@@ -8,7 +8,6 @@ const ItsAMatch = (props) => {
   const [imageId, setImageId] = useState("");
 
   const { loading, data } = useQuery(GET_ME);
-  console.log("data", data);
   const me = data?.me || {};
   const profile = data?.me.profile || {};
 

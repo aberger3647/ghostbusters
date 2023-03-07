@@ -28,9 +28,6 @@ const Details = () => {
 
     const profile = data?.user.profile || {};
 
-    console.log(user)
-
-
     const { register, handleSubmit } = useForm();
 
     const [addReview, { error, data: reviewData }] = useMutation(ADD_REVIEW);
@@ -40,11 +37,10 @@ const Details = () => {
                 variables: {
                     userId: user._id,
                     reviewText: review.reviewText,
-                    // reviewer: Auth.getProfile().data.firstName,
                 },
             });
-        }
-        catch (err) {
+            console.log('result', result)
+        } catch (err) {
             console.error(err);
         }
     };
@@ -70,22 +66,20 @@ const Details = () => {
             <div className="exploreContainer formContainer">
                 <div className="profileContainer">
 
-                    <ProfileCard name={user.firstName} age={profile.age} gender={profile.gender} height={profile.height} bio={profile.bio} religion={profile.religion} politics={profile.politics} smoking={profile.smoking} drinking={profile.drinking} />
+                    <ProfileCard name={user.firstName} age={profile.age} gender={profile.gender} height={profile.height} bio={profile.bio} religion={profile.religion} politics={profile.politics} smoking={profile.smoking} drinking={profile.drinking} image={user.image} />
                     <hr />
                     <h3 className="reviewsTitle">reviews</h3>
 
                     <div>
-                        {user?.reviews?.map((review) => (
+                        {user?.reviews?.map((review, index) => (
                             <div key={review._id}>
+                                {console.log(review)}
                                 {/* <h4>{review.reviewText}</h4> */}
-                                <Review direction="left" reviewText={review.reviewText} name={review.reviewer} />
+                                <Review direction={index} reviewText={review.reviewText} name={review.reviewer} image={review.image} />
                             </div>
                         ))}
                     </div>
 
-                    <Review direction="left" />
-                    <Review direction="right" />
-                    <Review direction="left" />
                     {/* <textarea className="reviewTextArea" placeholder="write a review.." />
                     <button>Submit</button> */}
                     <form onSubmit={handleSubmit(onSubmit)}>

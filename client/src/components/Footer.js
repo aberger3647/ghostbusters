@@ -8,10 +8,10 @@ import profileIcon from "../assets/profile-icon.svg";
 import exploreIcon from "../assets/magheart.svg";
 
 function Footer() {
-  const { loading, data } = useQuery(GET_IMAGE);
-  console.log(data);
-  const image = data?.me.image || "";
 
+  const { loading, data } = useQuery(GET_IMAGE);
+;
+  const image = data?.me.image || "";
   const [imageId, setImageId] = useState("");
   const [path, setPath] = useState();
 
@@ -35,6 +35,16 @@ function Footer() {
       setPath("");
     }
   });
+
+  useEffect(() => {
+
+    if (location.pathname === '/createprofile' || location.pathname === '/preferences') {
+      setPath(location.pathname);
+      document.body.style.margin = 0;
+    } else {
+      setPath('')
+    }
+  })
 
   return (
     <>
