@@ -12,6 +12,9 @@ const typeDefs = gql`
         image: String
         profile: Profile
         preference: Preference
+        likes: [User]!
+        matches: [User]!
+        dislikes: [User]!
     }
 
     type Profile {

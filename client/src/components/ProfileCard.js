@@ -9,38 +9,38 @@ const ProfileCard = (props) => {
 
     const [imageId, setImageId] = useState("");
 
-  const { loading, data } = useQuery(GET_ME);
-  const me = data?.me || {};
-  const profile = data?.me.profile || {};
+    const { loading, data } = useQuery(GET_ME);
+    const me = data?.me || {};
+    const profile = data?.me.profile || {};
 
-useEffect(() => {
-    if (me) {
-        let newImage = `${me.image}.png`
-        setImageId(newImage)
-    }
-}, [me])
+    useEffect(() => {
+        if (me) {
+            let newImage = `${me.image}.png`
+            setImageId(newImage)
+        }
+    }, [me])
 
     return (
         <>
-                  <Image
-        className="mediumPhoto topPhoto"
-        cloudName={process.env.REACT_APP_CLOUD_NAME}
-        publicId={props.image}
-        alt="Prof Pic"
-      >
-        <Transformation
-          width="345"
-          height="345"
-          gravity="face"
-          radius="max"
-          crop="fill"
-        />
-      </Image>
+            <Image
+                className="mediumPhoto topPhoto"
+                cloudName={process.env.REACT_APP_CLOUD_NAME}
+                publicId={props.image}
+                alt="Prof Pic"
+            >
+                <Transformation
+                    width="345"
+                    height="345"
+                    gravity="face"
+                    radius="max"
+                    crop="fill"
+                />
+            </Image>
 
             <h2 className='exploreName'>{props.name}</h2>
             <div className='exploreStatContainer'>
                 <h3 className="exploreStats">{props.gender} </h3>
-                <h3 className="exploreStats">{props.age}</h3> 
+                <h3 className="exploreStats">{props.age}</h3>
                 <h3 className="exploreStats">{props.height}</h3>
             </div>
 

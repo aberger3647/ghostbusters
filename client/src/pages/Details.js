@@ -17,7 +17,7 @@ import ItsAMatch from '../components/ItsAMatch'
 
 const Details = () => {
 
-    { !Auth.loggedIn() && <Navigate to='/login' /> }
+
 
     const { userId: userParam } = useParams();
     const { loading, data } = useQuery(GET_SINGLE_USER, {
@@ -25,7 +25,6 @@ const Details = () => {
     });
 
     const user = data?.user || {};
-
     const profile = data?.user.profile || {};
 
     const { register, handleSubmit } = useForm();
@@ -60,7 +59,7 @@ const Details = () => {
     }
     return (
         <>
-
+            {!Auth.loggedIn() && <Navigate to='/login' />}
             <ItsAMatch />
             <Header title="details" />
             <div className="exploreContainer formContainer">

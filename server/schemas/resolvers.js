@@ -17,7 +17,7 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('profile').populate('preference').populate('savedReviews');
+        return User.findOne({ _id: context.user._id }).populate('profile').populate('preference').populate('reviews').populate('likes').populate('matches').populate('dislikes');
       }
       throw new AuthenticationError('You must be logged in.');
     },
