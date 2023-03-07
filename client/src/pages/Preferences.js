@@ -38,19 +38,6 @@ const PreferencesForm = () => {
       <Header title="preferences" />
       <div className="formContainer">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="heightPrefs">
-            <input
-              className="minMaxAge"
-              {...register("minAge")}
-              placeholder="Min Age"
-            />
-            <h4>to</h4>
-            <input
-              className="minMaxAge"
-              {...register("maxAge")}
-              placeholder="Max Age"
-            />
-          </div>
 
         <select {...register('gender', { required: true })}>
             <option value=''>Gender...</option>
