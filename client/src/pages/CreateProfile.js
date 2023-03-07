@@ -14,13 +14,9 @@ import { ADD_PROFILE } from '../utils/mutations';
 
 const ProfileForm = () => {
 
-    // document.getElementById('footer').style.opacity = 0;
-
     const { register, handleSubmit } = useForm();
     
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
-    
-    const navigate = useNavigate();
     
     const onSubmit = async (profile, event) => {
         try {
@@ -34,7 +30,9 @@ const ProfileForm = () => {
             console.error(err);
         }
     }
-    
+
+        const navigate = useNavigate();
+
     return (
         
         <div className='contentContainer createProfile'>
@@ -123,7 +121,7 @@ const ProfileForm = () => {
                         placeholder='Bio'
                     />
 
-                    <input type='submit' value='Next' />
+                    <input type='submit' value='Next' className="createProfNext" />
                 </form>
             </div>
         </div>

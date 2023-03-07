@@ -86,7 +86,7 @@ const Details = () => {
                         <textarea className="reviewTextArea" {...register('reviewText')}
                             placeholder='Add a review'
                         />
-                        <button type='submit'>Submit</button>
+                        <button type='submit' className="detailsSubmit">Submit</button>
                     </form>
                     {/* <div className="matchBtnDetailContainer">
                         <button className="dislike" />
