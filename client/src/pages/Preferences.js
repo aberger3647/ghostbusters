@@ -22,11 +22,9 @@ const PreferencesForm = () => {
         defaultValues: preference,
     });
 
-    // i deleted data from { error, data } for something, incase something breaks.
     const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
 
     const onSubmit = async (preference, event) => {
-        // event.preventDefault();
         console.log(preference)
         try {
             const { data } = await addPreference({
@@ -39,11 +37,6 @@ const PreferencesForm = () => {
     }
 
     const navigate = useNavigate();
-
-    // const { loading, data: userData } = useQuery(GET_ME);
-    // console.log("I am looking at", userData);
-    // // const profile = userData?.me.profile || {};
-    // const preference = userData?.me.preference || {};
 
     const handleLogout = () => {
         Auth.logout();
@@ -63,17 +56,17 @@ const PreferencesForm = () => {
                 <div className='heightPrefs'>
                     <input className='minMaxAge' {...register('minAge')} placeholder='Min Age' value={formState.minAge || ''} onChange={(event) => setFormState({ ...formState, minAge: event.target.value})}/>
                     <p>to</p>
-                    <input className='minMaxAge' {...register('maxAge')} placeholder='Max Age' defaultValue={preference.maxAge}/>
+                    <input className='minMaxAge' {...register('maxAge')} placeholder='Max Age' value={formState.maxAge || ''} onChange={(event) => setFormState({ ...formState, maxAge: event.target.value})}/>
                     </div>
 
-                    <select {...register('gender', { required: true })} defaultValue={preference.gender}>
+                    <select {...register('gender', { required: true })} value={formState.gender || ''} onChange={(event) => setFormState({ ...formState, gender: event.target.value})}>
                         <option value=''>Gender...</option>
                         <option value='Female'>Female</option>
                         <option value='Male'>Male</option>
                         <option value='Non-Binary'>Non-Binary</option>
                     </select>
                     <div className='heightPrefs'>
-                        <select className='minMaxHeight' {...register('minHeight')} defaultValue={preference.minHeight}>
+                        <select className='minMaxHeight' {...register('minHeight')} value={formState.minHeight || ''} onChange={(event) => setFormState({ ...formState, minHeight: event.target.value})}>
                             <option value=''>Min Height</option>
                             <option value="I don't care">I don't care</option>
                             <option value="4'5&quot;">4'5"</option>
@@ -105,7 +98,7 @@ const PreferencesForm = () => {
                             <option value="6'7&quot;">6'7"</option>
                         </select>
                         <h4>to</h4>
-                        <select className='minMaxHeight' {...register('maxHeight')} defaultValue={preference.maxHeight}>
+                        <select className='minMaxHeight' {...register('maxHeight')} value={formState.maxHeight|| ''} onChange={(event) => setFormState({ ...formState, maxHeight: event.target.value})}>
                             <option value=''>Max Height</option>
                             <option value="I don't care">I don't care</option>
                             <option value="4'5&quot;">4'5"</option>
@@ -138,7 +131,7 @@ const PreferencesForm = () => {
                         </select>
                     </div>
 
-                    <select {...register('religion', { required: true })} defaultValue={preference.religion}>
+                    <select {...register('religion', { required: true })} value={formState.religion || ''} onChange={(event) => setFormState({ ...formState, religion: event.target.value})}>
                         <option value=''>Religion...</option>
                         <option value='Agnostic/Atheist'>Agnostic/Atheist</option>
                         <option value='Buddhist'>Buddhist</option>
@@ -148,20 +141,20 @@ const PreferencesForm = () => {
                         <option value='Spiritual'>Spiritual</option>
                     </select>
 
-                    <select {...register('politics', { required: true })} defaultValue={preference.politics}>
+                    <select {...register('politics', { required: true })} value={formState.politics || ''} onChange={(event) => setFormState({ ...formState, politics: event.target.value})}>
                         <option value=''>Politics...</option>
                         <option value='Conservative'>Conservative</option>
                         <option value='Moderate'>Moderate</option>
                         <option value='Liberal'>Liberal</option>
                     </select>
 
-                    <select {...register('smoking', { required: true })} defaultValue={preference.smoking}>
+                    <select {...register('smoking', { required: true })} value={formState.smoking || ''} onChange={(event) => setFormState({ ...formState, smoking: event.target.value})}>
                         <option value=''>Smoking...</option>
                         <option value='Smokes'>Smokes</option>
                         <option value='Doesnt Smoke'>Doesn't smoke</option>
                     </select>
 
-                    <select {...register('drinking', { required: true })} defaultValue={preference.drinking}>
+                    <select {...register('drinking', { required: true })} value={formState.drinking || ''} onChange={(event) => setFormState({ ...formState, drinking: event.target.value})}>
                         <option value=''>Drinking...</option>
                         <option value='Drinks'>Drinks</option>
                         <option value='Doesnt Drink'>Doesn't drink</option>

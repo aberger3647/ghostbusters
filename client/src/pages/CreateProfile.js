@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
@@ -12,21 +12,31 @@ import Upload from '../components/Upload';
 
 import { ADD_PROFILE } from '../utils/mutations';
 
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../utils/queries';
+
 const ProfileForm = () => {
 
-    // document.getElementById('footer').style.opacity = 0;
+    const { loading, data: userData } = useQuery(GET_ME);
+    console.log('I am looking at', userData);
+    const profile = userData?.me.profile || {};
+    const [formState, setFormState] = useState(profile);
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm({
+        defaultValues: profile,
+    });
     
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
-    
+
     const navigate = useNavigate();
-    
+
     const onSubmit = async (profile, event) => {
+        console.log(profile)
         try {
             const { data } = await addProfile({
                 variables: { profile },
             });
+            setFormState(profile);
             if (data) {
                 navigate('/preferences');
             }
@@ -50,16 +60,17 @@ const ProfileForm = () => {
 
                     <input {...register('age')}
                         placeholder='Age'
+                        value={formState.age || ''} onChange={(event) => setFormState({ ...formState, age: event.target.value})}
                     />
 
-                    <select {...register('gender', { required: true })}>
+                    <select {...register('gender', { required: true })} value={formState.gender || '' } onChange={(event) => setFormState({ ...formState, gender: event.target.value})}>
                         <option value=''>Gender...</option>
                         <option value='F'>Female</option>
                         <option value='M'>Male</option>
                         <option value='NB'>Non-Binary</option>
                     </select>
 
-                    <select {...register('height', { required: true })}>
+                    <select {...register('height', { required: true })} value={formState.height || ''} onChange={(event) => setFormState({ ...formState, height: event.target.value})}>
                         <option value=''>Height...</option>
                         <option value="4'5&quot;">4'5"</option>
                         <option value="4'6&quot;">4'6"</option>
@@ -90,7 +101,7 @@ const ProfileForm = () => {
                         <option value="6'7&quot;">6'7"</option>
                     </select>
 
-                    <select {...register('religion', { required: true })}>
+                    <select {...register('religion', { required: true })} value={formState.religion || ''} onChange={(event) => setFormState({ ...formState, religion: event.target.value})}>
                         <option value=''>Religion...</option>
                         <option value='Agnostic/Atheist'>Agnostic/Atheist</option>
                         <option value='Buddhist'>Buddhist</option>
@@ -100,20 +111,20 @@ const ProfileForm = () => {
                         <option value='Spiritual'>Spiritual</option>
                     </select>
 
-                    <select {...register('politics', { required: true })}>
+                    <select {...register('politics', { required: true })} value={formState.politics || ''} onChange={(event) => setFormState({ ...formState, politics: event.target.value})}>
                         <option value=''>Politics...</option>
                         <option value='Conservative'>Conservative</option>
                         <option value='Moderate'>Moderate</option>
                         <option value='Liberal'>Liberal</option>
                     </select>
 
-                    <select {...register('smoking', { required: true })}>
+                    <select {...register('smoking', { required: true })} value={formState.smoking || ''} onChange={(event) => setFormState({ ...formState, smoking: event.target.value})}>
                         <option value=''>Smoking...</option>
                         <option value='Smokes'>Smokes</option>
                         <option value='Doesnt Smoke'>Doesn't smoke</option>
                     </select>
 
-                    <select {...register('drinking', { required: true })}>
+                    <select {...register('drinking', { required: true })} value={formState.drinking || ''} onChange={(event) => setFormState({ ...formState, drinking: event.target.value})}>
                         <option value=''>Drinking...</option>
                         <option value='Drinks'>Drinks</option>
                         <option value='Doesnt Drink'>Doesn't drink</option>
@@ -121,6 +132,7 @@ const ProfileForm = () => {
 
                     <textarea {...register('bio')}
                         placeholder='Bio'
+                        value={formState.bio || ''} onChange={(event) => setFormState({ ...formState, bio: event.target.value})}
                     />
 
                     <input type='submit' value='Next' />
