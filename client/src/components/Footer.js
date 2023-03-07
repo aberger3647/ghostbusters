@@ -10,7 +10,7 @@ import exploreIcon from "../assets/magheart.svg";
 function Footer() {
 
   const { loading, data } = useQuery(GET_IMAGE);
-;
+
   const image = data?.me.image || "";
   const [imageId, setImageId] = useState("");
   const [path, setPath] = useState();
@@ -21,9 +21,15 @@ function Footer() {
       setImageId(newImage);
     }
   }, [image]);
+  useEffect(() => {
+    if (image) {
+      let newImage = `${image}.png`
+      setImageId(newImage)
+    }
+  }, [image])
 
-  const location = useLocation();
-  console.log(location.pathname);
+    const location = useLocation();
+  ;
   useEffect(() => {
     if (
       location.pathname === "/createprofile" ||
@@ -36,8 +42,15 @@ function Footer() {
     }
   });
 
-  useEffect(() => {
+    useEffect(() => {
 
+    if (location.pathname === '/createprofile' || location.pathname === '/preferences') {
+      setPath(location.pathname);
+      document.body.style.margin = 0;
+    } else {
+      setPath('')
+    }
+  })
     if (location.pathname === '/createprofile' || location.pathname === '/preferences') {
       setPath(location.pathname);
       document.body.style.margin = 0;
