@@ -1,30 +1,54 @@
-import React, { useState } from "react";
-import profilePhoto from '../assets/profile-icon.svg'
+import React, { useState, useEffect } from "react";
+import profilePhoto from '../assets/profile-icon.svg';
+import { Image, Transformation } from "cloudinary-react";
+import { GET_ME } from '../utils/queries';
+import { useQuery } from "@apollo/client";
 
 
 const ProfileCard = (props) => {
 
-    const [gender, setGender] = useState('M')
-    const [age, setAge] = useState('33')
-    const [height, setHeight] = useState(`6'`)
-    const [name, setName] = useState('Marcus')
+    const [imageId, setImageId] = useState("");
+
+    const { loading, data } = useQuery(GET_ME);
+    const me = data?.me || {};
+    const profile = data?.me.profile || {};
+
+    useEffect(() => {
+        if (me) {
+            let newImage = `${me.image}.png`
+            setImageId(newImage)
+        }
+    }, [me])
 
     return (
         <>
-            <img className='mediumPhoto' src={profilePhoto} alt='Profile Pic' />
+            <Image
+                className="mediumPhoto topPhoto"
+                cloudName={process.env.REACT_APP_CLOUD_NAME}
+                publicId={props.image}
+                alt="Prof Pic"
+            >
+                <Transformation
+                    width="345"
+                    height="345"
+                    gravity="face"
+                    radius="max"
+                    crop="fill"
+                    border="10px_solid_rgb:6789FF"
+                />
+            </Image>
 
             <h2 className='exploreName'>{props.name}</h2>
             <div className='exploreStatContainer'>
                 <h3 className="exploreStats">{props.gender} </h3>
-                <h3 className="exploreStats">{props.age}</h3> 
+                <h3 className="exploreStats">{props.age}</h3>
                 <h3 className="exploreStats">{props.height}</h3>
             </div>
 
             <p className="profilebioText">{props.bio}</p>
 
-
             <div className="profileDetailsContainer">
-                <h4>Reddit Moderator</h4>
+                <h4>{props.work}</h4>
                 <div className="profileDetails">
                     <h4>{props.religion}</h4>
                     <h4>{props.politics}</h4>
@@ -36,6 +60,6 @@ const ProfileCard = (props) => {
             </div>
         </>
     )
-}
+};
 
 export default ProfileCard; 

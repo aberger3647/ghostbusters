@@ -35,9 +35,24 @@ h3 {
 }
 
 p,
-button {
+button,
+input[type="submit"],
+input[value="Previous"] {
   font-size: 25px;
   font-weight: 400;
+}
+
+input[type="submit"],
+input[value="Previous"],
+.detailsSubmit {
+  color: black;
+  width: 40%;
+}
+
+input[type='submit']
+
+.detailsSubmit:hover {
+  color: black;
 }
 
 h4,
@@ -67,13 +82,17 @@ header {
   margin-bottom: 25px;
 }
 
-button, .uploadPhotoForm>button {
+button, .uploadPhotoForm>button, input[type="submit"], input[value="Previous"], .detailsSubmit {
   border: 3px solid var(--periwinkle);
   border-radius: 50px;
   padding: 5px 25px 5px 25px;
   margin: 25px;
   background-color: var(--white);
   transition: opacity 0.3s ease-in-out;
+}
+
+input[value="Previous"],input[type="submit"] {
+  margin: 25px 0px 25px 0px;
 }
 
 .uploadPhotoForm>button {
@@ -86,7 +105,10 @@ button, .uploadPhotoForm>button {
 }
 
 button:hover,
-button:active {
+button:active,
+input[type="submit"]:hover,
+input[value="Previous"]:hover,
+.detailsSubmit:hover {
   background-color: var(--lightperi);
 }
 
@@ -212,6 +234,7 @@ textarea {
   resize: none;
 }
 
+
 /* create profile */
 .contentContainer {
   position: relative;
@@ -245,17 +268,20 @@ label {
 }
 
 .minMaxAge {
-  width: 43%
+  width: 34%
 }
 
+.createProfNext, .createPrefsNext {
+  align-self: center;
+}
+
+/* footer */
 footer {
   position: fixed;
   height: 77px;
   width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: center;
   color: var(--white);
   background: linear-gradient(270deg, var(--purple), var(--periwinkle));
   z-index: 2;
@@ -263,18 +289,24 @@ footer {
 
 footer a {
   text-decoration: none;
+  height: 50px;
   color: white;
 }
 
 footer img {
   height: 50px;
-  margin: 5px;
+  width: 50px;
 }
 
-
+.footerLinks {
+  width: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
 
 .matchBtnContainer {
-  width: 75%;
   display: flex;
   justify-content: space-between;
   max-width: 420px;
@@ -292,6 +324,7 @@ footer img {
   border: none;
   height: 128px;
   width: 128px;
+  margin: 0;
 }
 
 .like {
@@ -300,7 +333,6 @@ footer img {
 }
 
 .like:hover {
-  background-color: transparent;
   background-color: transparent;
 }
 
@@ -316,15 +348,12 @@ footer img {
 
 .dislike:hover {
   background-color: transparent;
-  background-color: transparent;
 }
 
 .dislike:active {
   background-image: url('./assets/broken-heart-active.svg');
   background-repeat: no-repeat;
 }
-
-
 
 .exploreContainer {
   display: flex;
@@ -353,7 +382,13 @@ footer img {
 .exploreStatContainer {
   display: flex;
   justify-content: space-between;
+  align-self: center;
   width: 186px;
+}
+
+.exploreBox {
+  display: flex;
+  flex-direction: column;
 }
 
 .matchCard {
@@ -400,7 +435,6 @@ footer img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: fill;
   width: 336px;
 }
 
@@ -412,6 +446,7 @@ footer img {
 .profilebioText {
   text-align: center;
   width: fill;
+  width: -moz-available;
 }
 
 .profileDetails {
@@ -424,6 +459,7 @@ footer img {
   display: flex;
   flex-direction: column;
   width: fill;
+  width: -moz-available;
   margin-bottom: 15px;
 }
 
@@ -435,6 +471,7 @@ footer img {
 .profilePreferences {
   text-align: left;
   width: fill;
+  width: -moz-available;
   margin-bottom: 15px;
 }
 
@@ -452,6 +489,7 @@ footer img {
   display: flex;
   width: fill;
   justify-content: space-between;
+  width: -moz-available;
 }
 
 .profileBtns button {
@@ -475,16 +513,15 @@ footer img {
 
   body {
     margin-top: 76px;
-    margin-top: 76px;
   }
 
   .matches {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
     justify-content: center;
     width: fill;
+    width: -moz-available;
   }
 
   .matchCard hr {
@@ -522,10 +559,12 @@ footer img {
 .reviewText {
   display: flex;
   flex-direction: column;
+  width: fill;
+  max-width: 336px;
+  overflow-wrap: break-word;
 }
 
-.reviewText h5,
-h4 {
+.reviewText h5, .reviewText h4 {
   margin: 0 15px 0 15px;
   text-align: left;
 }

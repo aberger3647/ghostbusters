@@ -12,6 +12,7 @@ export const GET_ME = gql`
                 age
                 gender
                 height
+                work
                 religion
                 politics
                 smoking
@@ -30,6 +31,15 @@ export const GET_ME = gql`
                 smoking
                 drinking
             }
+            likes {
+                _id
+            }
+            matches {
+                _id
+            }
+            dislikes {
+                _id
+            }
         }
     }
 `
@@ -40,11 +50,13 @@ export const GET_SINGLE_USER = gql`
             _id
             firstName
             email
+            image
             profile {
                 _id
                 age
                 gender
                 height
+                work
                 religion
                 politics
                 smoking
@@ -55,6 +67,32 @@ export const GET_SINGLE_USER = gql`
                 _id
                 reviewText
                 reviewer
+                image
+            }
+        }
+    }
+`
+
+export const GET_IMAGE = gql`
+    query getImage {
+        me {
+            image
+        }
+    }
+`
+
+export const GET_USER = gql`
+    query getUsers {
+        users {
+            _id
+            firstName
+            email
+            image
+            profile {
+                _id
+                age
+                gender
+                height
             }
         }
     }

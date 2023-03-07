@@ -7,6 +7,8 @@ export const LOGIN_USER = gql`
             me {
                 _id
                 email
+                firstName
+                image
             }
         }
     }
@@ -20,6 +22,7 @@ export const ADD_USER = gql`
                 _id
                 firstName
                 email
+                image
             }
         }
     }    
@@ -40,6 +43,7 @@ export const ADD_PROFILE = gql`
                 age
                 gender
                 height
+                work
                 religion
                 politics
                 smoking
@@ -76,7 +80,25 @@ export const ADD_REVIEW = gql`
             reviews {
                 _id
                 reviewText
+                reviewer
+                image
             }
+        }
+    }
+`
+
+export const ADD_LIKE = gql`
+    mutation addLike($userId: ID!) {
+        addLike(userId: $userId) {
+            _id
+        }
+    }
+`
+
+export const ADD_DISLIKE = gql`
+    mutation addDislike($userId: ID!) {
+        addDislike(userId: $userId) {
+            _id
         }
     }
 `

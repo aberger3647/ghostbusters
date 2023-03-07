@@ -7,14 +7,22 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
 
   Query: {
+    getImage: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne(
+          { _id: context.user._id },
+          { image }
+        )
+      }
+    },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('profile').populate('preference').populate('savedReviews');
+        return User.findOne({ _id: context.user._id }).populate('profile').populate('preference').populate('reviews').populate('likes').populate('matches').populate('dislikes');
       }
       throw new AuthenticationError('You must be logged in.');
     },
     users: async () => {
-      return User.find();
+      return User.find().populate('profile');
 
     },
     user: async (parent, { userId }, context) => {
@@ -71,11 +79,12 @@ const resolvers = {
 
     addReview: async (parent, { userId, reviewText }, context) => {
       if (context.user) {
+
         return User.findOneAndUpdate(
           { _id: userId },
           {
             $addToSet: {
-              reviews: { reviewText, reviewer: context.user.firstName },
+              reviews: { reviewText, reviewer: context.user.firstName, image: context.user.image },
             },
           },
           { new: true, runValidators: true }
@@ -89,7 +98,7 @@ const resolvers = {
         throw new AuthenticationError('You must be logged in.');
       }
       const newImage = args.image
-      console.log(newImage)
+
       return await User.findOneAndUpdate(
         { _id: context.user._id },
         { $set: { image: newImage } },
@@ -97,52 +106,68 @@ const resolvers = {
       )
     },
     addLike: async (parent, args, context) => {
-      // if (!context.user) {
-      //   throw new AuthenticationError('You must be logged in.')
-      // }
+      if (!context.user) {
+        throw new AuthenticationError('You must be logged in.')
+      }
       let match = false;
-      console.log(args)
-      const likedUser = await User.findOne({ _id: args.userId })
-      console.log(likedUser)
+      const likedUser = await User.findOne({ _id: args.userId }).populate('likes').populate('matches');
+      const me = await User.findOne({ _id: context.user._id }).populate('likes').populate('matches');
+
       // IF LIKED USER ALREADY HAS YOU LIKED (ITS A MATCH)
-      if (likedUser.likes.includes("640196d888622758d0611d07")) {
-        console.log('they like you already')
+      if (likedUser.likes.includes(context.user._id)) {
+
 
         // UPDATE LIKED USER (REMOVE FROM LIKES)
         await User.findOneAndUpdate(
           { _id: likedUser._id },
-          { $pull: { likes: "640196d888622758d0611d07" } },
+          { $pull: { likes: context.user._id } },
           { new: true }
         )
-        console.log('')
+
 
         // UPDATE LIKED USER (ADD TO MATCHES)
         await User.findOneAndUpdate(
           { _id: likedUser._id },
-          { $addToSet: { matches: "640196d888622758d0611d07" } },
+          { $addToSet: { matches: context.user._id } },
           { new: true }
         )
-        console.log('')
+
 
         // UPDATE LOGGED IN USER TO ADD LIKED USER TO MATCHES
         await User.findOneAndUpdate(
-          { _id: "640196d888622758d0611d07" },
-          { $addtoSet: { matches: args.userId } },
+          { _id: context.user._id },
+          { $addToSet: { matches: args.userId } },
           { new: true }
         )
-        console.log('')
+
+
+
         match = true;
 
+        return { match, me, likedUser }
+
+        // IF THEY DON'T LIKE YOU YET
       } else {
         // ADD LIKE TO USER'S LIKES
         await User.findOneAndUpdate(
-          { _id: "640196d888622758d0611d07" },
+          { _id: context.user._id },
           { $addToSet: { likes: args.userId } },
           { new: true }
         )
-        console.log('ONLY ADD TO LIKES')
+        return { match }
       }
 
+    },
+
+    addDislike: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You must be logged in.')
+      }
+      return await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $addToSet: { dislikes: args.userId } },
+        { new: true }
+      )
     }
   },
 };

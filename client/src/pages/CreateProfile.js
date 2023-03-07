@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate, NavigationType, useNavigationType } from 'react-router-dom';
+
 
 import Auth from '../utils/auth';
 
@@ -13,31 +13,57 @@ import Upload from '../components/Upload';
 import { ADD_PROFILE } from '../utils/mutations';
 
 const ProfileForm = () => {
-    
 
     const { register, handleSubmit } = useForm();
-    
+
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
-    
     const navigate = useNavigate();
-    
     const onSubmit = async (profile, event) => {
         try {
             const { data } = await addProfile({
                 variables: { profile },
             });
             if (data) {
+
                 navigate('/preferences');
             }
         } catch (err) {
             console.error(err);
         }
     }
-    
+
+    const useBackButton = () => {
+        const navType = useNavigationType();
+        return navType === NavigationType.Pop;
+    };
+
+    const useScrollToTop = () => {
+        const { pathname } = useLocation();
+
+        const isPop = useBackButton();
+
+        const scrollToTop = () => window.scrollTo(0, 0);
+
+        useEffect(() => {
+            scrollToTop();
+        }, [pathname, isPop]);
+
+        useEffect(() => {
+            window.addEventListener("beforeunload", scrollToTop);
+            return () => {
+                window.removeEventListener("beforeunload", scrollToTop);
+            };
+        }, []);
+    };
+
+    useScrollToTop();
+
+
+
     return (
-        
-        <div className='contentContainer'>
-            { !Auth.loggedIn() && <Navigate to='/login' /> }
+
+        <div className='contentContainer createProfile'>
+            {!Auth.loggedIn() && <Navigate to='/login' />}
             <Header title="edit profile" />
 
             <h2>Name</h2>
@@ -89,6 +115,10 @@ const ProfileForm = () => {
                         <option value='67'>6'7"</option>
                     </select>
 
+                    <input {...register('work')}
+                        placeholder='Profession'
+                    />
+
                     <select {...register('religion', { required: true })}>
                         <option value=''>Religion...</option>
                         <option value='Agnostic/Atheist'>Agnostic/Atheist</option>
@@ -122,7 +152,7 @@ const ProfileForm = () => {
                         placeholder='Bio'
                     />
 
-                    <input type='submit' value='Next' />
+                    <input type='submit' value='Next' className="createProfNext" />
                 </form>
             </div>
         </div>

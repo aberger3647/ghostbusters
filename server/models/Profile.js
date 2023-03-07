@@ -14,6 +14,9 @@ const profileSchema = new Schema(
             type: String,
             required: true,
         },
+        work: {
+            type: String,
+        },
         religion: {
             type: String,
         },
