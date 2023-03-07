@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate, NavigationType, useNavigationType } from 'react-router-dom';
+
 
 import Auth from '../utils/auth';
 
@@ -17,13 +17,14 @@ const ProfileForm = () => {
     const { register, handleSubmit } = useForm();
     
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
-    
+    const navigate = useNavigate();
     const onSubmit = async (profile, event) => {
         try {
             const { data } = await addProfile({
                 variables: { profile },
             });
             if (data) {
+                
                 navigate('/preferences');
             }
         } catch (err) {
@@ -31,7 +32,33 @@ const ProfileForm = () => {
         }
     }
 
-        const navigate = useNavigate();
+    const useBackButton = () => {
+        const navType = useNavigationType();
+        return navType === NavigationType.Pop;
+      };
+      
+    const useScrollToTop = () => {
+        const { pathname } = useLocation();
+      
+        const isPop = useBackButton();
+      
+        const scrollToTop = () => window.scrollTo(0, 0);
+      
+        useEffect(() => {
+          scrollToTop();
+        }, [pathname, isPop]);
+      
+        useEffect(() => {
+          window.addEventListener("beforeunload", scrollToTop);
+          return () => {
+            window.removeEventListener("beforeunload", scrollToTop);
+          };
+        }, []);
+      };
+
+useScrollToTop();
+
+
 
     return (
         
