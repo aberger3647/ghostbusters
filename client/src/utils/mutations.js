@@ -94,9 +94,9 @@ export const ADD_LIKE = gql`
     }
 `
 
-export const DISLIKE = gql`
-    mutation dislike($userId: ID!) {
-        dislike(userId: $userId) {
+export const ADD_DISLIKE = gql`
+    mutation addDislike($userId: ID!) {
+        addDislike(userId: $userId) {
             _id
         }
     }
