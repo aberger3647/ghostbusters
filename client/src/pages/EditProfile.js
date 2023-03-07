@@ -16,46 +16,34 @@ import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
 const EditProfile = () => {
-
-    const { loading, data: userData } = useQuery(GET_ME);
-
-    console.log('I am looking at', userData);
-    const profile = userData?.me.profile || {};
-    const [formState, setFormState] = useState(profile);
-    console.log('formState is', formState);
-
-    const { register, handleSubmit } = useForm({
-        defaultValues: profile,
+    const { register, handleSubmit, reset } = useForm();
+    const { loading, data: userData } = useQuery(GET_ME, {
+        onCompleted: (data) => {
+            console.log('got data from graphql', data.me.profile);
+            reset(data.me.profile);
+        }
     });
-    
+
     const [editProfile, { error, data }] = useMutation(EDIT_PROFILE);
 
-    const navigate = useNavigate();
-
-    const onSubmit = async (profile, event) => {
-        profile = {...profile, _id: formState._id};
+    const onSubmit = async (formData) => {
+        // removes typename from variables so mutation doesn't include __typename
+        const {__typename: _, ...profile } = formData;
         console.log('sending profile', profile);
         try {
             const { data } = await editProfile({
                 variables: {profile},
             });
-            setFormState(profile);
-            alert('saved profile', 'yay');
+            alert('saved profile');
         } catch (err) {
             console.error(err);
-            alert('failed to set profile', err);
+            alert('failed to set profile' + err);
         }
     }
 
-    useEffect(() => {
-        if (userData?.me?.profile) {
-          setFormState(userData.me.profile);
-        }
-      }, [userData]);
-    
-      if (loading) {
-        return <div>Loading...</div>;
-      }
+    if (loading) {
+    return <div>Loading...</div>;
+    }
 
     return (
         
@@ -72,17 +60,16 @@ const EditProfile = () => {
 
                     <input {...register('age')}
                         placeholder='Age'
-                        value={formState.age || ''} onChange={(event) => setFormState({ ...formState, age: event.target.value})}
                     />
 
-                    <select {...register('gender', { required: true })} value={formState.gender || '' } onChange={(event) => setFormState({ ...formState, gender: event.target.value})}>
+                    <select {...register('gender', { required: true })} >
                         <option value=''>Gender...</option>
                         <option value='F'>Female</option>
                         <option value='M'>Male</option>
                         <option value='NB'>Non-Binary</option>
                     </select>
 
-                    <select {...register('height', { required: true })} value={formState.height || ''} onChange={(event) => setFormState({ ...formState, height: event.target.value})}>
+                    <select {...register('height', { required: true })} >
                         <option value=''>Height...</option>
                         <option value="4'5&quot;">4'5"</option>
                         <option value="4'6&quot;">4'6"</option>
@@ -113,7 +100,7 @@ const EditProfile = () => {
                         <option value="6'7&quot;">6'7"</option>
                     </select>
 
-                    <select {...register('religion', { required: true })} value={formState.religion || ''} onChange={(event) => setFormState({ ...formState, religion: event.target.value})}>
+                    <select {...register('religion', { required: true })} >
                         <option value=''>Religion...</option>
                         <option value='Agnostic/Atheist'>Agnostic/Atheist</option>
                         <option value='Buddhist'>Buddhist</option>
@@ -123,20 +110,20 @@ const EditProfile = () => {
                         <option value='Spiritual'>Spiritual</option>
                     </select>
 
-                    <select {...register('politics', { required: true })} value={formState.politics || ''} onChange={(event) => setFormState({ ...formState, politics: event.target.value})}>
+                    <select {...register('politics', { required: true })} >
                         <option value=''>Politics...</option>
                         <option value='Conservative'>Conservative</option>
                         <option value='Moderate'>Moderate</option>
                         <option value='Liberal'>Liberal</option>
                     </select>
 
-                    <select {...register('smoking', { required: true })} value={formState.smoking || ''} onChange={(event) => setFormState({ ...formState, smoking: event.target.value})}>
+                    <select {...register('smoking', { required: true })}  >
                         <option value=''>Smoking...</option>
                         <option value='Smokes'>Smokes</option>
                         <option value='Doesnt Smoke'>Doesn't smoke</option>
                     </select>
 
-                    <select {...register('drinking', { required: true })} value={formState.drinking || ''} onChange={(event) => setFormState({ ...formState, drinking: event.target.value})}>
+                    <select {...register('drinking', { required: true })} >
                         <option value=''>Drinking...</option>
                         <option value='Drinks'>Drinks</option>
                         <option value='Doesnt Drink'>Doesn't drink</option>
@@ -144,10 +131,9 @@ const EditProfile = () => {
 
                     <textarea {...register('bio')}
                         placeholder='Bio'
-                        value={formState.bio || ''} onChange={(event) => setFormState({ ...formState, bio: event.target.value})}
                     />
 
-                    <input type='submit' value='Next' />
+                    <input type='submit' value='Save' />
                 </form>
             </div>
         </div>
