@@ -57,7 +57,6 @@ export const ADD_PROFILE = gql`
 export const ADD_PREFERENCE = gql`
     mutation addPreference($preference: PreferenceInput!) {
         addPreference(preference: $preference) {
-                 _id
                 minAge
                 maxAge
                 gender
