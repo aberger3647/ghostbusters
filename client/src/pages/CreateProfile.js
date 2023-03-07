@@ -24,7 +24,7 @@ const ProfileForm = () => {
                 variables: { profile },
             });
             if (data) {
-                navigate('/preferences');
+                Navigate('/preferences');
             }
         } catch (err) {
             console.error(err);
