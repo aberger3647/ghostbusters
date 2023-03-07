@@ -41,18 +41,6 @@ const client = new ApolloClient({
 
 function App() {
 
-  // add hook to keep track of login/logout
-  // const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('id_token'));
-  // handle login
-  // const handleLogin = () => {
-  //   setLoggedIn(true);
-  // };
-  // handle logout
-  // const handleLogout = () => {
-  //   localStorage.removeItem('id_token');
-  //   setLoggedIn(false);
-  // };
-
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -62,14 +50,10 @@ function App() {
               exact path='/'
               element={<Login />}
             />
-            {/* if logged in, direct to explore pg */}
             <Route
               exact path='/explore'
               element={<Explore />}
             />
-
-
-
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/createprofile' element={<ProfileForm />} />
