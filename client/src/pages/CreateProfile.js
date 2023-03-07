@@ -18,8 +18,6 @@ const ProfileForm = () => {
     
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
     
-    const navigate = useNavigate();
-    
     const onSubmit = async (profile, event) => {
         try {
             const { data } = await addProfile({
@@ -147,7 +145,7 @@ useScrollToTop();
                         placeholder='Bio'
                     />
 
-                    <input type='submit' value='Next' />
+                    <input type='submit' value='Next' className="createProfNext" />
                 </form>
             </div>
         </div>

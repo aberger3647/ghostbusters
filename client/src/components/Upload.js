@@ -78,6 +78,7 @@ const UploadImage = () => {
               gravity="face"
               radius="max"
               crop="fill"
+              border="10px_solid_rgb:6789FF"
             />
           </Image>
           )}

@@ -17,7 +17,7 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('profile').populate('preference').populate('savedReviews');
+        return User.findOne({ _id: context.user._id }).populate('profile').populate('preference').populate('reviews').populate('likes').populate('matches').populate('dislikes');
       }
       throw new AuthenticationError('You must be logged in.');
     },
@@ -110,8 +110,8 @@ const resolvers = {
         throw new AuthenticationError('You must be logged in.')
       }
       let match = false;
-      const likedUser = await User.findOne({ _id: args.userId })
-      const me = await User.findOne({ _id: context.user._id })
+      const likedUser = await User.findOne({ _id: args.userId }).populate('likes').populate('matches');
+      const me = await User.findOne({ _id: context.user._id }).populate('likes').populate('matches');
 
       // IF LIKED USER ALREADY HAS YOU LIKED (ITS A MATCH)
       if (likedUser.likes.includes(context.user._id)) {
@@ -140,6 +140,8 @@ const resolvers = {
           { new: true }
         )
 
+
+
         match = true;
 
         return { match, me, likedUser }
@@ -156,11 +158,12 @@ const resolvers = {
       }
 
     },
-    dislike: async (parent, args, context) => {
+
+    addDislike: async (parent, args, context) => {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in.')
       }
-      await User.findOneAndUpdate(
+      return await User.findOneAndUpdate(
         { _id: context.user._id },
         { $addToSet: { dislikes: args.userId } },
         { new: true }

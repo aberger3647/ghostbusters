@@ -30,6 +30,15 @@ export const GET_ME = gql`
                 smoking
                 drinking
             }
+            likes {
+                _id
+            }
+            matches {
+                _id
+            }
+            dislikes {
+                _id
+            }
         }
     }
 `
