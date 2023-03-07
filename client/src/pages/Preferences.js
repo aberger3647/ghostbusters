@@ -11,7 +11,9 @@ import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
 const PreferencesForm = () => {
-    { !Auth.loggedIn() && <Navigate to='/login' /> }
+  {
+    !Auth.loggedIn() && <Navigate to="/login" />;
+  }
 
     const { loading, data: userData } = useQuery(GET_ME);
     console.log('I am looking at', userData);
@@ -22,7 +24,7 @@ const PreferencesForm = () => {
         defaultValues: preference,
     });
 
-    const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
+  const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
 
     const onSubmit = async (preference, event) => {
         console.log(preference)
@@ -31,27 +33,32 @@ const PreferencesForm = () => {
                 variables: { preference },
             });
             setFormState(preference);
+            navigate('/profile');
         } catch (err) {
             console.error(err)
         }
     }
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleLogout = () => {
-        Auth.logout();
-    };
-
-    const handleNextPage = () => {
-        navigate('/explore');
-    }
-
-    return (
-        <>
-            <Header title="preferences" />
-            <div className='formContainer'>
-
-                <form onSubmit={handleSubmit(onSubmit)}>
+  return (
+    <>
+      <Header title="preferences" />
+      <div className="formContainer">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="heightPrefs">
+            <input
+              className="minMaxAge"
+              {...register("minAge")}
+              placeholder="Min Age"
+            />
+            <h4>to</h4>
+            <input
+              className="minMaxAge"
+              {...register("maxAge")}
+              placeholder="Max Age"
+            />
+          </div>
 
                 <div className='heightPrefs'>
                     <input className='minMaxAge' {...register('minAge')} placeholder='Min Age' value={formState.minAge || ''} onChange={(event) => setFormState({ ...formState, minAge: event.target.value})}/>
@@ -160,7 +167,7 @@ const PreferencesForm = () => {
                         <option value='Doesnt Drink'>Doesn't drink</option>
                     </select>
 
-                    <input type='submit' />
+                    <input type="submit" value="Next" className="createPrefsNext" />
                 </form>
                 <button onClick={handleNextPage}>Next</button>
                 <button onClick={handleLogout}>Logout</button>

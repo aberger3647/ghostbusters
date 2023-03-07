@@ -12,6 +12,9 @@ const typeDefs = gql`
         image: String
         profile: Profile
         preference: Preference
+        likes: [User]!
+        matches: [User]!
+        dislikes: [User]!
     }
 
     type Profile {
@@ -19,6 +22,7 @@ const typeDefs = gql`
         age: Int
         gender: String
         height: String
+        work: String
         religion: String
         politics: String
         smoking: String
@@ -30,6 +34,7 @@ const typeDefs = gql`
         age: String
         gender: String
         height: String
+        work: String
         religion: String
         politics: String
         smoking: String
@@ -89,7 +94,7 @@ const typeDefs = gql`
         addPreference(preference: PreferenceInput!): Preference
         uploadImage(image: String): User
         addLike(userId: ID!): User
-        dislike(userId: ID!): User
+        addDislike(userId: ID!): User
     }
 `;
 

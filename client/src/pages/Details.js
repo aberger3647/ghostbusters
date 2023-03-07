@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_REVIEW } from '../utils/mutations';
 import { Navigate, useParams } from 'react-router-dom';
 import { GET_SINGLE_USER } from '../utils/queries'
-
 
 import Auth from '../utils/auth';
 
@@ -17,16 +16,26 @@ import ItsAMatch from '../components/ItsAMatch'
 
 const Details = () => {
 
-    { !Auth.loggedIn() && <Navigate to='/login' /> }
-
+    const [match, setMatches] = useState()
     const { userId: userParam } = useParams();
     const { loading, data } = useQuery(GET_SINGLE_USER, {
         variables: { userId: userParam },
     });
 
     const user = data?.user || {};
-
     const profile = data?.user.profile || {};
+
+    const { loading: meLoading, data: meData } = useQuery(GET_ME);
+
+    const me = meData?.me || {};
+    console.log('me', me)
+
+    useEffect(() => {
+        if (me) {
+            
+        }
+
+    }, [me])
 
     const { register, handleSubmit } = useForm();
 
@@ -60,7 +69,7 @@ const Details = () => {
     }
     return (
         <>
-
+            {!Auth.loggedIn() && <Navigate to='/login' />}
             <ItsAMatch />
             <Header title="details" />
             <div className="exploreContainer formContainer">
@@ -86,7 +95,7 @@ const Details = () => {
                         <textarea className="reviewTextArea" {...register('reviewText')}
                             placeholder='Add a review'
                         />
-                        <button type='submit'>Submit</button>
+                        <button type='submit' className="detailsSubmit">Submit</button>
                     </form>
                     {/* <div className="matchBtnDetailContainer">
                         <button className="dislike" />
