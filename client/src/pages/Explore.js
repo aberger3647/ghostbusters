@@ -80,7 +80,7 @@ const Explore = () => {
                 <Header title="explore" />
                 <div className='exploreContainer'>
 
-                    <div key={users[randomNumber]?._id}>
+                    <div key={users[randomNumber]?._id} className="exploreBox">
                         <Link to={`/details/${users[randomNumber]?._id}`}>
                             <img className='explorePhoto' src={profilePhoto} alt='Profile Pic' />
                         </Link>

@@ -21,15 +21,9 @@ function Footer() {
       setImageId(newImage);
     }
   }, [image]);
-  useEffect(() => {
-    if (image) {
-      let newImage = `${image}.png`
-      setImageId(newImage)
-    }
-  }, [image])
 
     const location = useLocation();
-  ;
+  
   useEffect(() => {
     if (
       location.pathname === "/createprofile" ||
@@ -40,24 +34,7 @@ function Footer() {
     } else {
       setPath("");
     }
-  });
-
-    useEffect(() => {
-
-    if (location.pathname === '/createprofile' || location.pathname === '/preferences') {
-      setPath(location.pathname);
-      document.body.style.margin = 0;
-    } else {
-      setPath('')
-    }
-  })
-    if (location.pathname === '/createprofile' || location.pathname === '/preferences') {
-      setPath(location.pathname);
-      document.body.style.margin = 0;
-    } else {
-      setPath('')
-    }
-  })
+  }, []);
 
   return (
     <>

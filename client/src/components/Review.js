@@ -14,8 +14,6 @@ const Review = (props) => {
         }
     }
 
-    console.log(props.image)
-
     useEffect(() => {
         if (isEven(props.direction) === 'odd') {
             setContainerDirection(styles.divRight)

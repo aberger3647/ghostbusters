@@ -334,7 +334,6 @@ footer img {
 
 .like:hover {
   background-color: transparent;
-  background-color: transparent;
 }
 
 .like:active {
@@ -348,7 +347,6 @@ footer img {
 }
 
 .dislike:hover {
-  background-color: transparent;
   background-color: transparent;
 }
 
@@ -384,7 +382,13 @@ footer img {
 .exploreStatContainer {
   display: flex;
   justify-content: space-between;
+  align-self: center;
   width: 186px;
+}
+
+.exploreBox {
+  display: flex;
+  flex-direction: column;
 }
 
 .matchCard {

@@ -14,13 +14,12 @@ const Profile = () => {
     };
 
     const { loading, data } = useQuery(GET_ME);
-    console.log("data", data);
+
     const me = data?.me || {};
     const profile = data?.me.profile || {};
     const preference = data?.me.preference || {};
 
-    console.log("profile", profile);
-    console.log("preference", preference)
+
 
     if (loading) {
         return <div>Potentially app logo</div>
