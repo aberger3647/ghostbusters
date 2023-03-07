@@ -15,7 +15,7 @@ import { ADD_PROFILE } from '../utils/mutations';
 const ProfileForm = () => {
 
     const { register, handleSubmit } = useForm();
-    
+
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
     const navigate = useNavigate();
     const onSubmit = async (profile, event) => {
@@ -24,7 +24,7 @@ const ProfileForm = () => {
                 variables: { profile },
             });
             if (data) {
-                
+
                 navigate('/preferences');
             }
         } catch (err) {
@@ -35,35 +35,35 @@ const ProfileForm = () => {
     const useBackButton = () => {
         const navType = useNavigationType();
         return navType === NavigationType.Pop;
-      };
-      
+    };
+
     const useScrollToTop = () => {
         const { pathname } = useLocation();
-      
-        const isPop = useBackButton();
-      
-        const scrollToTop = () => window.scrollTo(0, 0);
-      
-        useEffect(() => {
-          scrollToTop();
-        }, [pathname, isPop]);
-      
-        useEffect(() => {
-          window.addEventListener("beforeunload", scrollToTop);
-          return () => {
-            window.removeEventListener("beforeunload", scrollToTop);
-          };
-        }, []);
-      };
 
-useScrollToTop();
+        const isPop = useBackButton();
+
+        const scrollToTop = () => window.scrollTo(0, 0);
+
+        useEffect(() => {
+            scrollToTop();
+        }, [pathname, isPop]);
+
+        useEffect(() => {
+            window.addEventListener("beforeunload", scrollToTop);
+            return () => {
+                window.removeEventListener("beforeunload", scrollToTop);
+            };
+        }, []);
+    };
+
+    useScrollToTop();
 
 
 
     return (
-        
+
         <div className='contentContainer createProfile'>
-            { !Auth.loggedIn() && <Navigate to='/login' /> }
+            {!Auth.loggedIn() && <Navigate to='/login' />}
             <Header title="edit profile" />
 
             <h2>Name</h2>
@@ -114,6 +114,10 @@ useScrollToTop();
                         <option value='66'>6'6"</option>
                         <option value='67'>6'7"</option>
                     </select>
+
+                    <input {...register('work')}
+                        placeholder='Profession'
+                    />
 
                     <select {...register('religion', { required: true })}>
                         <option value=''>Religion...</option>
