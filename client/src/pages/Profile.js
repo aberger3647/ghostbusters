@@ -31,7 +31,7 @@ const Profile = () => {
             <div className="exploreContainer formContainer">
                 <div className="profileContainer">
 
-                    <ProfileCard name={me.firstName} age={profile.age} gender={profile.gender} height={profile.height} bio={profile.bio} religion={profile.religion} politics={profile.politics} smoking={profile.smoking} drinking={profile.drinking} image={me.image} />
+                    <ProfileCard name={me.firstName} age={profile.age} gender={profile.gender} height={profile.height} work={profile.work} bio={profile.bio} religion={profile.religion} politics={profile.politics} smoking={profile.smoking} drinking={profile.drinking} image={me.image} />
                     <hr />
 
                     <h3 className="profilePreferencesTitle">Preferences</h3>
@@ -46,7 +46,7 @@ const Profile = () => {
                     </div>
                     <div className="profileBtns">
                         <Link to='/createprofile'>
-                        <button>Edit</button>
+                            <button>Edit</button>
                         </Link>
                         <button onClick={handleLogout}>Logout</button>
                     </div>

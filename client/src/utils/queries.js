@@ -12,6 +12,7 @@ export const GET_ME = gql`
                 age
                 gender
                 height
+                work
                 religion
                 politics
                 smoking
@@ -55,6 +56,7 @@ export const GET_SINGLE_USER = gql`
                 age
                 gender
                 height
+                work
                 religion
                 politics
                 smoking

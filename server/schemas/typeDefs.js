@@ -22,6 +22,7 @@ const typeDefs = gql`
         age: Int
         gender: String
         height: String
+        work: String
         religion: String
         politics: String
         smoking: String
@@ -33,6 +34,7 @@ const typeDefs = gql`
         age: String
         gender: String
         height: String
+        work: String
         religion: String
         politics: String
         smoking: String

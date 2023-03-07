@@ -43,6 +43,7 @@ export const ADD_PROFILE = gql`
                 age
                 gender
                 height
+                work
                 religion
                 politics
                 smoking
