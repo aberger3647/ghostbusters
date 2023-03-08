@@ -80,7 +80,7 @@ const Details = () => {
             <div className="exploreContainer formContainer">
                 <div className="profileContainer">
 
-                    <ProfileCard name={user.firstName} age={profile.age} gender={profile.gender} height={profile.height} bio={profile.bio} religion={profile.religion} politics={profile.politics} smoking={profile.smoking} drinking={profile.drinking} image={user.image} />
+                    <ProfileCard name={user.firstName} age={profile.age} gender={profile.gender} height={profile.height} work={profile.work} bio={profile.bio} religion={profile.religion} politics={profile.politics} smoking={profile.smoking} drinking={profile.drinking} image={user.image} />
                     <hr />
                     <h3 className="reviewsTitle">Reviews</h3>
 
