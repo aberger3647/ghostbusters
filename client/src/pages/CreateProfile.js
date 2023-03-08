@@ -18,6 +18,13 @@ const ProfileForm = () => {
             reset(data.me.profile);
         }
     });
+    const { register, handleSubmit, reset } = useForm();
+    const { loading, data: userData } = useQuery(GET_ME, {
+        onCompleted: (data) => {
+            console.log('got data from graphql', data.me.profile);
+            reset(data.me.profile);
+        }
+    });
 
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
     const navigate = useNavigate();

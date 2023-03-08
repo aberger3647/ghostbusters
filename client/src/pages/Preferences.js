@@ -1,19 +1,23 @@
-import React from "react";
-import { useMutation } from "@apollo/client";
-import { useForm } from "react-hook-form";
-import { Navigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import Auth from "../utils/auth";
-import { ADD_PREFERENCE } from "../utils/mutations";
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { useForm } from 'react-hook-form';
+import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
+import Auth from '../utils/auth';
+import { ADD_PREFERENCE } from '../utils/mutations';
+
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../utils/queries';
 
 const PreferencesForm = () => {
   {
     !Auth.loggedIn() && <Navigate to="/login" />;
   }
 
-  const { register, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm();
 
+    const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
     const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
 
     const onSubmit = async (preference, event) => {
@@ -31,7 +35,6 @@ const PreferencesForm = () => {
             console.error(err)
         }
     }
-  };
 
   const navigate = useNavigate();
 
