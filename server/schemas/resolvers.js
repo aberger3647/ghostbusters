@@ -68,7 +68,7 @@ const resolvers = {
     editProfile: async (parent, args, context) => {
       if (context.user) {
         console.debug('updating profile with', args);
-        const profile = await Profile.findByIdAndUpdate(args.profile._id, args.profile, {new: true});
+        const profile = await Profile.findByIdAndUpdate(args.profile._id, args.profile, { new: true });
         console.debug('updated profile', profile);
         return profile;
       } else {
@@ -89,10 +89,10 @@ const resolvers = {
       }
     },
 
-    editPreference: async(parent, args, context) => {
+    editPreference: async (parent, args, context) => {
       if (context.user) {
         console.debug('updating preferences', args.preference._id, 'with', args);
-        const preference = await Preference.findByIdAndUpdate(args.preference._id, args.preference, {new: true});
+        const preference = await Preference.findByIdAndUpdate(args.preference._id, args.preference, { new: true });
         console.debug('updated preferences', preference);
         return preference;
       } else {
@@ -136,11 +136,15 @@ const resolvers = {
       const likedUser = await User.findOne({ _id: args.userId }).populate('likes').populate('matches');
       const me = await User.findOne({ _id: context.user._id }).populate('likes').populate('matches');
 
-      // IF LIKED USER ALREADY HAS YOU LIKED (ITS A MATCH)
-      if (likedUser.likes.includes(context.user._id)) {
 
+      const myIdInLikedUser = likedUser.likes[0]._id.toString();
+      const myId = me._id.toString();
+
+      // IF LIKED USER ALREADY HAS YOU LIKED (ITS A MATCH)
+      if (myIdInLikedUser === myId) {
 
         // UPDATE LIKED USER (REMOVE FROM LIKES)
+
         await User.findOneAndUpdate(
           { _id: likedUser._id },
           { $pull: { likes: context.user._id } },
@@ -164,19 +168,25 @@ const resolvers = {
         )
 
         return likedUser
+      }
 
-        // IF THEY DON'T LIKE YOU YET
-      } else {
+      // IF THEY DON'T LIKE YOU YET
+
+      else {
         // ADD LIKE TO USER'S LIKES
+        console.log('else statement entered');
+
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { likes: args.userId } },
           { new: true }
         )
-        console.log('user', user)
+
 
         return likedUser
+
       }
+
 
     },
 
