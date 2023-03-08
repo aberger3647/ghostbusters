@@ -21,24 +21,22 @@ const ProfileForm = () => {
 
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
     const navigate = useNavigate();
-    
+
     const onSubmit = async (profile, event) => {
         console.log(profile)
         try {
             const { data } = await addProfile({
                 variables: { profile },
             });
-            alert('created profile');
             if (data) {
                 navigate('/preferences');
             }
         } catch (err) {
             console.error(err);
-            alert('failed to create profile' + err);
         }
     }
 
-   
+
     const useBackButton = () => {
         const navType = useNavigationType();
         return navType === NavigationType.Pop;
@@ -62,7 +60,7 @@ const ProfileForm = () => {
             };
         }, []);
     };
-    
+
     useScrollToTop();
 
     if (loading) {
@@ -83,7 +81,7 @@ const ProfileForm = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
 
-                    <input {...register('age', {valueAsNumber: true})}
+                    <input {...register('age', { valueAsNumber: true })}
                         placeholder='Age'
                     />
 

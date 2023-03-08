@@ -25,30 +25,32 @@ const EditProfile = () => {
     });
 
     const [editProfile, { error, data }] = useMutation(EDIT_PROFILE);
+    const navigate = useNavigate();
 
     const onSubmit = async (formData) => {
         // removes typename from variables so mutation doesn't include __typename
-        const {__typename: _, ...profile } = formData;
+        const { __typename: _, ...profile } = formData;
         console.log('sending profile', profile);
         try {
             const { data } = await editProfile({
-                variables: {profile},
+                variables: { profile },
             });
-            alert('saved profile');
+            if (data) {
+                navigate('/editpreferences');
+            }
         } catch (err) {
             console.error(err);
-            alert('failed to set profile' + err);
         }
     }
 
     if (loading) {
-    return <div>Loading...</div>;
+        return <div>Loading...</div>;
     }
 
     return (
-        
+
         <div className='contentContainer createProfile'>
-            { !Auth.loggedIn() && <Navigate to='/login' /> }
+            {!Auth.loggedIn() && <Navigate to='/login' />}
             <Header title="edit profile" />
 
             <h2>Name</h2>
@@ -58,7 +60,7 @@ const EditProfile = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
 
-                    <input {...register('age', {valueAsNumber: true})}
+                    <input {...register('age', { valueAsNumber: true })}
                         placeholder='Age'
                         type="number"
                     />
