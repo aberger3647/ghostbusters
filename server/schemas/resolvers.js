@@ -91,8 +91,8 @@ const resolvers = {
 
     editPreference: async(parent, args, context) => {
       if (context.user) {
-        console.debug('updating preferences with', args);
-        const preference = await Profile.findByIdAndUpdate(args.preference._id, args.preference, {new: true});
+        console.debug('updating preferences', args.preference._id, 'with', args);
+        const preference = await Preference.findByIdAndUpdate(args.preference._id, args.preference, {new: true});
         console.debug('updated preferences', preference);
         return preference;
       } else {
