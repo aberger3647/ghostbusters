@@ -590,7 +590,9 @@ footer img {
 .matchBtnDetailContainer {
   display: flex;
   justify-content: space-between;
+  width: fill;
   max-width: 420px;
-  margin-top: 30px;
+  margin: 30px 0 30px 0;
+  width: -moz-available;
 }
 

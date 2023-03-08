@@ -14,6 +14,8 @@ import PreferencesForm from './pages/Preferences';
 import Details from './pages/Details'
 import Profile from './pages/Profile'
 import Matches from './pages/Matches'
+import EditProfile from './pages/EditProfile';
+import EditPreferences from './pages/EditPreferences';
 
 import Upload from './components/Upload'
 
@@ -41,18 +43,6 @@ const client = new ApolloClient({
 
 function App() {
 
-  // add hook to keep track of login/logout
-  // const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('id_token'));
-  // handle login
-  // const handleLogin = () => {
-  //   setLoggedIn(true);
-  // };
-  // handle logout
-  // const handleLogout = () => {
-  //   localStorage.removeItem('id_token');
-  //   setLoggedIn(false);
-  // };
-
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -62,14 +52,10 @@ function App() {
               exact path='/'
               element={<Login />}
             />
-            {/* if logged in, direct to explore pg */}
             <Route
               exact path='/explore'
               element={<Explore />}
             />
-
-
-
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/createprofile' element={<ProfileForm />} />
@@ -78,6 +64,8 @@ function App() {
             <Route path='/profile' element={<Profile />} />
             <Route path='/upload' element={<Upload />} />
             <Route path='/matches' element={<Matches />} />
+            <Route path='/editprofile' element={<EditProfile />} />
+            <Route path='/editpreferences' element={<EditPreferences />} />
             <Route
               path='*'
               element={<h1 className='display-2'>Wrong page!</h1>}
