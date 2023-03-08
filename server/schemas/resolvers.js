@@ -132,7 +132,7 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in.')
       }
-      let match = false;
+
       const likedUser = await User.findOne({ _id: args.userId }).populate('likes').populate('matches');
       const me = await User.findOne({ _id: context.user._id }).populate('likes').populate('matches');
 
@@ -163,21 +163,19 @@ const resolvers = {
           { new: true }
         )
 
-
-
-        match = true;
-
-        return { match, me, likedUser }
+        return likedUser
 
         // IF THEY DON'T LIKE YOU YET
       } else {
         // ADD LIKE TO USER'S LIKES
-        await User.findOneAndUpdate(
+        const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { likes: args.userId } },
           { new: true }
         )
-        return { match }
+        console.log('user', user)
+
+        return likedUser
       }
 
     },
