@@ -91,9 +91,9 @@ const Details = () => {
 
                     {/* <textarea className="reviewTextArea" placeholder="write a review.." />
                     <button>Submit</button> */}
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(onSubmit)} className="detailsForm">
                         <textarea className="reviewTextArea" {...register('reviewText')}
-                            placeholder='Add a review'
+                            placeholder='Write a thoughtful, constructive review.'
                         />
                         <button type='submit' className="detailsSubmit">Submit</button>
                     </form>
