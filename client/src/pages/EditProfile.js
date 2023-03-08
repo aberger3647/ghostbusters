@@ -136,7 +136,7 @@ const EditProfile = () => {
                         placeholder='Bio'
                     />
 
-                    <input type='submit' value='Save' />
+                    <input type='submit' value='Save' className="editProfNext" />
                 </form>
             </div>
         </div>
