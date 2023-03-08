@@ -83,7 +83,7 @@ const ProfileForm = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
 
-                    <input {...register('age')}
+                    <input {...register('age', {valueAsNumber: true})}
                         placeholder='Age'
                     />
 
