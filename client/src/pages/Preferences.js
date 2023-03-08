@@ -18,7 +18,6 @@ const PreferencesForm = () => {
     const { register, handleSubmit } = useForm();
 
     const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
-    const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
 
     const onSubmit = async (preference, event) => {
         console.log(preference)

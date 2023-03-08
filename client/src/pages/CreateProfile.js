@@ -7,17 +7,10 @@ import Header from '../components/Header';
 import Upload from '../components/Upload';
 import { ADD_PROFILE } from '../utils/mutations';
 
-// import { useQuery } from '@apollo/client';
-// import { GET_ME } from '../utils/queries';
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../utils/queries';
 
 const ProfileForm = () => {
-    const { register, handleSubmit, reset } = useForm();
-    const { loading, data: userData } = useQuery(GET_ME, {
-        onCompleted: (data) => {
-            console.log('got data from graphql', data.me.profile);
-            reset(data.me.profile);
-        }
-    });
     const { register, handleSubmit, reset } = useForm();
     const { loading, data: userData } = useQuery(GET_ME, {
         onCompleted: (data) => {
