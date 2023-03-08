@@ -25,9 +25,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // REDIRECT BAD URLS TO THE HOMEPAGE
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'))
-})
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/build/index.html'))
+// })
 
 // START THE APOLLO SERVER USING EXPRESS AS OUR MIDDLEWARE
 const startApolloServer = async (typeDefs, resolvers) => {

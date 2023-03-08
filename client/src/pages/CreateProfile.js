@@ -11,25 +11,34 @@ import { ADD_PROFILE } from '../utils/mutations';
 // import { GET_ME } from '../utils/queries';
 
 const ProfileForm = () => {
-
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
+    const { loading, data: userData } = useQuery(GET_ME, {
+        onCompleted: (data) => {
+            console.log('got data from graphql', data.me.profile);
+            reset(data.me.profile);
+        }
+    });
 
     const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
     const navigate = useNavigate();
+    
     const onSubmit = async (profile, event) => {
         console.log(profile)
         try {
             const { data } = await addProfile({
                 variables: { profile },
             });
+            alert('created profile');
             if (data) {
                 navigate('/preferences');
             }
         } catch (err) {
             console.error(err);
+            alert('failed to create profile' + err);
         }
     }
 
+   
     const useBackButton = () => {
         const navType = useNavigationType();
         return navType === NavigationType.Pop;
@@ -53,16 +62,19 @@ const ProfileForm = () => {
             };
         }, []);
     };
-
+    
     useScrollToTop();
 
+    if (loading) {
+        return <div>Loading...</div>
+    }
 
 
     return (
 
         <div className='contentContainer createProfile'>
             {!Auth.loggedIn() && <Navigate to='/login' />}
-            <Header title="edit profile" />
+            <Header title="create profile" />
 
             <h2>Name</h2>
             <div className='formContainer'>

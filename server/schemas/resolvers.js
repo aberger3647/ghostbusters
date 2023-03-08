@@ -54,10 +54,22 @@ const resolvers = {
     addProfile: async (parent, args, context) => {
       if (context.user) {
         const profile = await Profile.create(args.profile);
+        console.debug('created profile', profile);
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { profile: profile._id }
         );
+        return profile;
+      } else {
+        throw new AuthenticationError('You must be logged in.');
+      }
+    },
+
+    editProfile: async (parent, args, context) => {
+      if (context.user) {
+        console.debug('updating profile with', args);
+        const profile = await Profile.findByIdAndUpdate(args.profile._id, args.profile, {new: true});
+        console.debug('updated profile', profile);
         return profile;
       } else {
         throw new AuthenticationError('You must be logged in.');
@@ -71,6 +83,17 @@ const resolvers = {
           { _id: context.user._id },
           { preference: preference._id }
         );
+        return preference;
+      } else {
+        throw new AuthenticationError('You must be logged in.');
+      }
+    },
+
+    editPreference: async(parent, args, context) => {
+      if (context.user) {
+        console.debug('updating preferences with', args);
+        const preference = await Profile.findByIdAndUpdate(args.preference._id, args.preference, {new: true});
+        console.debug('updated preferences', preference);
         return preference;
       } else {
         throw new AuthenticationError('You must be logged in.');

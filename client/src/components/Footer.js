@@ -6,6 +6,7 @@ import { GET_IMAGE } from "../utils/queries";
 import { Image, Transformation } from "cloudinary-react";
 import profileIcon from "../assets/profile-icon.svg";
 import exploreIcon from "../assets/magheart.svg";
+import auth from '../utils/auth';
 
 function Footer() {
 
@@ -69,6 +70,7 @@ function Footer() {
             <a href="/matches">
               <img src={matchIcon} alt="Matches Icon" />
             </a>
+            <button onClick={auth.logout}>LOGOUT!</button>
           </div>
         </footer>
       ) : (
