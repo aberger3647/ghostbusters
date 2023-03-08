@@ -16,14 +16,17 @@ const Explore = () => {
 
     const [randomNumber, setRandomNumber] = useState(0);
 
+    const [match1, setMatch1] = useState({});
+    const [match2, setMatch2] = useState({});
+
 
     const { loading, data } = useQuery(GET_USER);
 
     const users = data?.users || [];
 
-    // const { loading: meLoading, data: meData } = useQuery(GET_ME);
-    // console.log("data", data);
-    // const me = meData?.me || {};
+    const { loading: meLoading, data: meData } = useQuery(GET_ME);
+    console.log("me", meData);
+    const me = meData?.me || {};
 
     const [addDislike, { data: dislikeData }] = useMutation(ADD_DISLIKE);
 
@@ -57,7 +60,21 @@ const Explore = () => {
                     userId: id,
                 }
             });
-            console.log("data", matchData);
+
+            const matches = matchData.addLike.matches;
+            console.log("matches", matches);
+
+            if (matchData.addLike.matches.length) {
+                for (var i = 0; i < matches.length; i++) {
+                    if (matches[i]._id.includes(me._id)) {
+                        setMatch1(me);
+                        setMatch2(matchData.addLike);
+                        openModal();
+                    }
+                }
+            }
+
+            console.log("matchData", matchData);
         } catch (err) {
             console.error(err);
         }
@@ -75,7 +92,7 @@ const Explore = () => {
 
     return (
         <>
-            <ItsAMatch />
+            <ItsAMatch me={match1} user={match2} />
             <div className='contentContainer'>
                 <Header title="explore" />
                 <div className='exploreContainer'>

@@ -124,6 +124,11 @@ export const ADD_LIKE = gql`
     mutation addLike($userId: ID!) {
         addLike(userId: $userId) {
             _id
+            firstName
+            image
+            matches {
+                _id
+            }
         }
     }
 `
