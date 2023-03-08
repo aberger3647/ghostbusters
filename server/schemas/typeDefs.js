@@ -44,7 +44,7 @@ const typeDefs = gql`
 
     input EditProfileInput {
         _id: ID
-        age: String
+        age: Int
         gender: String
         height: String
         work: String

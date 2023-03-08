@@ -58,8 +58,9 @@ const EditProfile = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
 
-                    <input {...register('age')}
+                    <input {...register('age', {valueAsNumber: true})}
                         placeholder='Age'
+                        type="number"
                     />
 
                     <select {...register('gender', { required: true })} >
