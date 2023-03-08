@@ -5,40 +5,43 @@ import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Auth from '../utils/auth';
-import { ADD_PREFERENCE } from '../utils/mutations';
+import { EDIT_PREFERENCE } from '../utils/mutations';
 
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
-const PreferencesForm = () => {
-  {
-    !Auth.loggedIn() && <Navigate to="/login" />;
-  }
+const EditPreferences = () => {
+    const { register, handleSubmit, reset } = useForm();
+    const { loading, data: userData } = useQuery(GET_ME, {
+        onCompleted: (data) => {
+            console.log('got data from graphql', data.me.preference);
+            reset(data.me.preference);
+        }
+    });
 
-    const { register, handleSubmit } = useForm();
+  const [editPreference, { error, data }] = useMutation(EDIT_PREFERENCE);
 
-    const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
-
-    const onSubmit = async (preference, event) => {
-        console.log(preference)
+    const onSubmit = async (formData) => {
+        // removes typename from variables so mutation doesn't include __typename
+        const {__typename: _, ...preference } = formData;
+        console.log('sending preferences', preference);
         try {
-            const { data } = await addPreference({
+            const { data } = await editPreference({
                 variables: { preference },
             });
-            // setFormState(preference);
-            if (data) {
-              alert('created preferences');
-              navigate('/profile');
-            }
+            alert('saved preferences');
         } catch (err) {
             console.error(err)
         }
     }
 
-  const navigate = useNavigate();
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
   return (
     <>
+    { !Auth.loggedIn() && <Navigate to='/login' />}
       <Header title="preferences" />
       <div className="formContainer">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -157,4 +160,4 @@ const PreferencesForm = () => {
     )
 };
 
-export default PreferencesForm;
+export default EditPreferences;
