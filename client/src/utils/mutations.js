@@ -88,8 +88,9 @@ export const ADD_PREFERENCE = gql`
 `
 
 export const EDIT_PREFERENCE = gql`
-    mutation addPreference($preference: PreferenceInput!) {
-        addPreference(preference: $preference) {
+    mutation editPreference($preference: EditPreferenceInput!) {
+        editPreference(preference: $preference) {
+                _id
                 minAge
                 maxAge
                 gender
@@ -123,6 +124,11 @@ export const ADD_LIKE = gql`
     mutation addLike($userId: ID!) {
         addLike(userId: $userId) {
             _id
+            firstName
+            image
+            matches {
+                _id
+            }
         }
     }
 `

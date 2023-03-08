@@ -3,20 +3,33 @@ import Auth from "../utils/auth";
 import Header from "../components/Header";
 import ItsAMatch from "../components/ItsAMatch";
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_USER, GET_SINGLE_USER } from "../utils/queries";
+import { GET_USER, GET_ME } from "../utils/queries";
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { ADD_DISLIKE, ADD_LIKE } from "../utils/mutations";
 import { Image, Transformation } from "cloudinary-react";
 
 const Explore = () => {
-  const [randomNumber, setRandomNumber] = useState(0);
-  const [imageId, setImageId] = useState("");
-  const { loading, data } = useQuery(GET_USER);
-  const users = data?.users || [];
+    { !Auth.loggedIn() && <Navigate to='/login' /> }
+
+    const [randomNumber, setRandomNumber] = useState(0);
+
+    const [match1, setMatch1] = useState({});
+    const [match2, setMatch2] = useState({});
+
+
+    const { loading, data } = useQuery(GET_USER);
+
+    const users = data?.users || [];
+
+    const { loading: meLoading, data: meData } = useQuery(GET_ME);
+    console.log("me", meData);
+    const me = meData?.me || {};
 
   const [addDislike, { data: dislikeData }] = useMutation(ADD_DISLIKE);
   const [addLike, { data: likeData }] = useMutation(ADD_LIKE);
+
+  const [imageId, setImageId] = useState("");
 
   useEffect(() => {
     if (users) {
@@ -46,16 +59,30 @@ const Explore = () => {
   const onLikeClick = async (event) => {
     const id = event.target.id;
 
-    try {
-      const { data: matchData } = await addLike({
-        variables: {
-          userId: id,
-        },
-      });
-      console.log("data", matchData);
-    } catch (err) {
-      console.error(err);
-    }
+        try {
+            const { data: matchData } = await addLike({
+                variables: {
+                    userId: id,
+                }
+            });
+
+            const matches = matchData.addLike.matches;
+            console.log("matches", matches);
+
+            if (matchData.addLike.matches.length) {
+                for (var i = 0; i < matches.length; i++) {
+                    if (matches[i]._id.includes(me._id)) {
+                        setMatch1(me);
+                        setMatch2(matchData.addLike);
+                        openModal();
+                    }
+                }
+            }
+
+            console.log("matchData", matchData);
+        } catch (err) {
+            console.error(err);
+        }
 
     const randomIndex = Math.floor(Math.random() * users.length);
 
@@ -69,7 +96,7 @@ const Explore = () => {
 
   return (
     <>
-      <ItsAMatch />
+      <ItsAMatch me={match1} user={match2} />
       <div className="contentContainer">
         {!Auth.loggedIn() && <Navigate to="/login" />}
         <Header title="explore" />

@@ -19,17 +19,20 @@ const EditPreferences = () => {
         }
     });
 
-  const [editPreference, { error, data }] = useMutation(EDIT_PREFERENCE);
+    const [editPreference, { error, data }] = useMutation(EDIT_PREFERENCE);
+    const navigate = useNavigate();
 
     const onSubmit = async (formData) => {
         // removes typename from variables so mutation doesn't include __typename
-        const {__typename: _, ...preference } = formData;
+        const { __typename: _, ...preference } = formData;
         console.log('sending preferences', preference);
         try {
             const { data } = await editPreference({
                 variables: { preference },
             });
-            alert('saved preferences');
+            if (data) {
+                navigate('/profile');
+            }
         } catch (err) {
             console.error(err)
         }
@@ -39,17 +42,17 @@ const EditPreferences = () => {
         return <div>Loading...</div>;
     }
 
-  return (
-    <>
-    { !Auth.loggedIn() && <Navigate to='/login' />}
-      <Header title="preferences" />
-      <div className="formContainer">
-        <form onSubmit={handleSubmit(onSubmit)}>
+    return (
+        <>
+            {!Auth.loggedIn() && <Navigate to='/login' />}
+            <Header title="preferences" />
+            <div className="formContainer">
+                <form onSubmit={handleSubmit(onSubmit)}>
 
-                <div className='heightPrefs'>
-                    <input className='minMaxAge' {...register('minAge')} placeholder='Min Age' />
-                    <p>to</p>
-                    <input className='minMaxAge' {...register('maxAge')} placeholder='Max Age' />
+                    <div className='heightPrefs'>
+                        <input type="number" className='minMaxAge' {...register('minAge', { valueAsNumber: true })} placeholder='Min Age' />
+                        <p>to</p>
+                        <input type="number" className='minMaxAge' {...register('maxAge', { valueAsNumber: true })} placeholder='Max Age' />
                     </div>
 
                     <select {...register('gender', { required: true })} >
