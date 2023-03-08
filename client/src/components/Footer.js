@@ -70,7 +70,6 @@ function Footer() {
             <a href="/matches">
               <img src={matchIcon} alt="Matches Icon" />
             </a>
-            <button onClick={auth.logout}>LOGOUT!</button>
           </div>
         </footer>
       ) : (
