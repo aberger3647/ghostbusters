@@ -275,7 +275,7 @@ label {
   width: 34%
 }
 
-.createProfNext, .createPrefsNext {
+.createProfNext, .createPrefsNext, .editProfNext {
   align-self: center;
 }
 
