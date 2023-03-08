@@ -26,9 +26,6 @@ const Explore = () => {
 
     let users = data?.users || [];
 
-
-
-
     users = users.filter(user => user._id !== me._id);
     console.log(users);
 
@@ -73,7 +70,6 @@ const Explore = () => {
             });
 
             const matches = matchData.addLike.matches;
-            console.log("matches", matches);
 
             if (matchData.addLike.matches.length) {
                 for (var i = 0; i < matches.length; i++) {
@@ -85,7 +81,6 @@ const Explore = () => {
                 }
             }
 
-            console.log("matchData", matchData);
         } catch (err) {
             console.error(err);
         }
