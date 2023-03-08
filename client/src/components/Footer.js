@@ -35,7 +35,7 @@ function Footer() {
     } else {
       setPath("");
     }
-  }, []);
+  }, [location.pathname]);
 
   return (
     <>
