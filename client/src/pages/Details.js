@@ -16,7 +16,7 @@ import ItsAMatch from '../components/ItsAMatch'
 
 const Details = () => {
 
-    const [match, setMatches] = useState()
+    const [matched, setMatched] = useState(false)
     const { userId: userParam } = useParams();
     const { loading, data } = useQuery(GET_SINGLE_USER, {
         variables: { userId: userParam },
@@ -31,10 +31,15 @@ const Details = () => {
     console.log('me', me)
 
     useEffect(() => {
-        if (me) {
-            
-        }
+        if (!meLoading) {
+            const matches = me.matches
 
+            for (const match of matches) {
+                if (match._id.includes(userParam)) {
+                    setMatched(true)
+                }
+            }
+        }
     }, [me])
 
     const { register, handleSubmit } = useForm();
@@ -75,32 +80,36 @@ const Details = () => {
             <div className="exploreContainer formContainer">
                 <div className="profileContainer">
 
-                    <ProfileCard name={user.firstName} age={profile.age} gender={profile.gender} height={profile.height} bio={profile.bio} religion={profile.religion} politics={profile.politics} smoking={profile.smoking} drinking={profile.drinking} image={user.image} />
+                    <ProfileCard name={user.firstName} age={profile.age} gender={profile.gender} height={profile.height} work={profile.work} bio={profile.bio} religion={profile.religion} politics={profile.politics} smoking={profile.smoking} drinking={profile.drinking} image={user.image} />
                     <hr />
-                    <h3 className="reviewsTitle">reviews</h3>
+                    <h3 className="reviewsTitle">Reviews</h3>
 
                     <div>
-                        {user?.reviews?.map((review, index) => (
-                            <div key={review._id}>
-                                {console.log(review)}
-                                {/* <h4>{review.reviewText}</h4> */}
-                                <Review direction={index} reviewText={review.reviewText} name={review.reviewer} image={review.image} />
-                            </div>
-                        ))}
+                        {user.reivews ? (
+                            user?.reviews?.map((review, index) => (
+                                <div key={review._id}>
+                                    {console.log(review)}
+                                    {/* <h4>{review.reviewText}</h4> */}
+                                    <Review direction={index} reviewText={review.reviewText} name={review.reviewer} image={review.image} />
+                                </div>
+                            ))
+                        ) : (
+                            <h4>No reviews yet!</h4>
+                        )}
                     </div>
-
-                    {/* <textarea className="reviewTextArea" placeholder="write a review.." />
-                    <button>Submit</button> */}
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <textarea className="reviewTextArea" {...register('reviewText')}
-                            placeholder='Add a review'
-                        />
-                        <button type='submit' className="detailsSubmit">Submit</button>
-                    </form>
-                    {/* <div className="matchBtnDetailContainer">
-                        <button className="dislike" />
-                        <button onClick={openModal} className="like" />
-                    </div> */}
+                    {matched ? (
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <textarea className="reviewTextArea" {...register('reviewText')}
+                                placeholder='Add a review'
+                            />
+                            <button type='submit' className="detailsSubmit">Submit</button>
+                        </form>
+                    ) : (
+                        <div className="matchBtnDetailContainer">
+                            <button className="dislike" />
+                            <button onClick={openModal} className="like" />
+                        </div>
+                    )}
                 </div>
             </div>
 

@@ -1,16 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
-import { useNavigate, useLocation, Navigate, NavigationType, useNavigationType } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+
 import Auth from '../utils/auth';
+
 import Header from '../components/Header';
 import Upload from '../components/Upload';
-import { ADD_PROFILE } from '../utils/mutations';
+
+import { EDIT_PROFILE } from '../utils/mutations';
 
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
-const ProfileForm = () => {
+const EditProfile = () => {
     const { register, handleSubmit, reset } = useForm();
     const { loading, data: userData } = useQuery(GET_ME, {
         onCompleted: (data) => {
@@ -19,60 +24,34 @@ const ProfileForm = () => {
         }
     });
 
-    const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
+    const [editProfile, { error, data }] = useMutation(EDIT_PROFILE);
     const navigate = useNavigate();
 
-    const onSubmit = async (profile, event) => {
-        console.log(profile)
+    const onSubmit = async (formData) => {
+        // removes typename from variables so mutation doesn't include __typename
+        const { __typename: _, ...profile } = formData;
+        console.log('sending profile', profile);
         try {
-            const { data } = await addProfile({
+            const { data } = await editProfile({
                 variables: { profile },
             });
             if (data) {
-                navigate('/preferences');
+                navigate('/editpreferences');
             }
         } catch (err) {
             console.error(err);
         }
     }
 
-
-    const useBackButton = () => {
-        const navType = useNavigationType();
-        return navType === NavigationType.Pop;
-    };
-
-    const useScrollToTop = () => {
-        const { pathname } = useLocation();
-
-        const isPop = useBackButton();
-
-        const scrollToTop = () => window.scrollTo(0, 0);
-
-        useEffect(() => {
-            scrollToTop();
-        }, [pathname, isPop]);
-
-        useEffect(() => {
-            window.addEventListener("beforeunload", scrollToTop);
-            return () => {
-                window.removeEventListener("beforeunload", scrollToTop);
-            };
-        }, []);
-    };
-
-    useScrollToTop();
-
     if (loading) {
-        return <div>Loading...</div>
+        return <div>Loading...</div>;
     }
-
 
     return (
 
         <div className='contentContainer createProfile'>
             {!Auth.loggedIn() && <Navigate to='/login' />}
-            <Header title="create profile" />
+            <Header title="edit profile" />
 
             <h2>Name</h2>
             <div className='formContainer'>
@@ -83,6 +62,7 @@ const ProfileForm = () => {
 
                     <input {...register('age', { valueAsNumber: true })}
                         placeholder='Age'
+                        type="number"
                     />
 
                     <select {...register('gender', { required: true })} >
@@ -123,12 +103,8 @@ const ProfileForm = () => {
                         <option value="6'7&quot;">6'7"</option>
                     </select>
 
-                    <input {...register('work')}
-                        placeholder='Profession'
-                    />
-
-
                     <select {...register('religion', { required: true })} >
+                        <option value=''>Religion...</option>
                         <option value='Agnostic/Atheist'>Agnostic/Atheist</option>
                         <option value='Buddhist'>Buddhist</option>
                         <option value='Christian'>Christian</option>
@@ -144,7 +120,7 @@ const ProfileForm = () => {
                         <option value='Liberal'>Liberal</option>
                     </select>
 
-                    <select {...register('smoking', { required: true })} >
+                    <select {...register('smoking', { required: true })}  >
                         <option value=''>Smoking...</option>
                         <option value='Smokes'>Smokes</option>
                         <option value='Doesnt Smoke'>Doesn't smoke</option>
@@ -160,11 +136,11 @@ const ProfileForm = () => {
                         placeholder='Bio'
                     />
 
-                    <input type='submit' value='Next' className="createProfNext" />
+                    <input type='submit' value='Save' />
                 </form>
             </div>
         </div>
     )
 };
 
-export default ProfileForm;
+export default EditProfile;

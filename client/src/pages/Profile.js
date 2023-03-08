@@ -45,7 +45,7 @@ const Profile = () => {
                         <h4>Drinking: {preference.drinking}</h4>
                     </div>
                     <div className="profileBtns">
-                        <Link to='/createprofile'>
+                        <Link to='/editprofile'>
                             <button>Edit</button>
                         </Link>
                         <button onClick={handleLogout}>Logout</button>

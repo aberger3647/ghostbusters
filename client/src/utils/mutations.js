@@ -39,6 +39,23 @@ export const UPLOAD_IMAGE = gql`
 export const ADD_PROFILE = gql`
     mutation addProfile($profile: ProfileInput!) {
         addProfile(profile: $profile) {
+                age
+                gender
+                height
+                work
+                religion
+                politics
+                smoking
+                drinking
+                bio
+
+        }
+    }
+`
+
+export const EDIT_PROFILE = gql`
+    mutation editProfile($profile: EditProfileInput!) {
+        editProfile(profile: $profile) {
                 _id
                 age
                 gender
@@ -57,7 +74,23 @@ export const ADD_PROFILE = gql`
 export const ADD_PREFERENCE = gql`
     mutation addPreference($preference: PreferenceInput!) {
         addPreference(preference: $preference) {
-                 _id
+                minAge
+                maxAge
+                gender
+                minHeight
+                maxHeight
+                religion
+                politics
+                smoking
+                drinking
+        }
+    }
+`
+
+export const EDIT_PREFERENCE = gql`
+    mutation editPreference($preference: EditPreferenceInput!) {
+        editPreference(preference: $preference) {
+                _id
                 minAge
                 maxAge
                 gender
@@ -91,6 +124,11 @@ export const ADD_LIKE = gql`
     mutation addLike($userId: ID!) {
         addLike(userId: $userId) {
             _id
+            firstName
+            image
+            matches {
+                _id
+            }
         }
     }
 `

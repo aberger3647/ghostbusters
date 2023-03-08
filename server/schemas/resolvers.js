@@ -54,10 +54,22 @@ const resolvers = {
     addProfile: async (parent, args, context) => {
       if (context.user) {
         const profile = await Profile.create(args.profile);
+        console.debug('created profile', profile);
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { profile: profile._id }
         );
+        return profile;
+      } else {
+        throw new AuthenticationError('You must be logged in.');
+      }
+    },
+
+    editProfile: async (parent, args, context) => {
+      if (context.user) {
+        console.debug('updating profile with', args);
+        const profile = await Profile.findByIdAndUpdate(args.profile._id, args.profile, {new: true});
+        console.debug('updated profile', profile);
         return profile;
       } else {
         throw new AuthenticationError('You must be logged in.');
@@ -71,6 +83,17 @@ const resolvers = {
           { _id: context.user._id },
           { preference: preference._id }
         );
+        return preference;
+      } else {
+        throw new AuthenticationError('You must be logged in.');
+      }
+    },
+
+    editPreference: async(parent, args, context) => {
+      if (context.user) {
+        console.debug('updating preferences', args.preference._id, 'with', args);
+        const preference = await Preference.findByIdAndUpdate(args.preference._id, args.preference, {new: true});
+        console.debug('updated preferences', preference);
         return preference;
       } else {
         throw new AuthenticationError('You must be logged in.');
@@ -109,7 +132,7 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in.')
       }
-      let match = false;
+
       const likedUser = await User.findOne({ _id: args.userId }).populate('likes').populate('matches');
       const me = await User.findOne({ _id: context.user._id }).populate('likes').populate('matches');
 
@@ -140,21 +163,19 @@ const resolvers = {
           { new: true }
         )
 
-
-
-        match = true;
-
-        return { match, me, likedUser }
+        return likedUser
 
         // IF THEY DON'T LIKE YOU YET
       } else {
         // ADD LIKE TO USER'S LIKES
-        await User.findOneAndUpdate(
+        const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { likes: args.userId } },
           { new: true }
         )
-        return { match }
+        console.log('user', user)
+
+        return likedUser
       }
 
     },
