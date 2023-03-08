@@ -29,12 +29,12 @@ const ProfileCard = (props) => {
                 alt="Prof Pic"
             >
                 <Transformation
-                    width="345"
-                    height="345"
+                    width="1000"
+                    height="1000"
                     gravity="face"
                     radius="max"
                     crop="fill"
-                    border="10px_solid_rgb:6789FF"
+                    border="20px_solid_rgb:6789FF"
                 />
             </Image>
 

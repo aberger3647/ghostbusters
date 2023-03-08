@@ -13,17 +13,19 @@ const Profile = () => {
         Auth.logout();
     };
 
-    const { loading, data } = useQuery(GET_ME);
+    const { loading, data, error, refetch } = useQuery(GET_ME);
 
-    const me = data?.me || {};
-    const profile = data?.me.profile || {};
-    const preference = data?.me.preference || {};
+    console.log('got data', data);
 
-
-
-    if (loading) {
+    if (error) return `Error! ${error}`;
+    if (loading || !data.me || !data.me.profile || !data.me.preference) {
+        console.log('refetching');
+        refetch();
         return <div>Potentially app logo</div>
     }
+    const me = data.me;
+    const profile = data.me.profile;
+    const preference = data.me.preference;
 
     return (
         <>
@@ -35,7 +37,6 @@ const Profile = () => {
                     <hr />
 
                     <h3 className="profilePreferencesTitle">Preferences</h3>
-
                     <div className="profilePreferences">
                         <h4>Age: {preference.minAge} to {preference.maxAge}</h4>
                         <h4>Height: {preference.minHeight} to {preference.maxHeight}</h4>

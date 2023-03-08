@@ -129,6 +129,7 @@ const ProfileForm = () => {
 
 
                     <select {...register('religion', { required: true })} >
+                        <option value=''>Religion...</option>
                         <option value='Agnostic/Atheist'>Agnostic/Atheist</option>
                         <option value='Buddhist'>Buddhist</option>
                         <option value='Christian'>Christian</option>

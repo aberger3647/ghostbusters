@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Image, Transformation } from "cloudinary-react";
 import profilePhoto from '../assets/profile-icon.svg'
+import { GET_ME } from '../utils/queries';
+import { useQuery } from "@apollo/client";
 
 const Review = (props) => {
 
     const [containerDirection, setContainerDirection] = useState({})
+    const [imageId, setImageId] = useState("");
 
     const isEven = (num) => {
         if (num % 2 === 0) {
@@ -26,6 +29,16 @@ const Review = (props) => {
         },
     }
 
+    const { loading, data } = useQuery(GET_ME);
+    const me = data?.me || {};
+
+    useEffect(() => {
+        if (me) {
+            let newImage = `${me.image}.png`
+            setImageId(newImage)
+        }
+    }, [me])
+
     return (
         <>
             <div className="reviewContainer" style={containerDirection}>
@@ -33,15 +46,16 @@ const Review = (props) => {
                 <Image
                     className="smallPhoto"
                     cloudName={process.env.REACT_APP_CLOUD_NAME}
-                    publicId={props.image}
+                    publicId={me.image}
                     alt="Prof pic"
                 >
                     <Transformation
-                        width="136"
-                        height="136"
+                        width="500"
+                        height="500"
                         gravity="face"
                         radius="max"
                         crop="fill"
+                        border="20px_solid_rgb:6789FF"
                     />
                 </Image>
                 <div className="reviewText" >

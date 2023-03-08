@@ -75,7 +75,7 @@ const Details = () => {
     return (
         <>
             {!Auth.loggedIn() && <Navigate to='/login' />}
-            <ItsAMatch />
+            {/* <ItsAMatch /> */}
             <Header title="details" />
             <div className="exploreContainer formContainer">
                 <div className="profileContainer">
@@ -98,9 +98,9 @@ const Details = () => {
                         )}
                     </div>
                     {matched ? (
-                        <form onSubmit={handleSubmit(onSubmit)}>
+                        <form onSubmit={handleSubmit(onSubmit)} className="detailsForm">
                             <textarea className="reviewTextArea" {...register('reviewText')}
-                                placeholder='Add a review'
+                                placeholder='Write a thoughtful, constructive review.'
                             />
                             <button type='submit' className="detailsSubmit">Submit</button>
                         </form>

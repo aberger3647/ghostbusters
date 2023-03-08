@@ -7,16 +7,16 @@ const ItsAMatch = (props) => {
   const [name, setName] = useState(["Jessica", "Marcus"]);
   const [imageId, setImageId] = useState("");
 
-  // const { loading, data } = useQuery(GET_ME);
-  // const me = data?.me || {};
-  // const profile = data?.me.profile || {};
+  const { loading, data } = useQuery(GET_ME);
+  const me = data?.me || {};
+  const profile = data?.me.profile || {};
 
-  // useEffect(() => {
-  //   if (me) {
-  //     let newImage = `${me.image}.png`
-  //     setImageId(newImage)
-  //   }
-  // }, [me])
+  useEffect(() => {
+    if (me) {
+      let newImage = `${me.image}.png`
+      setImageId(newImage)
+    }
+  }, [me])
 
   const closeModal = () => {
     const modal = document.querySelector(".itsAMatch");
@@ -26,39 +26,41 @@ const ItsAMatch = (props) => {
   return (
     <div className="formContainer itsAMatch">
       <h1>it's a match!</h1>
-      <h2>{props.me.firstName}</h2>
+      <h2>{props.user.firstName}</h2>
 
       <Image
         className="mediumPhoto topPhoto"
         cloudName={process.env.REACT_APP_CLOUD_NAME}
-        publicId={props.me.image}
+        publicId={props.user.image}
         alt="Match pic"
       >
         <Transformation
-          width="345"
-          height="345"
+          width="1000"
+          height="1000"
           gravity="face"
           radius="max"
           crop="fill"
+          border="20px_solid_rgb:6789FF"
         />
       </Image>
 
       <Image
         className="mediumPhoto botPhoto"
         cloudName={process.env.REACT_APP_CLOUD_NAME}
-        publicId={props.user.image}
+        publicId={props.me.image}
         alt='Prof pic'
       >
         <Transformation
-          width="345"
-          height="345"
+          width="1000"
+          height="1000"
           gravity="face"
           radius="max"
           crop="fill"
+          border="20px_solid_rgb:6789FF"
         />
       </Image>
 
-      <h2>{props.user.firstName}</h2>
+      <h2>{props.me.firstName}</h2>
       <button id="close" onClick={closeModal}>
         {" "}
         <h5>Close</h5>
