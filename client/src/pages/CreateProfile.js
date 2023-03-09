@@ -81,10 +81,11 @@ const ProfileForm = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
 
-                    <input {...register('age', { valueAsNumber: true, required: true})}
+                    <input {...register('age', { valueAsNumber: true, required: true, validate: (value) => value >= 18 || 'You must be at least 18 years old'})}
                         placeholder='Age'
                     />
-                    {errors.age && <small>This field is required</small>}
+                    {errors.age && errors.age.type === "validate" && <small>{errors.age.message}</small>}
+                    {errors.age && errors.age.type === "required" && <small>This field is required</small>}
 
                     <select {...register('gender', { required: true })} >
                         <option value=''>Gender...</option>
@@ -165,7 +166,7 @@ const ProfileForm = () => {
                     </select>
                     {errors.drinking && <small>This field is required</small>}
 
-                    <textarea {...register('bio')}
+                    <textarea {...register('bio', {required: true})}
                         placeholder='Bio'
                     />
                     {errors.bio && <small>This field is required</small>}
