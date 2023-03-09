@@ -127,7 +127,7 @@ const ProfileForm = () => {
                     </select>
                     {errors.height && <small>This field is required</small>}
 
-                    <input {...register('work')}
+                    <input {...register('work', { required: true })}
                         placeholder='Profession'
                     />
                     {errors.work && <small>This field is required</small>}
