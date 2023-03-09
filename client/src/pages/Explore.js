@@ -21,12 +21,17 @@ const Explore = () => {
     const { loading, data } = useQuery(GET_USER);
 
     const { loading: meLoading, data: meData } = useQuery(GET_ME);
-    console.log("me", meData);
     const me = meData?.me || {};
 
-    let users = data?.users || [];
+    const myLikes = me.likes?.map(like => like._id);
+    const myDislikes = me.dislikes?.map(like => like._id);
+    const myMatches = me.matches?.map(like => like._id);
 
+    const allSeenUsers = myLikes?.concat(myDislikes?.concat(myMatches));
+
+    let users = data?.users || [];
     users = users.filter(user => user._id !== me._id);
+    users = users.filter(user => !allSeenUsers?.includes(user._id));
     console.log(users);
 
 
