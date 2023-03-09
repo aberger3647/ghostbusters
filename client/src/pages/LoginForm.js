@@ -8,7 +8,7 @@ import { Navigate } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
 
 const LoginForm = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: {errors} } = useForm();
   const [login, { error, data }] = useMutation(LOGIN_USER);
   const [isHover, setIsHover] = useState(false);
   const [activeTab, setActiveTab] = useState("login");
@@ -102,15 +102,19 @@ const LoginForm = () => {
               className='loginInput'
               {...register("email", {
                 pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
+                required: true,
               })}
               placeholder="Email Address"
             />
+            {errors.email && <small className='loginSmall'>This field is required</small>}
+
             <input
               className='loginInput'
               type="password"
-              {...register("password")}
+              {...register("password", {required: true})}
               placeholder="Password"
             />
+            {errors.password && <small className='loginSmall'>This field is required</small>}
 
             <button
               type="submit"

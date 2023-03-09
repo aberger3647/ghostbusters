@@ -6,7 +6,7 @@ import { ADD_USER } from "../utils/mutations";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: {errors} } = useForm();
   const [signup, { error, data }] = useMutation(ADD_USER);
   const [isHover, setIsHover] = useState(false);
   const [activeTab, setActiveTab] = useState("signup");
@@ -40,20 +40,27 @@ const SignUpForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input className='loginInput' {...register("firstName")} placeholder="First Name" />
+        <input className='loginInput' {...register("firstName", {required:true})} placeholder="First Name" />
+        {errors.email && <small className='loginSmall'>This field is required</small>}
+        
         <input
           className='loginInput'
           {...register("email", {
             pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
+            required: true,
           })}
           placeholder="Email"
         />
+        {errors.email && <small className='loginSmall'>This field is required</small>}
+
         <input
-          className='loginInput'
-          type="password"
-          {...register("password")}
-          placeholder="Password"
-        />
+              className='loginInput'
+              type="password"
+              {...register("password", {required: true})}
+              placeholder="Password"
+            />
+            {errors.password && <small className='loginSmall'>This field is required</small>}
+
         <button
           type="submit"
           onMouseEnter={() => setIsHover(true)}
