@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { ADD_DISLIKE, ADD_LIKE } from "../utils/mutations";
 import { Image, Transformation } from "cloudinary-react";
+import profilePhoto from '../assets/profile-icon.svg'
 
 const Explore = () => {
 
@@ -41,7 +42,7 @@ const Explore = () => {
     const [imageId, setImageId] = useState("");
 
     useEffect(() => {
-        if (users) {
+        if (users.image) {
             let newImage = `${users[randomNumber]?.image}.png`;
             setImageId(newImage);
         }
@@ -109,21 +110,25 @@ const Explore = () => {
                 <div className="exploreContainer">
                     <div key={users[randomNumber]?._id} className="exploreBox">
                         <Link to={`/details/${users[randomNumber]?._id}`}>
-                            <Image
-                                className="explorePhoto"
-                                cloudName={process.env.REACT_APP_CLOUD_NAME}
-                                publicId={imageId}
-                                alt="Explore pic"
-                            >
-                                <Transformation
-                                    width="1000"
-                                    height="1000"
-                                    gravity="face"
-                                    radius="max"
-                                    crop="fill"
-                                    border="20px_solid_rgb:6789FF"
-                                />
-                            </Image>
+                            {imageId ? (
+                                <Image
+                                    className="explorePhoto"
+                                    cloudName={process.env.REACT_APP_CLOUD_NAME}
+                                    publicId={imageId}
+                                    alt="Explore pic"
+                                >
+                                    <Transformation
+                                        width="1000"
+                                        height="1000"
+                                        gravity="face"
+                                        radius="max"
+                                        crop="fill"
+                                        border="20px_solid_rgb:6789FF"
+                                    />
+                                </Image>
+                            ) : (
+                                <img src={profilePhoto} className="mediumPhoto" alt="prof pic" />
+                            )}
                         </Link>
 
                         <h2 className="exploreName">{users[randomNumber]?.firstName}</h2>
