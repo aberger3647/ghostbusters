@@ -53,8 +53,6 @@ input[value="Previous"],
   width: 40%;
 }
 
-input[type='submit']
-
 .detailsSubmit:hover {
   color: black;
 }
