@@ -54,7 +54,7 @@ const resolvers = {
     addProfile: async (parent, args, context) => {
       if (context.user) {
         const profile = await Profile.create(args.profile);
-        console.debug('created profile', profile);
+
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { profile: profile._id }
@@ -67,9 +67,7 @@ const resolvers = {
 
     editProfile: async (parent, args, context) => {
       if (context.user) {
-        console.debug('updating profile with', args);
         const profile = await Profile.findByIdAndUpdate(args.profile._id, args.profile, { new: true });
-        console.debug('updated profile', profile);
         return profile;
       } else {
         throw new AuthenticationError('You must be logged in.');
@@ -91,9 +89,7 @@ const resolvers = {
 
     editPreference: async (parent, args, context) => {
       if (context.user) {
-        console.debug('updating preferences', args.preference._id, 'with', args);
         const preference = await Preference.findByIdAndUpdate(args.preference._id, args.preference, { new: true });
-        console.debug('updated preferences', preference);
         return preference;
       } else {
         throw new AuthenticationError('You must be logged in.');
@@ -149,7 +145,6 @@ const resolvers = {
           { $pull: { likes: context.user._id } },
           { new: true }
         )
-        console.log("likeRemovedFromOther", likeRemovedFromOther);
 
         // UPDATE LIKED USER (ADD TO MATCHES)
         const matchAddedToOther = await User.findOneAndUpdate(
@@ -157,7 +152,6 @@ const resolvers = {
           { $addToSet: { matches: context.user._id } },
           { new: true }
         )
-        console.log("matchAddedToOther", matchAddedToOther);
 
         // UPDATE LOGGED IN USER TO ADD LIKED USER TO MATCHES
         const matchAddedToMe = await User.findOneAndUpdate(
@@ -165,7 +159,6 @@ const resolvers = {
           { $addToSet: { matches: args.userId } },
           { new: true }
         )
-        console.log("matchAddedToMe", matchAddedToMe);
 
         return matchAddedToOther;
       }

@@ -31,7 +31,7 @@ const Explore = () => {
     let users = data?.users || [];
     users = users.filter(user => user._id !== me._id);
     users = users.filter(user => !allSeenUsers?.includes(user._id));
-    console.log(users);
+
 
 
     const [addDislike, { data: dislikeData }] = useMutation(ADD_DISLIKE);

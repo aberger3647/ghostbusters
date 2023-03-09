@@ -13,7 +13,6 @@ const EditProfile = () => {
     const { register, handleSubmit, reset, formState: {errors} } = useForm();
     const { loading, data: userData } = useQuery(GET_ME, {
         onCompleted: (data) => {
-            console.log('got data from graphql', data.me.profile);
             reset(data.me.profile);
         }
     });
@@ -24,7 +23,6 @@ const EditProfile = () => {
     const onSubmit = async (formData) => {
         // removes typename from variables so mutation doesn't include __typename
         const { __typename: _, ...profile } = formData;
-        console.log('sending profile', profile);
         try {
             const { data } = await editProfile({
                 variables: { profile },

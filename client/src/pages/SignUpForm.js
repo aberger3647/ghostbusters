@@ -13,7 +13,6 @@ const SignUpForm = () => {
   const navigate = useNavigate();
   
   const onSubmit = async (formData) => {
-    console.log(formData);
     try {
       const { data } = await signup({
         variables: {
@@ -24,7 +23,6 @@ const SignUpForm = () => {
       });
 
       Auth.login(data.addUser.token);
-      console.log("signed up");
       navigate('/createprofile');
     } catch (err) {
       console.error(err);
@@ -33,7 +31,6 @@ const SignUpForm = () => {
 
   return (
     <>
-      {/* {Auth.loggedIn() && <Navigate to="/createprofile" />} */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <input className='loginInput' {...register("firstName")} placeholder="First Name" />
         <input
