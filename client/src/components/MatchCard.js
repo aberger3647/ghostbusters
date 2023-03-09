@@ -17,7 +17,7 @@ const MatchCard = (props) => {
     const [imageId, setImageId] = useState("");
 
     useEffect(() => {
-        if (user) {
+        if (user.image) {
             let newImage = `${user.image}.png`;
             setImageId(newImage);
         }
@@ -27,6 +27,7 @@ const MatchCard = (props) => {
         <div className='matchCard'>
             <Link to={`/details/${props.user}`}>
                 <h3>{user.firstName}</h3>
+                {imageId ? (
                 <Image
                 className="mediumPhoto topPhoto"
                 cloudName={process.env.REACT_APP_CLOUD_NAME}
@@ -42,6 +43,9 @@ const MatchCard = (props) => {
                     border="10px_solid_rgb:6789FF"
                 />
             </Image>
+            ) : (
+                <img src={profilePhoto} className="mediumPhoto" alt="prof pic" />
+            )}
             </Link>
             <hr />
         </div>
