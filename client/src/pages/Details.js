@@ -128,7 +128,7 @@ const Details = () => {
                     <h3 className="reviewsTitle">Reviews</h3>
 
                     <div>
-                        {user.reivews ? (
+                        {user.reviews ? (
                             user?.reviews?.map((review, index) => (
                                 <div key={review._id}>
                                     <Review direction={index} reviewText={review.reviewText} name={review.reviewer} image={review.image} />

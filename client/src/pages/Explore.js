@@ -111,7 +111,7 @@ const Explore = () => {
                             <Image
                                 className="explorePhoto"
                                 cloudName={process.env.REACT_APP_CLOUD_NAME}
-                                publicId={users[randomNumber]?.image}
+                                publicId={imageId}
                                 alt="Explore pic"
                             >
                                 <Transformation

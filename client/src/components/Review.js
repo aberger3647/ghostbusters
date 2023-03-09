@@ -46,7 +46,7 @@ const Review = (props) => {
                 <Image
                     className="smallPhoto"
                     cloudName={process.env.REACT_APP_CLOUD_NAME}
-                    publicId={me.image}
+                    publicId={imageId}
                     alt="Prof pic"
                 >
                     <Transformation
