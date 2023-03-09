@@ -132,49 +132,48 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in.')
       }
-
       const likedUser = await User.findOne({ _id: args.userId }).populate('likes').populate('matches');
       const me = await User.findOne({ _id: context.user._id }).populate('likes').populate('matches');
 
-
-      const myIdInLikedUser = likedUser.likes[0]._id.toString();
+      const likedUserLikes = likedUser.likes;
+      const likedUserLikeIds = likedUserLikes.map(like => like._id.toString());
       const myId = me._id.toString();
 
       // IF LIKED USER ALREADY HAS YOU LIKED (ITS A MATCH)
-      if (myIdInLikedUser === myId) {
+      if (likedUserLikeIds.includes(myId)) {
 
         // UPDATE LIKED USER (REMOVE FROM LIKES)
 
-        await User.findOneAndUpdate(
+        const likeRemovedFromOther = await User.findOneAndUpdate(
           { _id: likedUser._id },
           { $pull: { likes: context.user._id } },
           { new: true }
         )
-
+        console.log("likeRemovedFromOther", likeRemovedFromOther);
 
         // UPDATE LIKED USER (ADD TO MATCHES)
-        await User.findOneAndUpdate(
+        const matchAddedToOther = await User.findOneAndUpdate(
           { _id: likedUser._id },
           { $addToSet: { matches: context.user._id } },
           { new: true }
         )
-
+        console.log("matchAddedToOther", matchAddedToOther);
 
         // UPDATE LOGGED IN USER TO ADD LIKED USER TO MATCHES
-        await User.findOneAndUpdate(
+        const matchAddedToMe = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { matches: args.userId } },
           { new: true }
         )
+        console.log("matchAddedToMe", matchAddedToMe);
 
-        return likedUser
+        return matchAddedToOther;
       }
 
       // IF THEY DON'T LIKE YOU YET
 
       else {
         // ADD LIKE TO USER'S LIKES
-        console.log('else statement entered');
 
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -182,11 +181,9 @@ const resolvers = {
           { new: true }
         )
 
-
         return likedUser
 
       }
-
 
     },
 
