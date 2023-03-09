@@ -565,6 +565,7 @@ footer img {
   display: flex;
   align-items: center;
   margin: 25px 0 25px 0;
+  max-width: 336px;
 }
 
 .reviewText {
@@ -572,7 +573,7 @@ footer img {
   flex-direction: column;
   width: fill;
   width: -moz-available;
-  max-width: 336px;
+  max-width: 200px;
   overflow-wrap: break-word;
 }
 

@@ -33,11 +33,11 @@ const Review = (props) => {
     const me = data?.me || {};
 
     useEffect(() => {
-        if (me) {
-            let newImage = `${me.image}.png`
+        if (props.image) {
+            let newImage = `${props.image}.png`
             setImageId(newImage)
         }
-    }, [me])
+    }, [props])
 
     return (
         <>
