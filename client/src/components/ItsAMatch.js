@@ -11,12 +11,17 @@ const ItsAMatch = (props) => {
   const me = data?.me || {};
   const profile = data?.me.profile || {};
 
+const [meImage, setMeImage] = useState();
+const [userImage, setUserImage] = useState();
+
   useEffect(() => {
-    if (me) {
-      let newImage = `${me.image}.png`
-      setImageId(newImage)
+    if (props) {
+      let newMeImage = `${props.me.image}.png`
+      setMeImage(newMeImage)
+      let newUserImage = `${props.user.image}.png`
+      setUserImage(newUserImage)
     }
-  }, [me])
+  }, [props])
 
   const closeModal = () => {
     const modal = document.querySelector(".itsAMatch");
@@ -31,7 +36,7 @@ const ItsAMatch = (props) => {
       <Image
         className="mediumPhoto topPhoto"
         cloudName={process.env.REACT_APP_CLOUD_NAME}
-        publicId={props.user.image}
+        publicId={userImage}
         alt="Match pic"
       >
         <Transformation
@@ -47,7 +52,7 @@ const ItsAMatch = (props) => {
       <Image
         className="mediumPhoto botPhoto"
         cloudName={process.env.REACT_APP_CLOUD_NAME}
-        publicId={props.me.image}
+        publicId={meImage}
         alt='Prof pic'
       >
         <Transformation

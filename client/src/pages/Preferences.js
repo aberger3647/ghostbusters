@@ -6,21 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Auth from '../utils/auth';
 import { ADD_PREFERENCE } from '../utils/mutations';
-
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
 const PreferencesForm = () => {
-  {
-    !Auth.loggedIn() && <Navigate to="/login" />;
-  }
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: {errors} } = useForm();
 
   const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
 
   const onSubmit = async (preference, event) => {
-    console.log(preference)
     try {
       const { data } = await addPreference({
         variables: { preference },
@@ -38,15 +33,18 @@ const PreferencesForm = () => {
 
   return (
     <>
+    {!Auth.loggedIn() && <Navigate to='/login' />}
       <Header title="preferences" />
       <div className="formContainer">
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className='heightPrefs'>
-            <input type="number" className='minMaxAge' {...register('minAge', { valueAsNumber: true })} placeholder='Min Age' />
+            <input type="number" className='minMaxAge' {...register('minAge', { valueAsNumber: true, required: true, validate: (value) => value >= 18 || 'Must be at least 18 years old'})} placeholder='Min Age' />
             <p>to</p>
-            <input type="number" className='minMaxAge' {...register('maxAge', { valueAsNumber: true })} placeholder='Max Age' />
+            <input type="number" className='minMaxAge' {...register('maxAge', { valueAsNumber: true, required: true })} placeholder='Max Age' />
           </div>
+          {errors.minAge && errors.minAge.type === "validate" && <small>{errors.minAge.message}</small>}
+          {errors.minAge && errors.maxAge && <small>Both fields are required</small>}
 
           <select {...register('gender', { required: true })} >
             <option value=''>Gender...</option>
@@ -54,8 +52,10 @@ const PreferencesForm = () => {
             <option value='Male'>Male</option>
             <option value='Non-Binary'>Non-Binary</option>
           </select>
+          {errors.gender && <small>This field is required</small>}
+
           <div className='heightPrefs'>
-            <select className='minMaxHeight' {...register('minHeight')} >
+            <select className='minMaxHeight' {...register('minHeight', {required: true})} >
               <option value=''>Min Height</option>
               <option value="I don't care">I don't care</option>
               <option value="4'5&quot;">4'5"</option>
@@ -87,7 +87,7 @@ const PreferencesForm = () => {
               <option value="6'7&quot;">6'7"</option>
             </select>
             <h4>to</h4>
-            <select className='minMaxHeight' {...register('maxHeight')} >
+            <select className='minMaxHeight' {...register('maxHeight', {required: true})} >
               <option value=''>Max Height</option>
               <option value="I don't care">I don't care</option>
               <option value="4'5&quot;">4'5"</option>
@@ -119,6 +119,8 @@ const PreferencesForm = () => {
               <option value="6'7&quot;">6'7"</option>
             </select>
           </div>
+          {errors.minHeight && errors.maxHeight && <small>Both fields are required</small>}
+
 
           <select {...register('religion', { required: true })} >
             <option value=''>Religion...</option>
@@ -129,6 +131,7 @@ const PreferencesForm = () => {
             <option value='Jewish'>Jewish</option>
             <option value='Spiritual'>Spiritual</option>
           </select>
+          {errors.religion && <small>This field is required</small>}
 
           <select {...register('politics', { required: true })} >
             <option value=''>Politics...</option>
@@ -136,18 +139,21 @@ const PreferencesForm = () => {
             <option value='Moderate'>Moderate</option>
             <option value='Liberal'>Liberal</option>
           </select>
+          {errors.politics && <small>This field is required</small>}
 
           <select {...register('smoking', { required: true })} >
             <option value=''>Smoking...</option>
             <option value='Smokes'>Smokes</option>
-            <option value='Doesnt Smoke'>Doesn't smoke</option>
+            <option value='Doesn&#39;t Smoke'>Doesn't smoke</option>
           </select>
+          {errors.smoking && <small>This field is required</small>}
 
           <select {...register('drinking', { required: true })} >
             <option value=''>Drinking...</option>
             <option value='Drinks'>Drinks</option>
-            <option value='Doesnt Drink'>Doesn't drink</option>
+            <option value='Doesn&#39;t Drink'>Doesn't drink</option>
           </select>
+          {errors.drinking && <small>This field is required</small>}
 
           <input type="submit" value="Submit" className="createPrefsNext" />
         </form>

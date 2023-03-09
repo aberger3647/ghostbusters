@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from '@apollo/client';
-import { ADD_REVIEW } from '../utils/mutations';
-import { Navigate, useParams } from 'react-router-dom';
+import { ADD_REVIEW, ADD_DISLIKE, ADD_LIKE } from '../utils/mutations';
+import { Navigate, useParams, useNavigate } from 'react-router-dom';
 import { GET_SINGLE_USER } from '../utils/queries'
-
 import Auth from '../utils/auth';
-
 import { GET_ME } from '../utils/queries';
 import Header from '../components/Header'
 import ProfileCard from '../components/ProfileCard'
@@ -15,7 +13,9 @@ import ItsAMatch from '../components/ItsAMatch'
 
 
 const Details = () => {
-
+    const navigate = useNavigate();
+    const [match1, setMatch1] = useState({});
+    const [match2, setMatch2] = useState({});
     const [matched, setMatched] = useState(false)
     const { userId: userParam } = useParams();
     const { loading, data } = useQuery(GET_SINGLE_USER, {
@@ -28,7 +28,6 @@ const Details = () => {
     const { loading: meLoading, data: meData } = useQuery(GET_ME);
 
     const me = meData?.me || {};
-    console.log('me', me)
 
     useEffect(() => {
         if (!meLoading) {
@@ -45,6 +44,51 @@ const Details = () => {
     const { register, handleSubmit } = useForm();
 
     const [addReview, { error, data: reviewData }] = useMutation(ADD_REVIEW);
+    const [addDislike, { data: dislikeData }] = useMutation(ADD_DISLIKE);
+    const [addLike, { data: likeData }] = useMutation(ADD_LIKE);
+
+    const onDislikeClick = async (event) => {
+        const id = event.target.id;
+        try {
+            const { data } = await addDislike({
+                variables: {
+                    userId: id,
+                },
+            });
+        } catch (err) {
+            console.error(err);
+        }
+        navigate('/explore')
+    };
+
+    const onLikeClick = async (event) => {
+        const id = event.target.id;
+
+        try {
+            const { data: matchData } = await addLike({
+                variables: {
+                    userId: id,
+                }
+            });
+
+            const matches = matchData.addLike.matches;
+
+            if (matchData.addLike.matches.length) {
+                for (var i = 0; i < matches.length; i++) {
+                    if (matches[i]._id.includes(me._id)) {
+                        setMatch1(me);
+                        setMatch2(matchData.addLike);
+                        openModal();
+                    }
+                }
+            }
+
+        } catch (err) {
+            console.error(err);
+        }
+        navigate('/explore')
+    };
+
     const onSubmit = async (review, event) => {
         try {
             const result = await addReview({
@@ -53,7 +97,6 @@ const Details = () => {
                     reviewText: review.reviewText,
                 },
             });
-            console.log('result', result)
         } catch (err) {
             console.error(err);
         }
@@ -75,7 +118,7 @@ const Details = () => {
     return (
         <>
             {!Auth.loggedIn() && <Navigate to='/login' />}
-            {/* <ItsAMatch /> */}
+            <ItsAMatch me={match1} user={match2} />
             <Header title="details" />
             <div className="exploreContainer formContainer">
                 <div className="profileContainer">
@@ -85,11 +128,9 @@ const Details = () => {
                     <h3 className="reviewsTitle">Reviews</h3>
 
                     <div>
-                        {user.reivews ? (
+                        {user.reviews ? (
                             user?.reviews?.map((review, index) => (
                                 <div key={review._id}>
-                                    {console.log(review)}
-                                    {/* <h4>{review.reviewText}</h4> */}
                                     <Review direction={index} reviewText={review.reviewText} name={review.reviewer} image={review.image} />
                                 </div>
                             ))
@@ -106,8 +147,8 @@ const Details = () => {
                         </form>
                     ) : (
                         <div className="matchBtnDetailContainer">
-                            <button className="dislike" />
-                            <button onClick={openModal} className="like" />
+                            <button onClick={onDislikeClick} className="dislike" />
+                            <button onClick={onLikeClick} className="like" />
                         </div>
                     )}
                 </div>

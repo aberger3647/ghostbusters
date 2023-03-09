@@ -11,10 +11,9 @@ import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
 const EditPreferences = () => {
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, formState: {errors}} = useForm();
     const { loading, data: userData } = useQuery(GET_ME, {
         onCompleted: (data) => {
-            console.log('got data from graphql', data.me.preference);
             reset(data.me.preference);
         }
     });
@@ -25,7 +24,6 @@ const EditPreferences = () => {
     const onSubmit = async (formData) => {
         // removes typename from variables so mutation doesn't include __typename
         const { __typename: _, ...preference } = formData;
-        console.log('sending preferences', preference);
         try {
             const { data } = await editPreference({
                 variables: { preference },
@@ -50,9 +48,11 @@ const EditPreferences = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <div className='heightPrefs'>
-                        <input type="number" className='minMaxAge' {...register('minAge', { valueAsNumber: true })} placeholder='Min Age' />
+                        <input type="number" className='minMaxAge' {...register('minAge', { valueAsNumber: true, required: true, validate: (value) => value >= 18 || 'Must be at least 18 years old' })} placeholder='Min Age' />
                         <p>to</p>
-                        <input type="number" className='minMaxAge' {...register('maxAge', { valueAsNumber: true })} placeholder='Max Age' />
+                        <input type="number" className='minMaxAge' {...register('maxAge', { valueAsNumber: true , required: true})} placeholder='Max Age' />
+                        {errors.minAge && errors.minAge.type === "validate" && <small>{errors.minAge.message}</small>}
+                        {errors.minAge && errors.maxAge && <small>Both fields are required</small>}
                     </div>
 
                     <select {...register('gender', { required: true })} >
@@ -61,8 +61,9 @@ const EditPreferences = () => {
                         <option value='Male'>Male</option>
                         <option value='Non-Binary'>Non-Binary</option>
                     </select>
+                    {errors.gender && <small>This field is required</small>}
                     <div className='heightPrefs'>
-                        <select className='minMaxHeight' {...register('minHeight')} >
+                        <select className='minMaxHeight' {...register('minHeight', {required: true})} >
                             <option value=''>Min Height</option>
                             <option value="I don't care">I don't care</option>
                             <option value="4'5&quot;">4'5"</option>
@@ -94,7 +95,7 @@ const EditPreferences = () => {
                             <option value="6'7&quot;">6'7"</option>
                         </select>
                         <h4>to</h4>
-                        <select className='minMaxHeight' {...register('maxHeight')} >
+                        <select className='minMaxHeight' {...register('maxHeight', {required: true})} >
                             <option value=''>Max Height</option>
                             <option value="I don't care">I don't care</option>
                             <option value="4'5&quot;">4'5"</option>
@@ -125,6 +126,7 @@ const EditPreferences = () => {
                             <option value="6'6&quot;">6'6"</option>
                             <option value="6'7&quot;">6'7"</option>
                         </select>
+                        {errors.minHeight && errors.maxHeight && <small>This field is required</small>}
                     </div>
 
                     <select {...register('religion', { required: true })} >
@@ -136,6 +138,7 @@ const EditPreferences = () => {
                         <option value='Jewish'>Jewish</option>
                         <option value='Spiritual'>Spiritual</option>
                     </select>
+                    {errors.religion && <small>This field is required</small>}
 
                     <select {...register('politics', { required: true })} >
                         <option value=''>Politics...</option>
@@ -143,18 +146,21 @@ const EditPreferences = () => {
                         <option value='Moderate'>Moderate</option>
                         <option value='Liberal'>Liberal</option>
                     </select>
+                    {errors.politics && <small>This field is required</small>}
 
                     <select {...register('smoking', { required: true })} >
                         <option value=''>Smoking...</option>
                         <option value='Smokes'>Smokes</option>
-                        <option value='Doesnt Smoke'>Doesn't smoke</option>
+                        <option value='Doesn&#39;t Smoke'>Doesn't smoke</option>
                     </select>
+                    {errors.smoking && <small>This field is required</small>}
 
                     <select {...register('drinking', { required: true })} >
                         <option value=''>Drinking...</option>
                         <option value='Drinks'>Drinks</option>
-                        <option value='Doesnt Drink'>Doesn't drink</option>
+                        <option value='Doesn&#39;t Drink'>Doesn't drink</option>
                     </select>
+                    {errors.drinking && <small>This field is required</small>}
 
                     <input type="submit" value="Submit" className="createPrefsNext" />
                 </form>

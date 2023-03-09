@@ -54,7 +54,7 @@ const resolvers = {
     addProfile: async (parent, args, context) => {
       if (context.user) {
         const profile = await Profile.create(args.profile);
-        console.debug('created profile', profile);
+
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { profile: profile._id }
@@ -67,9 +67,7 @@ const resolvers = {
 
     editProfile: async (parent, args, context) => {
       if (context.user) {
-        console.debug('updating profile with', args);
-        const profile = await Profile.findByIdAndUpdate(args.profile._id, args.profile, {new: true});
-        console.debug('updated profile', profile);
+        const profile = await Profile.findByIdAndUpdate(args.profile._id, args.profile, { new: true });
         return profile;
       } else {
         throw new AuthenticationError('You must be logged in.');
@@ -89,11 +87,9 @@ const resolvers = {
       }
     },
 
-    editPreference: async(parent, args, context) => {
+    editPreference: async (parent, args, context) => {
       if (context.user) {
-        console.debug('updating preferences', args.preference._id, 'with', args);
-        const preference = await Preference.findByIdAndUpdate(args.preference._id, args.preference, {new: true});
-        console.debug('updated preferences', preference);
+        const preference = await Preference.findByIdAndUpdate(args.preference._id, args.preference, { new: true });
         return preference;
       } else {
         throw new AuthenticationError('You must be logged in.');
@@ -132,50 +128,54 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in.')
       }
-
       const likedUser = await User.findOne({ _id: args.userId }).populate('likes').populate('matches');
       const me = await User.findOne({ _id: context.user._id }).populate('likes').populate('matches');
 
-      // IF LIKED USER ALREADY HAS YOU LIKED (ITS A MATCH)
-      if (likedUser.likes.includes(context.user._id)) {
+      const likedUserLikes = likedUser.likes;
+      const likedUserLikeIds = likedUserLikes.map(like => like._id.toString());
+      const myId = me._id.toString();
 
+      // IF LIKED USER ALREADY HAS YOU LIKED (ITS A MATCH)
+      if (likedUserLikeIds.includes(myId)) {
 
         // UPDATE LIKED USER (REMOVE FROM LIKES)
-        await User.findOneAndUpdate(
+
+        const likeRemovedFromOther = await User.findOneAndUpdate(
           { _id: likedUser._id },
           { $pull: { likes: context.user._id } },
           { new: true }
         )
 
-
         // UPDATE LIKED USER (ADD TO MATCHES)
-        await User.findOneAndUpdate(
+        const matchAddedToOther = await User.findOneAndUpdate(
           { _id: likedUser._id },
           { $addToSet: { matches: context.user._id } },
           { new: true }
         )
 
-
         // UPDATE LOGGED IN USER TO ADD LIKED USER TO MATCHES
-        await User.findOneAndUpdate(
+        const matchAddedToMe = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { matches: args.userId } },
           { new: true }
         )
 
-        return likedUser
+        return matchAddedToOther;
+      }
 
-        // IF THEY DON'T LIKE YOU YET
-      } else {
+      // IF THEY DON'T LIKE YOU YET
+
+      else {
         // ADD LIKE TO USER'S LIKES
+
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { likes: args.userId } },
           { new: true }
         )
-        console.log('user', user)
 
         return likedUser
+
       }
 
     },
