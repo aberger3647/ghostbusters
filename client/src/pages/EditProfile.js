@@ -10,7 +10,7 @@ import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
 const EditProfile = () => {
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, formState: {errors} } = useForm();
     const { loading, data: userData } = useQuery(GET_ME, {
         onCompleted: (data) => {
             console.log('got data from graphql', data.me.profile);
@@ -47,17 +47,19 @@ const EditProfile = () => {
             {!Auth.loggedIn() && <Navigate to='/login' />}
             <Header title="edit profile" />
 
-            <h2>Name</h2>
+            <h2>{ userData.me.firstName }</h2>
             <div className='formContainer'>
 
                 <Upload />
 
                 <form onSubmit={handleSubmit(onSubmit)}>
 
-                    <input {...register('age', { valueAsNumber: true })}
+                    <input {...register('age', { valueAsNumber: true, required: true, validate: (value) => value >= 18 || 'You must be at least 18 years old' })}
                         placeholder='Age'
                         type="number"
                     />
+                    {errors.age && errors.age.type === "validate" && <small>{errors.age.message}</small>}
+                    {errors.age && errors.age.type === "required" && <small>This field is required</small>}
 
                     <select {...register('gender', { required: true })} >
                         <option value=''>Gender...</option>
@@ -65,6 +67,7 @@ const EditProfile = () => {
                         <option value='M'>Male</option>
                         <option value='NB'>Non-Binary</option>
                     </select>
+                    {errors.gender && <small>This field is required</small>}
 
                     <select {...register('height', { required: true })} >
                         <option value=''>Height...</option>
@@ -96,6 +99,7 @@ const EditProfile = () => {
                         <option value="6'6&quot;">6'6"</option>
                         <option value="6'7&quot;">6'7"</option>
                     </select>
+                    {errors.height && <small>This field is required</small>}
 
                     <select {...register('religion', { required: true })} >
                         <option value=''>Religion...</option>
@@ -106,6 +110,7 @@ const EditProfile = () => {
                         <option value='Jewish'>Jewish</option>
                         <option value='Spiritual'>Spiritual</option>
                     </select>
+                    {errors.religion && <small>This field is required</small>}
 
                     <select {...register('politics', { required: true })} >
                         <option value=''>Politics...</option>
@@ -113,22 +118,26 @@ const EditProfile = () => {
                         <option value='Moderate'>Moderate</option>
                         <option value='Liberal'>Liberal</option>
                     </select>
+                    {errors.politics && <small>This field is required</small>}
 
                     <select {...register('smoking', { required: true })}  >
                         <option value=''>Smoking...</option>
                         <option value='Smokes'>Smokes</option>
-                        <option value='Doesnt Smoke'>Doesn't smoke</option>
+                        <option value="Doesn&#39;t Smoke">Doesn't smoke</option>
                     </select>
+                    {errors.smoking && <small>This field is required</small>}
 
                     <select {...register('drinking', { required: true })} >
                         <option value=''>Drinking...</option>
                         <option value='Drinks'>Drinks</option>
-                        <option value='Doesnt Drink'>Doesn't drink</option>
+                        <option value="Doesn&#39;t Drink">Doesn't drink</option>
                     </select>
+                    {errors.drinking && <small>This field is required</small>}
 
-                    <textarea {...register('bio')}
+                    <textarea {...register('bio', {required: true})}
                         placeholder='Bio'
                     />
+                    {errors.bio && <small>This field is required</small>}
 
                     <input type='submit' value='Save' className="editProfNext" />
                 </form>

@@ -42,6 +42,10 @@ input[value="Previous"] {
   font-weight: 400;
 }
 
+small {
+  color: red;
+}
+
 input[type="submit"],
 input[value="Previous"],
 .detailsSubmit {
