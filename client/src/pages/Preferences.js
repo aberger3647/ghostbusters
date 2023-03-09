@@ -6,21 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Auth from '../utils/auth';
 import { ADD_PREFERENCE } from '../utils/mutations';
-
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
 const PreferencesForm = () => {
-  {
-    !Auth.loggedIn() && <Navigate to="/login" />;
-  }
 
   const { register, handleSubmit, formState: {errors} } = useForm();
 
   const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
 
   const onSubmit = async (preference, event) => {
-    console.log(preference)
     try {
       const { data } = await addPreference({
         variables: { preference },
@@ -38,6 +33,7 @@ const PreferencesForm = () => {
 
   return (
     <>
+    {!Auth.loggedIn() && <Navigate to='/login' />}
       <Header title="preferences" />
       <div className="formContainer">
         <form onSubmit={handleSubmit(onSubmit)}>

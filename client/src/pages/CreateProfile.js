@@ -14,7 +14,6 @@ const ProfileForm = () => {
     const { register, handleSubmit, reset, formState: {errors} } = useForm();
     const { loading, data: userData } = useQuery(GET_ME, {
         onCompleted: (data) => {
-            console.log('got data from graphql', data.me.profile);
             reset(data.me.profile);
         }
     });
@@ -23,7 +22,6 @@ const ProfileForm = () => {
     const navigate = useNavigate();
 
     const onSubmit = async (profile, event) => {
-        console.log(profile)
         try {
             const { data } = await addProfile({
                 variables: { profile },
@@ -67,7 +65,6 @@ const ProfileForm = () => {
         return <div>Loading...</div>
     }
 
-console.log("########data###########", userData)
 
     return (
 

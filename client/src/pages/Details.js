@@ -28,7 +28,6 @@ const Details = () => {
     const { loading: meLoading, data: meData } = useQuery(GET_ME);
 
     const me = meData?.me || {};
-    console.log('me', me)
 
     useEffect(() => {
         if (!meLoading) {
@@ -98,7 +97,6 @@ const Details = () => {
                     reviewText: review.reviewText,
                 },
             });
-            console.log('result', result)
         } catch (err) {
             console.error(err);
         }
@@ -133,8 +131,6 @@ const Details = () => {
                         {user.reivews ? (
                             user?.reviews?.map((review, index) => (
                                 <div key={review._id}>
-                                    {console.log(review)}
-                                    {/* <h4>{review.reviewText}</h4> */}
                                     <Review direction={index} reviewText={review.reviewText} name={review.reviewer} image={review.image} />
                                 </div>
                             ))

@@ -14,7 +14,6 @@ const EditPreferences = () => {
     const { register, handleSubmit, reset, formState: {errors}} = useForm();
     const { loading, data: userData } = useQuery(GET_ME, {
         onCompleted: (data) => {
-            console.log('got data from graphql', data.me.preference);
             reset(data.me.preference);
         }
     });
@@ -25,7 +24,6 @@ const EditPreferences = () => {
     const onSubmit = async (formData) => {
         // removes typename from variables so mutation doesn't include __typename
         const { __typename: _, ...preference } = formData;
-        console.log('sending preferences', preference);
         try {
             const { data } = await editPreference({
                 variables: { preference },
