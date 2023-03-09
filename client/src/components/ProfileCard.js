@@ -25,27 +25,30 @@ const ProfileCard = (props) => {
         if (props.image) {
             let newImage = `${props.image}.png`
             setImageId(newImage)
-            console.log("######", newImage)
         }
     }, [props.image])
 
     return (
         <>
-            <Image
-                className="mediumPhoto topPhoto"
-                cloudName={process.env.REACT_APP_CLOUD_NAME}
-                publicId={imageId}
-                alt="Prof Pic"
-            >
-                <Transformation
-                    width="1000"
-                    height="1000"
-                    gravity="face"
-                    radius="max"
-                    crop="fill"
-                    border="20px_solid_rgb:6789FF"
-                />
-            </Image>
+            {imageId ? (
+                <Image
+                    className="mediumPhoto topPhoto"
+                    cloudName={process.env.REACT_APP_CLOUD_NAME}
+                    publicId={imageId}
+                    alt="Prof Pic"
+                >
+                    <Transformation
+                        width="1000"
+                        height="1000"
+                        gravity="face"
+                        radius="max"
+                        crop="fill"
+                        border="20px_solid_rgb:6789FF"
+                    />
+                </Image>
+            ) : (
+                <img src={profilePhoto} className="mediumPhoto" alt="prof pic" />
+            )}
 
             <h2 className='exploreName'>{props.name}</h2>
             <div className='exploreStatContainer'>
