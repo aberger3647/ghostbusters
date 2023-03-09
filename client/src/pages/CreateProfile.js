@@ -67,6 +67,7 @@ const ProfileForm = () => {
         return <div>Loading...</div>
     }
 
+console.log("########data###########", userData)
 
     return (
 
@@ -74,7 +75,7 @@ const ProfileForm = () => {
             {!Auth.loggedIn() && <Navigate to='/login' />}
             <Header title="create profile" />
 
-            <h2>Name</h2>
+            <h2>{ userData.me.firstName }</h2>
             <div className='formContainer'>
 
                 <Upload />
