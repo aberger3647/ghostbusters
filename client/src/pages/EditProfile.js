@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
-
+import { Navigate, useNavigate } from 'react-router-dom';
 import Auth from '../utils/auth';
-
 import Header from '../components/Header';
 import Upload from '../components/Upload';
-
 import { EDIT_PROFILE } from '../utils/mutations';
-
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
