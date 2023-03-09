@@ -42,7 +42,8 @@ const Explore = () => {
     const [imageId, setImageId] = useState("");
 
     useEffect(() => {
-        if (users.image) {
+        if (!loading) {
+
             let newImage = `${users[randomNumber]?.image}.png`;
             setImageId(newImage);
         }
@@ -91,6 +92,8 @@ const Explore = () => {
             console.error(err);
         }
 
+
+        
         const randomIndex = Math.floor(Math.random() * users.length);
 
         setRandomNumber(randomIndex);
