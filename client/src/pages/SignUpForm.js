@@ -17,7 +17,7 @@ const SignUpForm = () => {
       const { data } = await signup({
         variables: {
           email: formData.email,
-          firstName: formData.firstName,
+          firstName: uppercaseName(formData.firstName),
           password: formData.password,
         },
       });
@@ -28,6 +28,14 @@ const SignUpForm = () => {
       console.error(err);
     }
   };
+
+  const uppercaseName = (name) => {
+    let firstName = name.split('');
+    let firstLetter = firstName[0].toUpperCase();
+    firstName.splice(0, 1, firstLetter);
+	  firstName = firstName.join('')
+    return firstName;
+}
 
   return (
     <>
