@@ -9,23 +9,32 @@ const ProfileCard = (props) => {
 
     const [imageId, setImageId] = useState("");
 
-    const { loading, data } = useQuery(GET_ME);
-    const me = data?.me || {};
-    const profile = data?.me.profile || {};
+    // const { loading, data } = useQuery(GET_ME);
+    // const me = data?.me || {};
+    // const profile = data?.me.profile || {};
+
+    // useEffect(() => {
+    //     if (me) {
+    //         let newImage = `${me.image}.png`
+    //         setImageId(newImage)
+    //     }
+    // }, [me])
+
 
     useEffect(() => {
-        if (me) {
-            let newImage = `${me.image}.png`
+        if (props.image) {
+            let newImage = `${props.image}.png`
             setImageId(newImage)
+            console.log("######", newImage)
         }
-    }, [me])
+    }, [props.image])
 
     return (
         <>
             <Image
                 className="mediumPhoto topPhoto"
                 cloudName={process.env.REACT_APP_CLOUD_NAME}
-                publicId={props.image}
+                publicId={imageId}
                 alt="Prof Pic"
             >
                 <Transformation

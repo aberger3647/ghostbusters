@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import profilePhoto from '../assets/profile-icon.svg'
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -13,7 +13,16 @@ const MatchCard = (props) => {
     });
 
     const user = data?.user || {};
-    console.log('user', user)
+
+    const [imageId, setImageId] = useState("");
+
+    useEffect(() => {
+        if (user) {
+            let newImage = `${user.image}.png`;
+            setImageId(newImage);
+        }
+    }, [user]);
+
     return (
         <div className='matchCard'>
             <Link to={`/details/${props.user}`}>
@@ -21,7 +30,7 @@ const MatchCard = (props) => {
                 <Image
                 className="mediumPhoto topPhoto"
                 cloudName={process.env.REACT_APP_CLOUD_NAME}
-                publicId={user.image}
+                publicId={imageId}
                 alt="Prof Pic"
             >
                 <Transformation
@@ -30,6 +39,7 @@ const MatchCard = (props) => {
                     gravity="face"
                     radius="max"
                     crop="fill"
+                    border="10px_solid_rgb:6789FF"
                 />
             </Image>
             </Link>

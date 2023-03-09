@@ -16,8 +16,9 @@ const UploadImage = () => {
   const me = data?.me || {};
 
   useEffect(() => {
-    if (me) {
-      setImageId(me.image)
+    if (me.image) {
+      let newImage = `${me.image}.png`;
+      setImageId(newImage)
     }
 
   }, [me])
