@@ -13,7 +13,7 @@ const MatchCard = (props) => {
     });
 
     const user = data?.user || {};
-    console.log('user', user)
+
     return (
         <div className='matchCard'>
             <Link to={`/details/${props.user}`}>

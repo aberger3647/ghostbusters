@@ -16,11 +16,9 @@ const Profile = () => {
 
     const { loading, data, error, refetch } = useQuery(GET_ME);
     const navigate = useNavigate();
-    console.log('got data', data);
 
     if (error) return `Error! ${error}`;
     if (loading || !data.me || !data.me.profile || !data.me.preference) {
-        console.log('refetching');
         refetch();
         return navigate('/createprofile')
     }
@@ -30,6 +28,7 @@ const Profile = () => {
 
     return (
         <>
+        {!Auth.loggedIn() && <Navigate to='/login' />}
             <Header title="my profile" />
             <div className="exploreContainer formContainer">
                 <div className="profileContainer">
