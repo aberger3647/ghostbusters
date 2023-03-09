@@ -568,6 +568,7 @@ footer img {
   display: flex;
   flex-direction: column;
   width: fill;
+  width: -moz-available;
   max-width: 336px;
   overflow-wrap: break-word;
 }
