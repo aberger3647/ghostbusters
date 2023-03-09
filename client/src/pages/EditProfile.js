@@ -53,7 +53,7 @@ const EditProfile = () => {
             {!Auth.loggedIn() && <Navigate to='/login' />}
             <Header title="edit profile" />
 
-            <h2>Name</h2>
+            <h2>{ userData.me.firstName }</h2>
             <div className='formContainer'>
 
                 <Upload />

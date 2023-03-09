@@ -15,8 +15,6 @@ const Profile = () => {
 
     const { loading, data, error, refetch } = useQuery(GET_ME);
 
-    console.log('got data', data);
-
     if (error) return `Error! ${error}`;
     if (loading || !data.me || !data.me.profile || !data.me.preference) {
         console.log('refetching');
