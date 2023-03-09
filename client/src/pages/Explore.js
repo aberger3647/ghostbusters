@@ -10,7 +10,6 @@ import { ADD_DISLIKE, ADD_LIKE } from "../utils/mutations";
 import { Image, Transformation } from "cloudinary-react";
 
 const Explore = () => {
-    { !Auth.loggedIn() && <Navigate to='/login' /> }
 
     const [randomNumber, setRandomNumber] = useState(0);
 
