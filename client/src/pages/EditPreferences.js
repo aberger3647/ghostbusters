@@ -153,14 +153,14 @@ const EditPreferences = () => {
                     <select {...register('smoking', { required: true })} >
                         <option value=''>Smoking...</option>
                         <option value='Smokes'>Smokes</option>
-                        <option value='Doesnt Smoke'>Doesn't smoke</option>
+                        <option value='Doesn&#39;t Smoke'>Doesn't smoke</option>
                     </select>
                     {errors.smoking && <small>This field is required</small>}
 
                     <select {...register('drinking', { required: true })} >
                         <option value=''>Drinking...</option>
                         <option value='Drinks'>Drinks</option>
-                        <option value='Doesnt Drink'>Doesn't drink</option>
+                        <option value='Doesn&#39;t Drink'>Doesn't drink</option>
                     </select>
                     {errors.drinking && <small>This field is required</small>}
 
