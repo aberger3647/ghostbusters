@@ -46,6 +46,10 @@ small {
   color: red;
 }
 
+.loginSmall {
+  color: var(--white);
+}
+
 input[type="submit"],
 input[value="Previous"],
 .detailsSubmit {
