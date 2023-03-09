@@ -626,3 +626,7 @@ footer img {
   padding: 0;
   margin: 0;
 }
+
+.noMatches {
+  text-align: center;
+}

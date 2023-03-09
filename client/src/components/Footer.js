@@ -14,7 +14,7 @@ function Footer() {
 
   const image = data?.me.image || "";
   const [imageId, setImageId] = useState("");
-  const [path, setPath] = useState();
+  const [path, setPath] = useState('');
 
   useEffect(() => {
     if (image) {
@@ -23,19 +23,22 @@ function Footer() {
     }
   }, [image]);
 
-    const location = useLocation();
-  
+  const location = useLocation();
+
   useEffect(() => {
     if (
       location.pathname === "/createprofile" ||
-      location.pathname === "/preferences"
+      location.pathname === "/preferences" ||
+      location.pathname === "/editprofile" || 
+      location.pathname === "/editpreferences"
     ) {
       setPath(location.pathname);
       document.body.style.margin = 0;
     } else {
       setPath("");
     }
-  }, []);
+
+  }, [location.pathname]);
 
   return (
     <>
@@ -62,11 +65,11 @@ function Footer() {
                 </Image>
               )}
             </a>
-         
-              <a href="/explore">
-                <img src={exploreIcon} alt="Explore Icon" />
-              </a>
-          
+
+            <a href="/explore">
+              <img src={exploreIcon} alt="Explore Icon" />
+            </a>
+
             <a href="/matches">
               <img src={matchIcon} alt="Matches Icon" />
             </a>
