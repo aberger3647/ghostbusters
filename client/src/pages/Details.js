@@ -147,7 +147,7 @@ const Details = () => {
                         </form>
                     ) : (
                         <div className="matchBtnDetailContainer">
-                            <button onClick={onDislikeClick} className="dislike" />
+                            <button onClick={onDislikeClick} id={user?._id} className="dislike" />
                             <button onClick={onLikeClick} className="like" />
                         </div>
                     )}
