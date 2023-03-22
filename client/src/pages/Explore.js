@@ -104,13 +104,23 @@ const Explore = () => {
         modal.style.display = "flex";
     };
 
+const [usersExist, setUsersExist] = useState(false)
+
+useEffect(() => {
+    if (!loading && users.length > 0) {
+        setUsersExist(true)
+    }
+}, [users])
+
     return (
         <>
             <ItsAMatch me={match1} user={match2} />
             <div className="contentContainer">
                 {!Auth.loggedIn() && <Navigate to="/login" />}
                 <Header title="explore" />
+                
                 <div className="exploreContainer">
+                    { usersExist ? (
                     <div key={users[randomNumber]?._id} className="exploreBox">
                         <Link to={`/details/${users[randomNumber]?._id}`}>
                             {imageId ? (
@@ -160,6 +170,9 @@ const Explore = () => {
                             />
                         </div>
                     </div>
+                    ) : (
+                        <h4 className="noMatches">Sorry! No More People!</h4>
+                    )}
                 </div>
             </div>
         </>
