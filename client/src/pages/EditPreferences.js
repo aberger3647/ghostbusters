@@ -49,7 +49,7 @@ const EditPreferences = () => {
 
                     <div className='heightPrefs'>
                         <input type="number" className='minMaxAge' {...register('minAge', { valueAsNumber: true, required: true, validate: (value) => value >= 18 || 'Must be at least 18 years old' })} placeholder='Min Age' />
-                        <p>to</p>
+                        <h4>to</h4>
                         <input type="number" className='minMaxAge' {...register('maxAge', { valueAsNumber: true , required: true})} placeholder='Max Age' />
                         {errors.minAge && errors.minAge.type === "validate" && <small>{errors.minAge.message}</small>}
                         {errors.minAge && errors.maxAge && <small>Both fields are required</small>}
