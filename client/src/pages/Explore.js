@@ -110,8 +110,8 @@ const Explore = () => {
             <div className="contentContainer">
                 {!Auth.loggedIn() && <Navigate to="/login" />}
                 <Header title="explore" />
-                {users.length ? (
                     <div className="exploreContainer">
+                {users.length ? (
 
                         <div key={users[randomNumber]?._id} className="exploreBox">
                             <Link to={`/details/${users[randomNumber]?._id}`}>
@@ -162,9 +162,9 @@ const Explore = () => {
                                 />
                             </div>
                         </div>
+                        ) :
+                            (<h4>Sorry! No more people!</h4>)}
                     </div>
-                ) :
-                    (<h4>Sorry! No more people!</h4>)}
             </div>
         </>
     );
