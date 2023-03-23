@@ -93,7 +93,7 @@ const Explore = () => {
         }
 
 
-        
+
         const randomIndex = Math.floor(Math.random() * users.length);
 
         setRandomNumber(randomIndex);
@@ -110,57 +110,61 @@ const Explore = () => {
             <div className="contentContainer">
                 {!Auth.loggedIn() && <Navigate to="/login" />}
                 <Header title="explore" />
-                <div className="exploreContainer">
-                    <div key={users[randomNumber]?._id} className="exploreBox">
-                        <Link to={`/details/${users[randomNumber]?._id}`}>
-                            {imageId ? (
-                                <Image
-                                    className="explorePhoto"
-                                    cloudName={process.env.REACT_APP_CLOUD_NAME}
-                                    publicId={imageId}
-                                    alt="Explore pic"
-                                >
-                                    <Transformation
-                                        width="1000"
-                                        height="1000"
-                                        gravity="face"
-                                        radius="max"
-                                        crop="fill"
-                                        border="20px_solid_rgb:6789FF"
-                                    />
-                                </Image>
-                            ) : (
-                                <img src={profilePhoto} className="mediumPhoto" alt="prof pic" />
-                            )}
-                        </Link>
+                {users.length ? (
+                    <div className="exploreContainer">
 
-                        <h2 className="exploreName">{users[randomNumber]?.firstName}</h2>
-                        <div className="exploreStatContainer">
-                            <h3 className="exploreStats">
-                                {users[randomNumber]?.profile?.gender}{" "}
-                            </h3>
-                            <h3 className="exploreStats">
-                                {users[randomNumber]?.profile?.age}
-                            </h3>{" "}
-                            <h3 className="exploreStats">
-                                {users[randomNumber]?.profile?.height}
-                            </h3>
-                        </div>
-                        <div className="matchBtnContainer">
-                            <button
-                                id={users[randomNumber]?._id}
-                                key={users[randomNumber]?._id}
-                                onClick={onDislikeClick}
-                                className="dislike"
-                            />
-                            <button
-                                id={users[randomNumber]?._id}
-                                onClick={onLikeClick}
-                                className="like"
-                            />
+                        <div key={users[randomNumber]?._id} className="exploreBox">
+                            <Link to={`/details/${users[randomNumber]?._id}`}>
+                                {imageId ? (
+                                    <Image
+                                        className="explorePhoto"
+                                        cloudName={process.env.REACT_APP_CLOUD_NAME}
+                                        publicId={imageId}
+                                        alt="Explore pic"
+                                    >
+                                        <Transformation
+                                            width="1000"
+                                            height="1000"
+                                            gravity="face"
+                                            radius="max"
+                                            crop="fill"
+                                            border="20px_solid_rgb:6789FF"
+                                        />
+                                    </Image>
+                                ) : (
+                                    <img src={profilePhoto} className="mediumPhoto" alt="prof pic" />
+                                )}
+                            </Link>
+
+                            <h2 className="exploreName">{users[randomNumber]?.firstName}</h2>
+                            <div className="exploreStatContainer">
+                                <h3 className="exploreStats">
+                                    {users[randomNumber]?.profile?.gender}{" "}
+                                </h3>
+                                <h3 className="exploreStats">
+                                    {users[randomNumber]?.profile?.age}
+                                </h3>{" "}
+                                <h3 className="exploreStats">
+                                    {users[randomNumber]?.profile?.height}
+                                </h3>
+                            </div>
+                            <div className="matchBtnContainer">
+                                <button
+                                    id={users[randomNumber]?._id}
+                                    key={users[randomNumber]?._id}
+                                    onClick={onDislikeClick}
+                                    className="dislike"
+                                />
+                                <button
+                                    id={users[randomNumber]?._id}
+                                    onClick={onLikeClick}
+                                    className="like"
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
+                ) :
+                    (<h4>Sorry! No more people!</h4>)}
             </div>
         </>
     );
