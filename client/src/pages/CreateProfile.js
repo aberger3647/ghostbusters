@@ -11,7 +11,7 @@ import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
 const ProfileForm = () => {
-    const { register, handleSubmit, reset, formState: {errors} } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { loading, data: userData } = useQuery(GET_ME, {
         onCompleted: (data) => {
             reset(data.me.profile);
@@ -72,14 +72,14 @@ const ProfileForm = () => {
             {!Auth.loggedIn() && <Navigate to='/login' />}
             <Header title="create profile" />
 
-            <h2>{ userData.me.firstName }</h2>
+            <h2>{userData.me.firstName}</h2>
             <div className='formContainer'>
 
                 <Upload />
 
                 <form onSubmit={handleSubmit(onSubmit)}>
 
-                    <input {...register('age', { valueAsNumber: true, required: true, validate: (value) => value >= 18 || 'You must be at least 18 years old'})}
+                    <input {...register('age', { valueAsNumber: true, required: true, validate: (value) => value >= 18 || 'You must be at least 18 years old' })}
                         placeholder='Age'
                     />
                     {errors.age && errors.age.type === "validate" && <small>{errors.age.message}</small>}
@@ -138,6 +138,7 @@ const ProfileForm = () => {
                         <option value='Christian'>Christian</option>
                         <option value='Hindu'>Hindu</option>
                         <option value='Jewish'>Jewish</option>
+                        <option value='Muslim'>Muslim</option>
                         <option value='Spiritual'>Spiritual</option>
                     </select>
                     {errors.religion && <small>This field is required</small>}
@@ -164,7 +165,7 @@ const ProfileForm = () => {
                     </select>
                     {errors.drinking && <small>This field is required</small>}
 
-                    <textarea {...register('bio', {required: true})}
+                    <textarea {...register('bio', { required: true })}
                         placeholder='Bio'
                     />
                     {errors.bio && <small>This field is required</small>}
