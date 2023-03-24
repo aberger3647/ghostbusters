@@ -28,7 +28,7 @@ const Profile = () => {
 
     return (
         <>
-        {!Auth.loggedIn() && <Navigate to='/login' />}
+            {!Auth.loggedIn() && <Navigate to='/login' />}
             <Header title="my profile" />
             <div className="exploreContainer formContainer">
                 <div className="profileContainer">
@@ -39,6 +39,7 @@ const Profile = () => {
                     <h3 className="profilePreferencesTitle">Preferences</h3>
                     <div className="profilePreferences">
                         <h4>Age: {preference.minAge} to {preference.maxAge}</h4>
+                        <h4>Gender: {preference.gender}</h4>
                         <h4>Height: {preference.minHeight} to {preference.maxHeight}</h4>
                         <h4>Religion: {preference.religion}</h4>
                         <h4>Politics: {preference.politics}</h4>
