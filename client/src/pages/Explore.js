@@ -19,9 +19,12 @@ const Explore = () => {
 
 
     const { loading, data } = useQuery(GET_USER);
+    // console.log("users gender", data.profile.gender)
 
     const { loading: meLoading, data: meData } = useQuery(GET_ME);
     const me = meData?.me || {};
+
+    console.log("my preference gender", me.preference?.gender);
 
     const myLikes = me.likes?.map(like => like._id);
     const myDislikes = me.dislikes?.map(like => like._id);
@@ -32,7 +35,10 @@ const Explore = () => {
     let users = data?.users || [];
     users = users.filter(user => user._id !== me._id);
     users = users.filter(user => !allSeenUsers?.includes(user._id));
+
+    users = users.filter(user => user?.profile?.gender === me.preference?.gender);
     console.log(users);
+
 
 
 
@@ -110,8 +116,8 @@ const Explore = () => {
             <div className="contentContainer">
                 {!Auth.loggedIn() && <Navigate to="/login" />}
                 <Header title="explore" />
-                    <div className="exploreContainer">
-                {users.length ? (
+                <div className="exploreContainer">
+                    {users.length ? (
 
                         <div key={users[randomNumber]?._id} className="exploreBox">
                             <Link to={`/details/${users[randomNumber]?._id}`}>
@@ -162,9 +168,9 @@ const Explore = () => {
                                 />
                             </div>
                         </div>
-                        ) :
-                            (<h4>Sorry! No more people!</h4>)}
-                    </div>
+                    ) :
+                        (<h4>Sorry! No more people!</h4>)}
+                </div>
             </div>
         </>
     );
