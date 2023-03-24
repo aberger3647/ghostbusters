@@ -11,7 +11,7 @@ import { GET_ME } from '../utils/queries';
 
 const PreferencesForm = () => {
 
-  const { register, handleSubmit, formState: {errors} } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const [addPreference, { error, data }] = useMutation(ADD_PREFERENCE);
 
@@ -33,14 +33,14 @@ const PreferencesForm = () => {
 
   return (
     <>
-    {!Auth.loggedIn() && <Navigate to='/login' />}
+      {!Auth.loggedIn() && <Navigate to='/login' />}
       <Header title="preferences" />
       <div className="formContainer">
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className='heightPrefs'>
-            <input type="number" className='minMaxAge' {...register('minAge', { valueAsNumber: true, required: true, validate: (value) => value >= 18 || 'Must be at least 18 years old'})} placeholder='Min Age' />
-            <p>to</p>
+            <input type="number" className='minMaxAge' {...register('minAge', { valueAsNumber: true, required: true, validate: (value) => value >= 18 || 'Must be at least 18 years old' })} placeholder='Min Age' />
+            <h4>to</h4>
             <input type="number" className='minMaxAge' {...register('maxAge', { valueAsNumber: true, required: true })} placeholder='Max Age' />
           </div>
           {errors.minAge && errors.minAge.type === "validate" && <small>{errors.minAge.message}</small>}
@@ -48,14 +48,14 @@ const PreferencesForm = () => {
 
           <select {...register('gender', { required: true })} >
             <option value=''>Gender...</option>
-            <option value='Female'>Female</option>
-            <option value='Male'>Male</option>
-            <option value='Non-Binary'>Non-Binary</option>
+            <option value='F'>Female</option>
+            <option value='M'>Male</option>
+            <option value='NB'>Non-Binary</option>
           </select>
           {errors.gender && <small>This field is required</small>}
 
           <div className='heightPrefs'>
-            <select className='minMaxHeight' {...register('minHeight', {required: true})} >
+            <select className='minMaxHeight' {...register('minHeight', { required: true })} >
               <option value=''>Min Height</option>
               <option value="I don't care">I don't care</option>
               <option value="4'5&quot;">4'5"</option>
@@ -87,7 +87,7 @@ const PreferencesForm = () => {
               <option value="6'7&quot;">6'7"</option>
             </select>
             <h4>to</h4>
-            <select className='minMaxHeight' {...register('maxHeight', {required: true})} >
+            <select className='minMaxHeight' {...register('maxHeight', { required: true })} >
               <option value=''>Max Height</option>
               <option value="I don't care">I don't care</option>
               <option value="4'5&quot;">4'5"</option>

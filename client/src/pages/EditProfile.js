@@ -10,7 +10,7 @@ import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
 const EditProfile = () => {
-    const { register, handleSubmit, reset, formState: {errors} } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { loading, data: userData } = useQuery(GET_ME, {
         onCompleted: (data) => {
             reset(data.me.profile);
@@ -45,7 +45,7 @@ const EditProfile = () => {
             {!Auth.loggedIn() && <Navigate to='/login' />}
             <Header title="edit profile" />
 
-            <h2>{ userData.me.firstName }</h2>
+            <h2>{userData.me.firstName}</h2>
             <div className='formContainer'>
 
                 <Upload />
@@ -106,6 +106,7 @@ const EditProfile = () => {
                         <option value='Christian'>Christian</option>
                         <option value='Hindu'>Hindu</option>
                         <option value='Jewish'>Jewish</option>
+                        <option value='Muslim'>Muslim</option>
                         <option value='Spiritual'>Spiritual</option>
                     </select>
                     {errors.religion && <small>This field is required</small>}
@@ -132,7 +133,7 @@ const EditProfile = () => {
                     </select>
                     {errors.drinking && <small>This field is required</small>}
 
-                    <textarea {...register('bio', {required: true})}
+                    <textarea {...register('bio', { required: true })}
                         placeholder='Bio'
                     />
                     {errors.bio && <small>This field is required</small>}
