@@ -19,12 +19,9 @@ const Explore = () => {
 
 
     const { loading, data } = useQuery(GET_USER);
-    // console.log("users gender", data.profile.gender)
 
     const { loading: meLoading, data: meData } = useQuery(GET_ME);
     const me = meData?.me || {};
-
-    console.log("my preference gender", me.preference?.gender);
 
     const myLikes = me.likes?.map(like => like._id);
     const myDislikes = me.dislikes?.map(like => like._id);
