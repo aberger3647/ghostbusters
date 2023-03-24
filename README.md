@@ -8,6 +8,9 @@ An app which allows users to find potential matches and review their dates.
 
 ## Deployed App
 [Ghostbusters](https://agile-peak-65135.herokuapp.com/)
+
+Test username: alex@email.com
+Password: 12345678
   
 ## Table of Contents
 - [Screenshot](#screenshot)
