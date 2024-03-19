@@ -7,7 +7,7 @@
 An app which allows users to find potential matches and review their dates.
 
 ## Deployed App
-[Ghostbusters](https://sleepy-peak-62717.herokuapp.com/)
+[Ghostbusters](https://sleepy-peak-62717-f5b6901cfa73.herokuapp.com/)
 
 Test username: alex@email.com
 Password: 12345678
